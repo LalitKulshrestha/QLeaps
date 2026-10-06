@@ -1,447 +1,553 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quantum Leaps · Specialist Hiring Partner, Mumbai</title>
-  <meta name="description" content="Right talent. Right opportunity. Better fit. Quantum Leaps hires for marketing, creative, design and technology teams across India — one careful match at a time.">
-  <meta property="og:title" content="Quantum Leaps · Specialist Hiring Partner, Mumbai">
-  <meta property="og:description" content="Specialist recruitment partner for marketing, creative, design and technology roles across India.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://qleaps.in">
-  <link rel="canonical" href="https://qleaps.in">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Cloudflare Turnstile -->
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Leaps · Specialist hiring partner, Mumbai</title>
+<meta name="description" content="Quantum Leaps is a specialist hiring partner in Mumbai for marketing, creative, design and technology teams across India. Right talent. Right opportunity. Better fit.">
+<meta property="og:title" content="Quantum Leaps · Make the right leap.">
+<meta property="og:description" content="Specialist hiring for marketing, creative, design and technology teams across India.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/BricolageGrotesque-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
 </head>
 <body>
+<div style="min-height:100vh;background:#FAF8F5;overflow-x:hidden">
 
-  <!-- NAV -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="/" class="logo" aria-label="Quantum Leaps home">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-          <circle cx="8" cy="26" r="5" fill="#4338CA"/>
-          <circle cx="28" cy="26" r="5" fill="#FF6B4A"/>
-          <path d="M8 26 C14 8 22 8 28 26" stroke="#14213D" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <line x1="3" y1="31" x2="33" y2="31" stroke="#14213D" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span>Quantum<br>Leaps</span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="#specialisms">Specialisms</a></li>
-        <li><a href="#how-we-work">How we work</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact" class="nav-cta">Talk to us →</a></li>
-      </ul>
+  <header style="position:sticky;top:0;z-index:20;background:rgba(250,248,245,.92);backdrop-filter:blur(10px);border-bottom:1px solid #ECE9E2">
+    <div style="max-width:1240px;margin:0 auto;padding:14px clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap">
+      <a href="#top" data-target="top" style="display:flex"><img src="assets/logo/ql-logo-horizontal.svg" alt="Quantum Leaps" style="height:clamp(40px,4vw,48px);display:block"></a>
+      <nav style="display:flex;align-items:center;gap:clamp(12px,1.8vw,26px);flex-wrap:wrap">
+        <a href="#specialisms" data-target="specialisms" style="color:#14213D;font-size:15px;font-weight:500" class="hv0">Specialisms</a>
+        <a href="#how" data-target="how" style="color:#14213D;font-size:15px;font-weight:500" class="hv0">How we work</a>
+        <a href="#roles" data-target="roles" style="color:#14213D;font-size:15px;font-weight:500" class="hv0">Open roles</a>
+        <a href="#about" data-target="about" style="color:#14213D;font-size:15px;font-weight:500" class="hv0">About</a>
+        <a href="#contact" data-target="contact" style="color:#14213D;font-size:15px;font-weight:500" class="hv0">Contact</a>
+        <a href="#cv" data-target="cv" style="background:#4F46E5;color:#FFFFFF;font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px" class="hv1">Submit your CV</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Hero">
-    <div class="hero-content">
-      <p class="overline">● Specialist Hiring Partner · Mumbai</p>
-      <h1>Make the<br><span class="accent-word">right leap.</span></h1>
-      <p class="hero-sub">Right talent. Right opportunity. Better fit. We hire for marketing, creative, design and technology teams across India, one careful match at a time.</p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn btn-primary" id="heroHireBtn">
-          <span class="btn-label">I'm hiring for my team</span>
-          <span class="btn-main">Talk to our team →</span>
-        </a>
-        <a href="#contact" class="btn btn-outline" id="heroJobBtn">
-          <span class="btn-label">I'm looking for a role</span>
-          <span class="btn-main">Submit your CV →</span>
-        </a>
-      </div>
-      <div class="hero-badges">
-        <span>✓ Every candidate spoken to</span>
-        <span>✓ Hiring across India</span>
-      </div>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="orbit-scene">
-        <div class="orbit-bg"></div>
-        <div class="orbit-pill pill-marketing">Marketing</div>
-        <div class="orbit-pill pill-design">Design</div>
-        <div class="orbit-pill pill-tech">Tech</div>
-        <div class="orbit-dot dot-1"></div>
-        <div class="orbit-dot dot-2"></div>
-        <div class="mascot">
-          <svg viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Body -->
-            <ellipse cx="60" cy="90" rx="32" ry="28" fill="#D4974A"/>
-            <!-- Head -->
-            <ellipse cx="60" cy="55" rx="28" ry="26" fill="#E8A855"/>
-            <!-- Ears -->
-            <ellipse cx="36" cy="38" rx="10" ry="16" fill="#D4974A" transform="rotate(-15 36 38)"/>
-            <ellipse cx="84" cy="38" rx="10" ry="16" fill="#D4974A" transform="rotate(15 84 38)"/>
-            <ellipse cx="36" cy="40" rx="6" ry="10" fill="#C4824A" transform="rotate(-15 36 40)"/>
-            <ellipse cx="84" cy="40" rx="6" ry="10" fill="#C4824A" transform="rotate(15 84 40)"/>
-            <!-- Eyes -->
-            <circle cx="50" cy="50" r="6" fill="white"/>
-            <circle cx="70" cy="50" r="6" fill="white"/>
-            <circle cx="51" cy="51" r="3.5" fill="#2D1B00"/>
-            <circle cx="71" cy="51" r="3.5" fill="#2D1B00"/>
-            <circle cx="52" cy="50" r="1.2" fill="white"/>
-            <circle cx="72" cy="50" r="1.2" fill="white"/>
-            <!-- Nose -->
-            <ellipse cx="60" cy="60" rx="5" ry="3.5" fill="#8B4513"/>
-            <!-- Mouth / smile -->
-            <path d="M53 65 Q60 71 67 65" stroke="#8B4513" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <!-- Tongue -->
-            <ellipse cx="60" cy="69" rx="5" ry="4" fill="#E87070"/>
-            <!-- Collar -->
-            <rect x="44" y="76" width="32" height="7" rx="3.5" fill="#4338CA"/>
-            <circle cx="60" cy="79.5" r="2.5" fill="#FFD700"/>
-            <!-- Tail -->
-            <path d="M90 95 Q108 80 105 68" stroke="#D4974A" stroke-width="8" fill="none" stroke-linecap="round"/>
-            <!-- Legs -->
-            <ellipse cx="44" cy="115" rx="10" ry="7" fill="#D4974A"/>
-            <ellipse cx="76" cy="115" rx="10" ry="7" fill="#D4974A"/>
-            <!-- Wagging motion dots -->
-            <circle cx="112" cy="65" r="3" fill="#4338CA" opacity="0.4"/>
-            <circle cx="118" cy="58" r="2" fill="#4338CA" opacity="0.25"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TICKER -->
-  <div class="ticker-wrap" aria-hidden="true" role="presentation">
-    <div class="ticker-track">
-      <span>UX designers</span><span class="dot">·</span>
-      <span>Engineers</span><span class="dot">·</span>
-      <span>Brand leads</span><span class="dot">·</span>
-      <span>Art directors</span><span class="dot">·</span>
-      <span>Product managers</span><span class="dot">·</span>
-      <span>Performance marketers</span><span class="dot">·</span>
-      <span>Content strategists</span><span class="dot">·</span>
-      <span>Growth hackers</span><span class="dot">·</span>
-      <span>UI designers</span><span class="dot">·</span>
-      <span>Backend engineers</span><span class="dot">·</span>
-      <!-- Duplicate for infinite scroll -->
-      <span>UX designers</span><span class="dot">·</span>
-      <span>Engineers</span><span class="dot">·</span>
-      <span>Brand leads</span><span class="dot">·</span>
-      <span>Art directors</span><span class="dot">·</span>
-      <span>Product managers</span><span class="dot">·</span>
-      <span>Performance marketers</span><span class="dot">·</span>
-      <span>Content strategists</span><span class="dot">·</span>
-      <span>Growth hackers</span><span class="dot">·</span>
-      <span>UI designers</span><span class="dot">·</span>
-      <span>Backend engineers</span><span class="dot">·</span>
-    </div>
-  </div>
-
-  <!-- SPECIALISMS -->
-  <section class="specialisms" id="specialisms" aria-labelledby="spec-heading">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <p class="overline">What we hire for</p>
-          <h2 id="spec-heading">Four specialisms.<br>One way of working.</h2>
-        </div>
-        <p class="section-sub">We know these roles inside out, so we can look past the CV to what makes someone good at the job.</p>
-      </div>
-      <div class="spec-grid">
-        <div class="spec-card spec-dark">
-          <div class="card-num">01</div>
-          <h3>Marketing<br>and digital</h3>
-          <div class="tags">
-            <span>Performance</span><span>SEO / SEM</span><span>Growth</span>
-            <span>Content</span><span>Brand</span><span>CRM</span>
-          </div>
-          <p>People who connect the numbers to the story behind them.</p>
-        </div>
-        <div class="spec-card">
-          <div class="card-num">02</div>
-          <h3>Creative</h3>
-          <div class="tags">
-            <span>Copywriters</span><span>Content writers</span>
-            <span>Creative strategists</span><span>Art directors</span>
-          </div>
-          <p>Ideas that sell, from people who take feedback well.</p>
-        </div>
-        <div class="spec-card">
-          <div class="card-num">03</div>
-          <h3>Design and<br>product</h3>
-          <div class="tags">
-            <span>UI</span><span>UX</span><span>Product design</span>
-            <span>Visual design</span><span>Design leads</span>
-          </div>
-          <p>A portfolio that shows how they think, not just how it looks.</p>
-        </div>
-        <div class="spec-card">
-          <div class="card-num">04</div>
-          <h3>Technology</h3>
-          <div class="tags">
-            <span>Frontend</span><span>Backend</span><span>Full-stack</span>
-            <span>DevOps</span><span>Engineering leads</span>
-          </div>
-          <p>Engineers who ship, not just code.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW WE WORK -->
-  <section class="how-we-work" id="how-we-work" aria-labelledby="hww-heading">
-    <div class="container">
-      <p class="overline">How we work</p>
-      <h2 id="hww-heading">No spray and pray.<br>Just careful matching.</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h3>Brief</h3>
-          <p>We spend real time understanding your role, culture, and what good looks like.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">→</div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h3>Search</h3>
-          <p>We go beyond job boards. Our network runs deep in each specialism.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">→</div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h3>Screen</h3>
-          <p>Every candidate is spoken to before being presented. We read every CV.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">→</div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <h3>Place</h3>
-          <p>The shortlist lands in your inbox. You interview, we support. Done.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section class="stats" aria-label="Why choose us">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card stat-dark">
-          <div class="stat-num">84%</div>
-          <p>of employers in India say they have been hit by a bad hire.</p>
-          <div class="dot-grid" aria-hidden="true">
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span>
-            <span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-r"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span>
-            <span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span><span class="dot-g"></span>
-          </div>
-        </div>
-        <div class="stat-card stat-white">
-          <div class="stat-num stat-purple">₹20L+</div>
-          <p>lost on a single wrong hire.</p>
-        </div>
-        <div class="stat-card stat-light">
-          <div class="stat-num stat-purple">90 days</div>
-          <p>How long notice periods can run, so a wrong hire costs months.</p>
-        </div>
-      </div>
-      <div class="stat-banner">
-        <div>
-          <div class="stat-num-lg">73%</div>
-          <p>of Indian job seekers say an employer has ghosted them.</p>
-        </div>
-        <div class="chat-bubbles" aria-hidden="true">
-          <div class="bubble bubble-white">Any update on my application?</div>
-          <div class="bubble bubble-purple">Following up again...</div>
-          <div class="bubble bubble-dots"><span></span><span></span><span></span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT / LEAD FORM -->
-  <section class="contact" id="contact" aria-labelledby="contact-heading">
-    <div class="container">
-      <div class="contact-inner">
-        <div class="contact-left">
-          <p class="overline">Contact</p>
-          <h2 id="contact-heading">Say hello.</h2>
-          <div class="contact-details">
-            <div class="contact-row">
-              <span class="contact-label">EMAIL</span>
-              <a href="mailto:contact@qleaps.in" class="contact-value">contact@qleaps.in</a>
-            </div>
-            <div class="contact-row">
-              <span class="contact-label">PHONE</span>
-              <a href="tel:+919930822894" class="contact-value">+91 99308 22894</a>
-            </div>
-            <div class="contact-row">
-              <span class="contact-label">BASED IN</span>
-              <span class="contact-value">Mumbai, hiring across India</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-right">
-          <div class="form-card">
-            <h3>Send a quick message</h3>
-
-            <!-- Live feedback region for screen readers -->
-            <div role="status" aria-live="polite" aria-atomic="true" id="formStatus" class="form-status"></div>
-
-            <form id="leadForm" action="/api/lead" method="POST" novalidate>
-              <!-- Honeypot (off-screen, NOT display:none) -->
-              <div class="hp-field" aria-hidden="true">
-                <label for="company">Company website</label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  tabindex="-1"
-                  autocomplete="off"
-                  placeholder="Leave blank"
-                >
-              </div>
-
-              <!-- Hidden timestamp for time-trap -->
-              <input type="hidden" id="formLoadTime" name="loadTime" value="">
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name" class="form-label">Your name <span class="req" aria-label="required">*</span></label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="form-input"
-                    placeholder="Priya Sharma"
-                    required
-                    maxlength="100"
-                    autocomplete="name"
-                    aria-required="true"
-                    aria-describedby="name-error"
-                  >
-                  <span class="field-error" id="name-error" role="alert"></span>
-                </div>
-                <div class="form-group">
-                  <label for="email" class="form-label">Email <span class="req" aria-label="required">*</span></label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-input"
-                    placeholder="you@company.com"
-                    required
-                    maxlength="200"
-                    autocomplete="email"
-                    aria-required="true"
-                    aria-describedby="email-error"
-                  >
-                  <span class="field-error" id="email-error" role="alert"></span>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="message" class="form-label">How can we help? <span class="req-opt">(optional)</span></label>
-                <textarea
-                  id="message"
-                  name="message"
-                  class="form-input form-textarea"
-                  placeholder="Tell us what you're looking for — a role, a hire, or just curious..."
-                  maxlength="2000"
-                  rows="4"
-                  aria-describedby="message-error"
-                ></textarea>
-                <span class="field-error" id="message-error" role="alert"></span>
-              </div>
-
-              <!-- Consent checkbox -->
-              <div class="form-group form-check">
-                <label class="check-label" for="consent">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    name="consent"
-                    required
-                    aria-required="true"
-                    aria-describedby="consent-error"
-                  >
-                  <span class="check-custom"></span>
-                  <span>I agree to be contacted by Quantum Leaps regarding my enquiry. Read our <a href="/privacy.html" target="_blank" rel="noopener">privacy policy</a>.</span>
-                </label>
-                <span class="field-error" id="consent-error" role="alert"></span>
-              </div>
-
-              <!-- Cloudflare Turnstile -->
-              <div class="cf-turnstile"
-                   data-sitekey="0x4AAAAAABkMzB1g_placeholder__"
-                   data-theme="light"
-                   data-callback="onTurnstileSuccess"
-                   id="turnstileWidget"
-                   aria-label="Security verification">
-              </div>
-              <input type="hidden" name="cf-turnstile-response" id="turnstileToken">
-
-              <button
-                type="submit"
-                id="submitBtn"
-                class="btn btn-primary btn-submit"
-                aria-describedby="formStatus"
-              >
-                <span class="btn-text">Send message →</span>
-                <span class="btn-loading" aria-hidden="true" hidden>Sending…</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="/" class="logo" aria-label="Quantum Leaps home">
-            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-              <circle cx="8" cy="26" r="5" fill="#4338CA"/>
-              <circle cx="28" cy="26" r="5" fill="#FF6B4A"/>
-              <path d="M8 26 C14 8 22 8 28 26" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <line x1="3" y1="31" x2="33" y2="31" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-            <span style="color:white">Quantum<br>Leaps</span>
+  <section id="top" style="position:relative;overflow:hidden;background:#E9E7F5;min-height:min(86vh,820px);display:flex;align-items:center">
+    
+    
+      <div style="position:absolute;right:-6%;top:-18%;width:52%;aspect-ratio:1;border-radius:50%;background:#4F46E5;opacity:.1"></div>
+      <div style="position:absolute;right:30%;bottom:-24%;width:30%;aspect-ratio:1;border-radius:50%;border:2px dashed #4F46E5;opacity:.3"></div>
+      <div style="position:absolute;right:12%;top:16%;width:16px;height:16px;border-radius:50%;background:#4F46E5;opacity:.5"></div>
+    
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(250,248,245,.9) 0%, rgba(250,248,245,.4) 50%, rgba(250,248,245,0) 80%)"></div>
+    <div style="position:relative;width:100%;max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(20px,4vw,48px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:48px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5"><span style="width:8px;height:8px;border-radius:50%;background:#4F46E5"></span>Specialist hiring partner · Mumbai</div>
+        <h1 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(48px,7vw,88px);line-height:.92;letter-spacing:-.05em;color:#14213D">Make the right <span style="display:inline-block;background-image:linear-gradient(#FF6B4A,#FF6B4A);background-repeat:no-repeat;background-size:100% .12em;background-position:0 94%;padding-bottom:.04em">leap.</span></h1>
+        <p style="margin:0;font-size:clamp(18px,1.5vw,20px);line-height:1.55;max-width:520px;color:#1F2328;text-wrap:pretty">Right talent. Right opportunity. Better fit. We hire for marketing, creative, design and technology teams across India, one careful match at a time.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;max-width:560px">
+          <a href="#cv" data-target="cv" style="background:#4F46E5;color:#FFFFFF;border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;box-shadow:0 14px 30px rgba(79,70,229,.25);transition:transform .25s" class="hv2">
+            <span style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:#E9E7F5">I’m looking for a role</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:center">Submit your CV <span style="font-size:20px">→</span></span>
           </a>
-          <p>Specialist hiring partner based in Mumbai. Hiring across India.</p>
+          <a href="#contact" data-target="contact" style="background:#FFFFFF;color:#14213D;border:1.5px solid #14213D;border-radius:20px;padding:16.5px 20px;display:flex;flex-direction:column;gap:6px;transition:transform .25s" class="hv3">
+            <span style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:#4F46E5">I’m hiring for my team</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:center">Talk to our team <span style="font-size:20px">→</span></span>
+          </a>
         </div>
-        <nav aria-label="Footer navigation">
-          <ul class="footer-links" role="list">
-            <li><a href="#specialisms">Specialisms</a></li>
-            <li><a href="#how-we-work">How we work</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="/privacy.html">Privacy policy</a></li>
-          </ul>
-        </nav>
-        <div class="footer-contact">
-          <a href="mailto:contact@qleaps.in">contact@qleaps.in</a>
-          <a href="tel:+919930822894">+91 99308 22894</a>
+        <div style="display:flex;gap:12px 28px;flex-wrap:wrap;padding-top:4px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:#14213D"><span style="width:22px;height:22px;border-radius:50%;background:#FFFFFF;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">✓</span>Every candidate spoken to</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:#14213D"><span style="width:22px;height:22px;border-radius:50%;background:#FFFFFF;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">✓</span>Hiring across India</div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© <span id="year"></span> Quantum Leaps. All rights reserved.</p>
-        <p>Mumbai · Hiring across India</p>
+      <div style="position:relative;width:100%;max-width:560px;aspect-ratio:600/520;justify-self:center">
+        <svg viewBox="0 0 600 520" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none">
+          <defs><mask id="qlArcMask" maskUnits="userSpaceOnUse" x="-50" y="-100" width="700" height="700"><path d="M70 430 Q250 -10 500 320" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" pathLength="100" stroke-dasharray="100 100" id="qlArc" stroke-dashoffset="100" style="transition:stroke-dashoffset 1.6s cubic-bezier(.6,0,.3,1) .2s"></path></mask></defs>
+          <path d="M70 430 Q250 -10 500 320" fill="none" stroke="#4F46E5" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 15" mask="url(#qlArcMask)"></path>
+          <line x1="20" y1="452" x2="580" y2="452" stroke="#14213D" stroke-width="5" stroke-linecap="round"></line>
+          <circle cx="70" cy="430" r="13" fill="#4F46E5"></circle>
+          <circle id="qlDot" cx="500" cy="320" r="22" fill="#FF6B4A" style="transform-box:fill-box;transform-origin:center;transform:scale(1);transition:transform .45s cubic-bezier(.3,1.8,.5,1)"></circle>
+        </svg>
+        <div style="position:absolute;left:13.5%;top:52.3%;width:15%;aspect-ratio:1;border-radius:50%;background:#4F46E5;color:#FFFFFF;border:5px solid #FFFFFF;box-shadow:0 12px 28px rgba(20,33,61,.16);display:flex;align-items:center;justify-content:center;box-sizing:border-box;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(11px,1.15vw,15px);letter-spacing:-.02em">Marketing</div>
+        <div style="position:absolute;left:37%;top:26.3%;width:15%;aspect-ratio:1;border-radius:50%;background:#14213D;color:#FFFFFF;border:5px solid #FFFFFF;box-shadow:0 12px 28px rgba(20,33,61,.16);display:flex;align-items:center;justify-content:center;box-sizing:border-box;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(11px,1.15vw,15px);letter-spacing:-.02em">Design</div>
+        <div style="position:absolute;left:63.5%;top:37.3%;width:15%;aspect-ratio:1;border-radius:50%;background:#FFFFFF;color:#14213D;border:5px solid #FFFFFF;box-shadow:0 12px 28px rgba(20,33,61,.16);display:flex;align-items:center;justify-content:center;box-sizing:border-box;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(11px,1.15vw,15px);letter-spacing:-.02em">Tech</div>
+        
+          <div style="position:absolute;left:31%;bottom:11.6%;width:26%;height:12px;border-radius:50%;background:#14213D;opacity:.14;animation:qlShadow 3.2s ease-in-out infinite"></div>
+          <div id="qlScout" title="Give Scout a pat" style="position:absolute;left:27%;bottom:12.6%;width:34%;cursor:pointer;transform-origin:50% 100%;transform:translateY(0) rotate(0deg) scale(1,1);transition:transform .5s cubic-bezier(.3,1.8,.5,1)">
+            <div style="animation:qlBob 3.2s ease-in-out infinite;transform-origin:50% 100%"><img src="assets/mascot/scout-excited.svg" alt="Scout, our brand ambassador" style="width:100%;display:block;pointer-events:none"></div>
+          </div>
+          <div id="qlBubble" style="position:absolute;right:0;top:0;max-width:210px;background:#FFFFFF;color:#14213D;padding:12px 16px;border-radius:16px 16px 16px 4px;box-shadow:0 10px 30px rgba(20,33,61,.14);font-size:15px;font-weight:600;line-height:1.35;transform:scale(0);transform-origin:0 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1)">Hi, I’m Scout. Looking for your next leap?</div>
+        
+      </div>
+    </div>
+    
+  </section>
+
+  <div style="background:#4F46E5;color:#FFFFFF;overflow:hidden;padding:22px 0"><div style="display:flex;width:max-content;white-space:nowrap;animation:qlMarquee 38s linear infinite;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.03em;line-height:1" aria-hidden="true"><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Performance marketers</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Copywriters</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>UX designers</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Engineers</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Brand leads</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Art directors</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Product designers</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Data analysts</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>SEO leads</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Tech leads</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Performance marketers</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Copywriters</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>UX designers</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Engineers</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Brand leads</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Art directors</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Product designers</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Data analysts</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>SEO leads</span><span style="width:10px;height:10px;border-radius:50%;background:#E9E7F5;display:inline-block"></span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px"><span>Tech leads</span><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A;display:inline-block"></span></span></div></div>
+
+  <section id="specialisms" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-wrap:wrap;gap:20px 60px;justify-content:space-between;align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">What we hire for</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">Four specialisms. One way of working.</h2>
+      </div>
+      <p style="margin:0;font-size:18px;line-height:1.55;max-width:400px;text-wrap:pretty">We know these roles inside out, so we can look past the CV to what makes someone good at the job.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:18px">
+      
+        <div style="flex:7 1 520px;background:#14213D;color:#FAF8F5;border:1px solid #14213D;border-radius:28px;padding:28px;display:flex;flex-wrap:wrap;gap:24px;min-height:360px;box-sizing:border-box;transition:transform .3s ease" class="hv4">
+          <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;letter-spacing:.14em">01</span><span style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#FF6B4A;opacity:.5"></span><span style="width:12px;height:12px;border-radius:50%;background:#FF6B4A"></span></span></div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3vw,36px);line-height:1.02;letter-spacing:-.04em">Marketing and digital</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,248,245,.25)">Performance</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,248,245,.25)">SEO / SEM</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,248,245,.25)">Growth</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,248,245,.25)">Content</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,248,245,.25)">Brand</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,248,245,.25)">CRM</span></div>
+            <div style="margin-top:auto;font-size:16px;line-height:1.5;padding-top:18px;border-top:1px solid rgba(250,248,245,.25)">People who connect the numbers to the story behind them.</div>
+          </div>
+          <div style="flex:1 1 220px;min-height:260px;position:relative;border-radius:20px;overflow:hidden;background:#E9E7F5"><img src="https://images.pexels.com/photos/4308091/pexels-photo-4308091.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="Marketing colleagues working together" loading="lazy" style="position:absolute;inset:0%;width:100%;height:100%;object-fit:cover;display:block"></div>
+        </div>
+        <div style="flex:5 1 300px;background:#E9E7F5;color:#14213D;border:1px solid #E9E7F5;border-radius:28px;padding:28px;display:flex;flex-wrap:wrap;gap:24px;min-height:360px;box-sizing:border-box;transition:transform .3s ease" class="hv4">
+          <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;letter-spacing:.14em">02</span><span style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#4F46E5;opacity:.5"></span><span style="width:12px;height:12px;border-radius:50%;background:#4F46E5"></span></span></div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3vw,36px);line-height:1.02;letter-spacing:-.04em">Creative</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(20,33,61,.2)">Copywriters</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(20,33,61,.2)">Content writers</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(20,33,61,.2)">Creative strategists</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(20,33,61,.2)">Art directors</span></div>
+            <div style="margin-top:auto;font-size:16px;line-height:1.5;padding-top:18px;border-top:1px solid rgba(20,33,61,.2)">Ideas that sell, from people who take feedback well.</div>
+          </div>
+        </div>
+        <div style="flex:5 1 300px;background:#FFFFFF;color:#14213D;border:1px solid #E6E3EE;border-radius:28px;padding:28px;display:flex;flex-wrap:wrap;gap:24px;min-height:360px;box-sizing:border-box;transition:transform .3s ease" class="hv4">
+          <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;letter-spacing:.14em">03</span><span style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#4F46E5;opacity:.5"></span><span style="width:12px;height:12px;border-radius:50%;background:#4F46E5"></span></span></div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3vw,36px);line-height:1.02;letter-spacing:-.04em">Design and product</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid #E6E3EE">UI</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid #E6E3EE">UX</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid #E6E3EE">Product design</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid #E6E3EE">Visual design</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid #E6E3EE">Design leads</span></div>
+            <div style="margin-top:auto;font-size:16px;line-height:1.5;padding-top:18px;border-top:1px solid #E6E3EE">A portfolio that shows how they think, not just how it looks.</div>
+          </div>
+        </div>
+        <div style="flex:7 1 520px;background:#4F46E5;color:#FFFFFF;border:1px solid #4F46E5;border-radius:28px;padding:28px;display:flex;flex-wrap:wrap;gap:24px;min-height:360px;box-sizing:border-box;transition:transform .3s ease" class="hv4">
+          <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;letter-spacing:.14em">04</span><span style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#FF6B4A;opacity:.5"></span><span style="width:12px;height:12px;border-radius:50%;background:#FF6B4A"></span></span></div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,3vw,36px);line-height:1.02;letter-spacing:-.04em">Technology</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3)">Engineers</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3)">Tech leads</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3)">QA</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3)">DevOps and cloud</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3)">Data</span></div>
+            <div style="margin-top:auto;font-size:16px;line-height:1.5;padding-top:18px;border-top:1px solid rgba(255,255,255,.3)">Problem-solvers who can explain what they built, and why.</div>
+          </div>
+          <div style="flex:1 1 220px;min-height:260px;position:relative;border-radius:20px;overflow:hidden;background:#FFFFFF"><img src="assets/mascot/scout-thinking.svg" alt="Scout thinking" loading="lazy" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;display:block"></div>
+        </div>
+    </div>
+  </section>
+
+  <section id="fit" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+    <div style="background:#14213D;color:#FAF8F5;border-radius:32px;padding:clamp(36px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:center;position:relative;overflow:hidden">
+      <svg viewBox="0 0 800 400" preserveAspectRatio="none" style="position:absolute;left:-5%;bottom:-18%;width:70%;height:70%;opacity:.6"><path d="M0 380 Q300 0 800 260" fill="none" stroke="#4F46E5" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 14" vector-effect="non-scaling-stroke"></path></svg>
+      <div style="display:flex;flex-direction:column;gap:22px;position:relative">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#E9E7F5">What we believe</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,4.6vw,58px);line-height:.96;letter-spacing:-.045em">Three who fit beat thirty who <span style="display:inline-block;background-image:linear-gradient(#FF6B4A,#FF6B4A);background-repeat:no-repeat;background-size:100% .1em;background-position:0 94%">might.</span></h2>
+        <p style="margin:0;font-size:18px;line-height:1.6;color:#E9E7F5;max-width:460px;text-wrap:pretty">A pile of CVs feels like progress. It isn’t. We send a short list of people we’ve spoken to, who want this role, in this team, for the right reasons.</p>
+      </div>
+      <div id="qlFit" style="display:flex;flex-direction:column;gap:20px;position:relative;cursor:pointer">
+        <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(8px,1.4vw,16px)">
+          <div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 0ms,opacity .4s ease 0ms,background .4s ease 0ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 196ms,opacity .4s ease 196ms,background .4s ease 196ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 112ms,opacity .4s ease 112ms,background .4s ease 112ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 28ms,opacity .4s ease 28ms,background .4s ease 28ms"></div><div class="ql-fd" data-hi="1" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 224ms,opacity .4s ease 224ms,background .4s ease 224ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 140ms,opacity .4s ease 140ms,background .4s ease 140ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 56ms,opacity .4s ease 56ms,background .4s ease 56ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 252ms,opacity .4s ease 252ms,background .4s ease 252ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 168ms,opacity .4s ease 168ms,background .4s ease 168ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 84ms,opacity .4s ease 84ms,background .4s ease 84ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 0ms,opacity .4s ease 0ms,background .4s ease 0ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 196ms,opacity .4s ease 196ms,background .4s ease 196ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 112ms,opacity .4s ease 112ms,background .4s ease 112ms"></div><div class="ql-fd" data-hi="1" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 28ms,opacity .4s ease 28ms,background .4s ease 28ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 224ms,opacity .4s ease 224ms,background .4s ease 224ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 140ms,opacity .4s ease 140ms,background .4s ease 140ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 56ms,opacity .4s ease 56ms,background .4s ease 56ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 252ms,opacity .4s ease 252ms,background .4s ease 252ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 168ms,opacity .4s ease 168ms,background .4s ease 168ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 84ms,opacity .4s ease 84ms,background .4s ease 84ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 0ms,opacity .4s ease 0ms,background .4s ease 0ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 196ms,opacity .4s ease 196ms,background .4s ease 196ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 112ms,opacity .4s ease 112ms,background .4s ease 112ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 28ms,opacity .4s ease 28ms,background .4s ease 28ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 224ms,opacity .4s ease 224ms,background .4s ease 224ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 140ms,opacity .4s ease 140ms,background .4s ease 140ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 56ms,opacity .4s ease 56ms,background .4s ease 56ms"></div><div class="ql-fd" data-hi="1" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 252ms,opacity .4s ease 252ms,background .4s ease 252ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 168ms,opacity .4s ease 168ms,background .4s ease 168ms"></div><div class="ql-fd" data-hi="0" style="aspect-ratio:1;border-radius:50%;background:#E9E7F5;opacity:.9;transform:scale(1);transition:transform .5s cubic-bezier(.3,1.5,.5,1) 84ms,opacity .4s ease 84ms,background .4s ease 84ms"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em" id="qlFitCap">30 who might.</span>
+          <span style="font-size:14px;color:#E9E7F5" id="qlFitHint">Hover or tap to filter</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="people" data-reveal="1" style="padding:clamp(72px,9vw,120px) 0 0;overflow:hidden">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px) 40px;display:flex;flex-wrap:wrap;gap:20px 60px;justify-content:space-between;align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Hiring, the human way</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">Real people. Real <span style="display:inline-block;background-image:linear-gradient(#FF6B4A,#FF6B4A);background-repeat:no-repeat;background-size:100% .1em;background-position:0 94%">conversations.</span></h2>
+      </div>
+      <p style="margin:0;font-size:18px;line-height:1.55;max-width:400px;text-wrap:pretty">No bots, no CV piles. Every hire starts with people talking to people.</p>
+    </div>
+    <div style="display:flex;gap:20px;padding:10px clamp(20px,4vw,48px) 40px;overflow-x:auto;scrollbar-width:none">
+      <div style="flex:0 0 clamp(220px,24vw,300px);aspect-ratio:4/5;margin-top:0px;transform:rotate(-3deg);border-radius:24px;background:#FFFFFF;padding:8px;box-shadow:0 18px 40px rgba(20,33,61,.12);transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv5"><img src="https://images.pexels.com/photos/6392977/pexels-photo-6392977.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="A professional smiling at her laptop" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:18px"></div>
+      <div style="flex:0 0 clamp(220px,24vw,300px);aspect-ratio:4/5;margin-top:28px;transform:rotate(2deg);border-radius:24px;background:#FFFFFF;padding:8px;box-shadow:0 18px 40px rgba(20,33,61,.12);transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv5"><div style="width:100%;height:100%;border-radius:18px;background:#14213D;color:#FAF8F5;display:flex;flex-direction:column;justify-content:space-between;padding:26px;box-sizing:border-box;position:relative;overflow:hidden"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:90px;line-height:.6;color:#4F46E5;height:40px">“</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.08;letter-spacing:-.03em">Every hire starts with a conversation, not a CV pile.</span><span style="font-size:14px;color:#E9E7F5">How we work</span></div></div>
+      <div style="flex:0 0 clamp(220px,24vw,300px);aspect-ratio:4/5;margin-top:6px;transform:rotate(-1.5deg);border-radius:24px;background:#FFFFFF;padding:8px;box-shadow:0 18px 40px rgba(20,33,61,.12);transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv5"><img src="https://images.pexels.com/photos/18890945/pexels-photo-18890945.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="Colleagues at a laptop" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:18px"></div>
+      <div style="flex:0 0 clamp(220px,24vw,300px);aspect-ratio:4/5;margin-top:34px;transform:rotate(2.5deg);border-radius:24px;background:#FFFFFF;padding:8px;box-shadow:0 18px 40px rgba(20,33,61,.12);transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv5"><div style="width:100%;height:100%;border-radius:18px;background:#4F46E5;color:#FFFFFF;display:flex;flex-direction:column;justify-content:space-between;padding:26px;box-sizing:border-box;position:relative;overflow:hidden"><span style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#E9E7F5">Your shortlist</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:84px;line-height:.9;letter-spacing:-.05em">3–5</span><span style="font-size:16px;line-height:1.45">people we’ve spoken to, per role. Not thirty.</span></div></div>
+      <div style="flex:0 0 clamp(220px,24vw,300px);aspect-ratio:4/5;margin-top:10px;transform:rotate(-2deg);border-radius:24px;background:#FFFFFF;padding:8px;box-shadow:0 18px 40px rgba(20,33,61,.12);transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv5"><div style="width:100%;height:100%;border-radius:18px;background:#E9E7F5;color:#14213D;display:flex;flex-direction:column;justify-content:space-between;padding:26px;box-sizing:border-box;position:relative;overflow:hidden"><span style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Brand ambassador</span><img src="assets/mascot/scout-wave.svg" alt="Scout waving" style="width:78%;align-self:center;display:block"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;line-height:1.05">Scout says hi.</span></div></div>
+    </div>
+  </section>
+
+  <section id="how" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:56px">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:700px">
+      <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">How a great hire happens</div>
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">From first call to first day.</h2>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute;left:28px;right:28px;top:39px;border-top:3px dotted #4F46E5;opacity:.45"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:28px;position:relative">
+        
+          <div class="ql-step" style="display:flex;flex-direction:column;gap:16px;padding-top:12px">
+            <div class="ql-step-dot" style="width:56px;height:56px;border-radius:50%;background:#4F46E5;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;box-shadow:0 0 0 8px #FAF8F5;transform:scale(1.14);transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .3s">01</div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Brief</h3>
+            <div style="font-size:17px;line-height:1.55;text-wrap:pretty">A real conversation about the role, the team and what success looks like.</div>
+          </div>
+          <div class="ql-step" style="display:flex;flex-direction:column;gap:16px;padding-top:12px">
+            <div class="ql-step-dot" style="width:56px;height:56px;border-radius:50%;background:#14213D;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;box-shadow:0 0 0 8px #FAF8F5;transform:scale(1);transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .3s">02</div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Search</h3>
+            <div style="font-size:17px;line-height:1.55;text-wrap:pretty">We look past titles and keywords, across our network and beyond.</div>
+          </div>
+          <div class="ql-step" style="display:flex;flex-direction:column;gap:16px;padding-top:12px">
+            <div class="ql-step-dot" style="width:56px;height:56px;border-radius:50%;background:#14213D;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;box-shadow:0 0 0 8px #FAF8F5;transform:scale(1);transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .3s">03</div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Shortlist</h3>
+            <div style="font-size:17px;line-height:1.55;text-wrap:pretty">You meet three to five people we’ve spoken to. Not a pile of CVs.</div>
+          </div>
+          <div class="ql-step" style="display:flex;flex-direction:column;gap:16px;padding-top:12px">
+            <div class="ql-step-dot" style="width:56px;height:56px;border-radius:50%;background:#14213D;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;box-shadow:0 0 0 8px #FAF8F5;transform:scale(1);transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .3s">04</div>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Support</h3>
+            <div style="font-size:17px;line-height:1.55;text-wrap:pretty">We stay close through offer, notice period and day one.</div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stats" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:680px">
+      <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Hiring in India, by the numbers</div>
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">Why getting it right matters.</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:18px">
+      <div style="flex:7 1 480px;background:#14213D;color:#FAF8F5;border-radius:28px;padding:32px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;box-sizing:border-box">
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:14px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(64px,7vw,96px);line-height:.88;letter-spacing:-.05em">84%</div>
+          <div style="font-size:17px;line-height:1.5;max-width:300px">of employers in India say they have been hit by a bad hire.</div>
+        </div>
+        <div style="flex:0 1 240px;display:grid;grid-template-columns:repeat(10,1fr);gap:6px">
+          <span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:#FF6B4A"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span><span style="aspect-ratio:1;border-radius:50%;background:rgba(250,248,245,.22)"></span>
+        </div>
+      </div>
+      <div style="flex:5 1 300px;background:#FFFFFF;border:1px solid #E6E3EE;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box;min-height:260px">
+        <span style="align-self:flex-start;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#4F46E5">29% of employers</span>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(56px,6vw,80px);line-height:.88;letter-spacing:-.05em;color:#4F46E5;margin-top:auto">₹20L+</div>
+        <div style="font-size:17px;line-height:1.5">lost on a single wrong hire.</div>
+      </div>
+      <div style="flex:5 1 300px;background:#E9E7F5;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box;min-height:260px">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(56px,6vw,80px);line-height:.88;letter-spacing:-.05em;color:#14213D">90 <span style="font-size:.4em;letter-spacing:-.02em">days</span></div>
+        <div style="display:flex;gap:6px">
+          <span style="flex:1;height:12px;border-radius:999px;background:#4F46E5"></span><span style="flex:1;height:12px;border-radius:999px;background:#4F46E5;opacity:.6"></span><span style="flex:1;height:12px;border-radius:999px;background:#4F46E5;opacity:.3"></span>
+        </div>
+        <div style="font-size:17px;line-height:1.5;margin-top:auto">How long notice periods can run, so a wrong hire costs months.</div>
+      </div>
+      <div style="flex:7 1 480px;background:#4F46E5;color:#FFFFFF;border-radius:28px;padding:32px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;box-sizing:border-box">
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:14px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(64px,7vw,96px);line-height:.88;letter-spacing:-.05em">73%</div>
+          <div style="font-size:17px;line-height:1.5;max-width:300px">of Indian job seekers say an employer has ghosted them.</div>
+        </div>
+        <div style="flex:0 1 260px;display:flex;flex-direction:column;gap:10px">
+          <div style="align-self:flex-start;background:#FFFFFF;color:#14213D;border-radius:18px 18px 18px 4px;padding:12px 16px;font-size:15px;font-weight:600">Any update on my application?</div>
+          <div style="align-self:flex-start;background:rgba(255,255,255,.18);color:#FFFFFF;border-radius:18px 18px 18px 4px;padding:12px 16px;font-size:15px;font-weight:600">Following up again…</div>
+          <div style="align-self:flex-end;display:flex;gap:6px;padding:12px 16px;border-radius:18px 18px 4px 18px;border:1.5px dashed rgba(255,255,255,.5)"><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;opacity:.5"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;opacity:.5"></span><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;opacity:.5"></span></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:#5B5F6B">Figures from recent surveys of Indian employers and job seekers.</div>
+  </section>
+
+  <section id="about" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:56px;position:relative">
+    <div style="display:flex;flex-wrap:wrap;gap:20px 60px;justify-content:space-between;align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Meet the founders</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">Two founders. One <span style="display:inline-block;background-image:linear-gradient(#FF6B4A,#FF6B4A);background-repeat:no-repeat;background-size:100% .1em;background-position:0 94%">leap.</span></h2>
+      </div>
+      <p style="margin:0;font-size:18px;line-height:1.55;max-width:420px;text-wrap:pretty">Corporate experience meets technology depth. Between them, they’ve sat on both sides of the hiring table.</p>
+    </div>
+    <div style="position:relative">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="position:absolute;left:10%;right:10%;top:-70px;width:80%;height:120px;overflow:visible;pointer-events:none"><path d="M0 110 Q600 -60 1200 110" fill="none" stroke="#4F46E5" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 14" vector-effect="non-scaling-stroke"></path></svg>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);justify-content:center;align-items:flex-start">
+      <div style="flex:1 1 380px;max-width:560px;position:relative;display:flex;flex-direction:column;gap:0;margin-top:0px;transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv6">
+        <div style="position:relative;aspect-ratio:4/4.4;border-radius:32px;overflow:hidden;background:#E9E7F5">
+          <img src="assets/meeta-sabnis.png" alt="Meeta Sabnis, founder" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+          <div style="position:absolute;left:18px;top:18px;display:flex;align-items:center;gap:8px;background:#FFFFFF;color:#14213D;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:12px"><span style="width:10px;height:10px;border-radius:50%;background:#4F46E5"></span>Founder</div>
+        </div>
+        <div style="position:relative;margin:-64px 18px 0;background:#FFFFFF;border-radius:28px;padding:28px;box-shadow:0 20px 50px rgba(20,33,61,.12);display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:nowrap">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,32px);line-height:1;letter-spacing:-.04em;color:#14213D;text-wrap:balance">Meeta Sabnis</span>
+              <span style="font-size:15px;font-weight:600;color:#4F46E5">Founder, Quantum Leaps</span>
+            </div>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,3.2vw,42px);line-height:.9;letter-spacing:-.05em;color:#14213D;text-align:right;flex:none">20<span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#5B5F6B;margin-top:6px">years</span></span>
+          </div>
+          <div style="font-size:16.5px;line-height:1.6;text-wrap:pretty">Meeta brings around 20 years of experience across corporate functions. She started Quantum Leaps in Mumbai to make hiring feel more human, beginning every role with a real conversation.</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px;line-height:1.2;letter-spacing:-.02em;color:#14213D;padding:16px 0 0;border-top:1px solid #E6E3EE;text-wrap:pretty">“A CV tells you where someone has been. A conversation tells you where they’ll go next.”</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">People and culture</span><span style="font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Marketing and creative</span><span style="font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Hiring strategy</span></div>
+          <a href="mailto:meeta@qleaps.in" style="align-self:flex-start;font-size:15px;font-weight:600;color:#4F46E5" class="hv7">meeta@qleaps.in →</a>
+        </div>
+      </div>
+      <div style="flex:1 1 380px;max-width:560px;position:relative;display:flex;flex-direction:column;gap:0;margin-top:clamp(0px,6vw,80px);transition:transform .35s cubic-bezier(.3,1.5,.5,1)" class="hv6">
+        <div style="position:relative;aspect-ratio:4/4.4;border-radius:32px;overflow:hidden;background:#4F46E5">
+          <img src="assets/lalit-kulshrestha.png" alt="Lalit Kulshrestha, co-founder" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block">
+          <div style="position:absolute;left:18px;top:18px;display:flex;align-items:center;gap:8px;background:#FFFFFF;color:#14213D;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:12px"><span style="width:10px;height:10px;border-radius:50%;background:#FF6B4A"></span>Co-founder</div>
+        </div>
+        <div style="position:relative;margin:-64px 18px 0;background:#FFFFFF;border-radius:28px;padding:28px;box-shadow:0 20px 50px rgba(20,33,61,.12);display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:nowrap">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,32px);line-height:1;letter-spacing:-.04em;color:#14213D;text-wrap:balance">Lalit Kulshrestha</span>
+              <span style="font-size:15px;font-weight:600;color:#4F46E5">Co-founder, Quantum Leaps</span>
+            </div>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,3.2vw,42px);line-height:.9;letter-spacing:-.05em;color:#14213D;text-align:right;flex:none">10+<span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#5B5F6B;margin-top:6px">years in tech</span></span>
+          </div>
+          <div style="font-size:16.5px;line-height:1.6;text-wrap:pretty">A technology leader with over a decade in software engineering and IT consulting. Lalit brings an engineer’s eye to our technology hiring, so every tech candidate is assessed by someone who has done the work.</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px;line-height:1.2;letter-spacing:-.02em;color:#14213D;padding:16px 0 0;border-top:1px solid #E6E3EE;text-wrap:pretty">“Great engineers are best spotted by people who understand the work.”</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Software engineering</span><span style="font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">IT consulting</span><span style="font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Tech hiring</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 24px"><a href="mailto:lalit@qleaps.in" style="font-size:15px;font-weight:600;color:#4F46E5" class="hv7">lalit@qleaps.in →</a><a href="https://www.linkedin.com/in/lalit-kulshrestha-a0bb88a7/" style="font-size:15px;font-weight:600;color:#4F46E5" class="hv7">LinkedIn →</a></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scout" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+    <div style="background:#E9E7F5;border-radius:32px;padding:clamp(32px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px;align-items:center;position:relative;overflow:hidden">
+      <svg viewBox="0 0 400 300" style="position:absolute;right:-40px;top:-30px;width:420px;height:320px;opacity:.6"><path d="M20 280 Q180 -20 380 160" fill="none" stroke="#4F46E5" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 14"></path><circle cx="380" cy="160" r="12" fill="#FF6B4A"></circle></svg>
+      <div style="display:flex;flex-direction:column;gap:22px;position:relative">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Meet Scout</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,50px);line-height:.98;letter-spacing:-.045em;color:#14213D">Our brand ambassador.</h2>
+        <p style="margin:0;font-size:17.5px;line-height:1.6;max-width:460px;text-wrap:pretty">Scout is the face of Quantum Leaps. Curious, loyal and patient, he stands for everything we believe about hiring: take the time to find who truly belongs.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button type="button" class="ql-pose" data-pose="default" data-line="Ready when you are." style="font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:transparent;color:#14213D;transition:all .2s">Default</button><button type="button" class="ql-pose" data-pose="wave" data-line="Hello! Nice to meet you." style="font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:#14213D;color:#FFFFFF;transition:all .2s">Wave</button><button type="button" class="ql-pose" data-pose="excited" data-line="Me when the right person says yes." style="font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:transparent;color:#14213D;transition:all .2s">Excited</button><button type="button" class="ql-pose" data-pose="skeptical" data-line="Me reading a JD with 40 must-haves." style="font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:transparent;color:#14213D;transition:all .2s">Skeptical</button><button type="button" class="ql-pose" data-pose="thinking" data-line="Is this role right for you? Let’s think it through." style="font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:transparent;color:#14213D;transition:all .2s">Thinking</button><button type="button" class="ql-pose" data-pose="sleepy" data-line="Me during a 90-day notice period." style="font-size:15px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:transparent;color:#14213D;transition:all .2s">Sleepy</button>
+        </div>
+        <div style="font-size:16.5px;font-weight:600;color:#14213D;min-height:26px" id="qlPoseLine">Hello! Nice to meet you.</div>
+      </div>
+      <div style="position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:300px">
+        <div style="position:absolute;bottom:6px;width:62%;height:16px;border-radius:50%;background:#14213D;opacity:.12"></div>
+        <div id="qlPoseWrap" style="position:relative;width:min(100%,320px);transform:scale(1) translateY(0);transform-origin:50% 100%;transition:transform .45s cubic-bezier(.3,1.7,.5,1)"><div id="qlPoseAnim" style="animation:qlBob 3s ease-in-out infinite;transform-origin:50% 100%"><img id="qlPoseImg" src="assets/mascot/scout-wave.svg" alt="Scout" style="width:100%;display:block"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="returners" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+    <div style="background:#4F46E5;color:#FFFFFF;border-radius:32px;padding:clamp(36px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:center;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-8%;top:-30%;width:46%;aspect-ratio:1;border-radius:50%;border:2px dashed rgba(255,255,255,.3)"></div>
+      <div style="display:flex;flex-direction:column;gap:22px;position:relative">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#E9E7F5">Join our team · Women returners</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,4.6vw,58px);line-height:.96;letter-spacing:-.045em">A career break is not a gap. It’s a <span style="display:inline-block;background-image:linear-gradient(#FF6B4A,#FF6B4A);background-repeat:no-repeat;background-size:100% .1em;background-position:0 94%">chapter.</span></h2>
+        <p style="margin:0;font-size:18px;line-height:1.6;max-width:480px;text-wrap:pretty">We’re building the Quantum Leaps team with women returning after a career break. Time away for family, health or anything else? Your experience still counts. The role is fully remote, and we’d love to hear from you.</p>
+        <div style="display:flex"><a href="mailto:contact@qleaps.in?subject=Returner%20application" style="background:#FFFFFF;color:#14213D;font-size:16.5px;font-weight:600;padding:16px 28px;border-radius:999px" class="hv1">Email your CV to contact@qleaps.in</a></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;position:relative">
+        <div style="height:220px;border-radius:20px;overflow:hidden;border:4px solid rgba(255,255,255,.25)"><img src="https://images.pexels.com/photos/4307970/pexels-photo-4307970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" alt="A woman working from home on her laptop" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px"></div>
+        
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start">
+            <span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px">1</span>
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em">Your break, your story</span><span style="font-size:16px;line-height:1.5;color:#FFFFFF">No awkward explanations needed. We look at what you can do.</span></div>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start">
+            <span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px">2</span>
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em">Work remotely</span><span style="font-size:16px;line-height:1.5;color:#FFFFFF">Our team works from home, anywhere in India, with a phased return so you settle in at your pace.</span></div>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start">
+            <span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px">3</span>
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em">Learn recruitment with us</span><span style="font-size:16px;line-height:1.5;color:#FFFFFF">No recruitment background? We’ll train you and support you all the way.</span></div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roles" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-wrap:wrap;gap:24px 60px;justify-content:space-between;align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Open roles</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">Find your next leap.</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button type="button" class="ql-rf" data-f="All" style="font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;border:1.5px solid #14213D;background:#14213D;color:#FFFFFF;transition:all .2s">All</button><button type="button" class="ql-rf" data-f="Marketing and digital" style="font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;border:1.5px solid #D9D5CC;background:transparent;color:#14213D;transition:all .2s">Marketing</button><button type="button" class="ql-rf" data-f="Creative" style="font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;border:1.5px solid #D9D5CC;background:transparent;color:#14213D;transition:all .2s">Creative</button><button type="button" class="ql-rf" data-f="Design and product" style="font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;border:1.5px solid #D9D5CC;background:transparent;color:#14213D;transition:all .2s">Design</button><button type="button" class="ql-rf" data-f="Technology" style="font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;cursor:pointer;border:1.5px solid #D9D5CC;background:transparent;color:#14213D;transition:all .2s">Technology</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid #E2DED6">
+      
+        <div class="ql-role hv8" data-area="Marketing and digital" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Performance marketing manager</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#FF6B4A"></span>Marketing and digital</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Mumbai</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">5–8 years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="Performance marketing manager" data-area="Marketing and digital" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Creative" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Senior copywriter</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#4F46E5"></span>Creative</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Mumbai · Hybrid</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">4–6 years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="Senior copywriter" data-area="Creative" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Design and product" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Product designer</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#14213D"></span>Design and product</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Bengaluru</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">3–6 years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="Product designer" data-area="Design and product" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Technology" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Senior backend engineer</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#8B85F0"></span>Technology</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Pune</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">5–9 years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="Senior backend engineer" data-area="Technology" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Marketing and digital" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">SEO lead</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#FF6B4A"></span>Marketing and digital</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Remote, India</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">6+ years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="SEO lead" data-area="Marketing and digital" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Creative" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Art director</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#4F46E5"></span>Creative</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Delhi NCR</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">7+ years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="Art director" data-area="Creative" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Design and product" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">UX researcher</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#14213D"></span>Design and product</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Mumbai</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">3–5 years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="UX researcher" data-area="Design and product" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+        <div class="ql-role hv8" data-area="Technology" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px 24px;align-items:center;padding:24px 8px;border-bottom:1px solid #E2DED6;transition:background .2s">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:span 2">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">DevOps engineer</h3>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#5B5F6B"><span style="width:8px;height:8px;border-radius:50%;background:#8B85F0"></span>Technology</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">Hyderabad</span><span style="font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#14213D">4–7 years</span></div>
+          <div style="display:flex;justify-content:flex-end"><button type="button" class="ql-apply hv9" data-role="DevOps engineer" data-area="Technology" style="font-size:16px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;border:0;background:#14213D;color:#FFFFFF">Apply →</button></div>
+        </div>
+    </div>
+    <div style="font-size:16px;color:#5B5F6B">Don’t see your role? <a href="#cv" data-target="cv" style="font-weight:600">Send us your CV anyway</a>. Most of our roles are filled before they’re posted.</div>
+  </section>
+
+  <section id="insights" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:680px">
+      <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">For candidates</div>
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:.98;letter-spacing:-.045em;color:#14213D">Tips for your next move.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;align-items:start">
+      
+        <div class="ql-tip" style="background:#FFFFFF;border:1px solid #E6E3EE;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+          <span style="align-self:flex-start;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#4F46E5">Before you say yes</span>
+          <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;line-height:1.12;letter-spacing:-.03em;color:#14213D;text-wrap:pretty">Four questions to ask before accepting an offer.</h3>
+          <div style="font-size:17px;line-height:1.55">The right offer is about more than the number.</div>
+          <div class="ql-tip-pts" style="display:none;flex-direction:column;gap:10px;padding-top:6px"><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Who will I report to, and how do they like to work?</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>What does success look like in my first 90 days?</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Why is this role open right now?</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Where can this role lead in two years?</div></div>
+          <button type="button" class="ql-tip-btn" style="align-self:flex-start;background:none;border:0;padding:0;font-size:16px;font-weight:600;color:#4F46E5;cursor:pointer">Read the tips →</button>
+        </div>
+        <div class="ql-tip" style="background:#FFFFFF;border:1px solid #E6E3EE;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+          <span style="align-self:flex-start;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#4F46E5">Designers and creatives</span>
+          <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;line-height:1.12;letter-spacing:-.03em;color:#14213D;text-wrap:pretty">Your portfolio should show how you think.</h3>
+          <div style="font-size:17px;line-height:1.55">Hiring managers spend minutes, not hours. Make them count.</div>
+          <div class="ql-tip-pts" style="display:none;flex-direction:column;gap:10px;padding-top:6px"><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Lead with your three strongest projects</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Show the problem, your process and the result</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Keep it current, and trim the rest</div></div>
+          <button type="button" class="ql-tip-btn" style="align-self:flex-start;background:none;border:0;padding:0;font-size:16px;font-weight:600;color:#4F46E5;cursor:pointer">Read the tips →</button>
+        </div>
+        <div class="ql-tip" style="background:#FFFFFF;border:1px solid #E6E3EE;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+          <span style="align-self:flex-start;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:#E9E7F5;color:#4F46E5">Serving notice</span>
+          <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;line-height:1.12;letter-spacing:-.03em;color:#14213D;text-wrap:pretty">Make the most of a long notice period.</h3>
+          <div style="font-size:17px;line-height:1.55">Sixty to ninety days is a long time. Use it well.</div>
+          <div class="ql-tip-pts" style="display:none;flex-direction:column;gap:10px;padding-top:6px"><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Stay in touch with your new manager</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Ask about the first projects you’ll work on</div><div style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#14213D"><span style="flex:none;margin-top:7px;width:7px;height:7px;border-radius:50%;background:#4F46E5"></span>Hand over cleanly, so you leave on good terms</div></div>
+          <button type="button" class="ql-tip-btn" style="align-self:flex-start;background:none;border:0;padding:0;font-size:16px;font-weight:600;color:#4F46E5;cursor:pointer">Read the tips →</button>
+        </div>
+    </div>
+  </section>
+
+  <section id="cv" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+    <div style="background:#FFFFFF;border:1px solid #E6E3EE;border-radius:32px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px;position:relative;overflow:hidden">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Submit your CV</div>
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,50px);line-height:.98;letter-spacing:-.045em;color:#14213D">Tell us where you want to go next.</h2>
+        <p style="margin:0;font-size:17.5px;line-height:1.6;max-width:420px;text-wrap:pretty">We read every CV. If there’s a fit, we’ll call you for a proper conversation before we share your profile with anyone.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px">
+          <div style="display:flex;gap:12px;align-items:center;font-size:16px;color:#14213D"><span style="width:26px;height:26px;border-radius:50%;background:#E9E7F5;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">1</span>A real person reads it</div>
+          <div style="display:flex;gap:12px;align-items:center;font-size:16px;color:#14213D"><span style="width:26px;height:26px;border-radius:50%;background:#E9E7F5;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">2</span>We call before we share</div>
+          <div style="display:flex;gap:12px;align-items:center;font-size:16px;color:#14213D"><span style="width:26px;height:26px;border-radius:50%;background:#E9E7F5;color:#4F46E5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">3</span>You hear back, whatever the outcome</div>
+        </div>
+      </div>
+
+      
+        <div id="cvThanks" style="display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;background:#E9E7F5;border-radius:24px;padding:40px 28px">
+          <img src="assets/mascot/scout-excited.svg" alt="Scout, excited" style="width:180px;display:block">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.04em;color:#14213D">Thanks, <span id="cvFirst">friend</span>.</div>
+          <div style="font-size:16.5px;line-height:1.55;max-width:360px">Your CV is with us. Our team will be in touch within a week. Scout is already very excited.</div>
+          <button type="button" id="cvReset" style="background:none;border:1.5px solid #14213D;color:#14213D;border-radius:999px;padding:11px 20px;font-size:16px;font-weight:600;cursor:pointer">Send another</button>
+        </div>
+      
+      
+        <form id="cvForm" name="cv" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" novalidate style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px">
+          <input type="hidden" name="form-name" value="cv"><p hidden><label>Leave empty <input name="bot-field"></label></p>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D">Full name *<input name="name" placeholder="Your name" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328;outline-color:#4F46E5"><span data-err="name" style="font-size:13px;font-weight:500;color:#B42318"></span></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D">Email *<input type="email" name="email" placeholder="you@email.com" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328;outline-color:#4F46E5"><span data-err="email" style="font-size:13px;font-weight:500;color:#B42318"></span></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D">Phone *<input type="tel" name="phone" placeholder="+91" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328;outline-color:#4F46E5"><span data-err="phone" style="font-size:13px;font-weight:500;color:#B42318"></span></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D">City<input name="city" placeholder="Mumbai" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328;outline-color:#4F46E5"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D">Specialism *<select name="area" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328"><option value="">Choose one</option><option value="Marketing and digital">Marketing and digital</option><option value="Creative">Creative</option><option value="Design and product">Design and product</option><option value="Technology">Technology</option></select><span data-err="area" style="font-size:13px;font-weight:500;color:#B42318"></span></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D">Experience<select name="exp" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328"><option value="0–2 years">0–2 years</option><option value="3–5 years" selected>3–5 years</option><option value="6–9 years">6–9 years</option><option value="10+ years">10+ years</option></select></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D;grid-column:1/-1">Role you’re interested in<input name="role" placeholder="e.g. Product designer" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328;outline-color:#4F46E5"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#14213D;grid-column:1/-1">LinkedIn or portfolio link<input name="link" placeholder="https://" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #E2DED6;background:#FAF8F5;color:#1F2328;outline-color:#4F46E5"></label>
+          <label id="cvFileBox" style="grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:18px;border-radius:16px;border:1.5px dashed #4F46E5;background:#FAF8F5;cursor:pointer">
+            <span style="flex:none;width:44px;height:44px;border-radius:12px;background:#4F46E5;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700">↑</span>
+            <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600;color:#14213D" id="cvFileLabel">Attach your CV *</span><span id="cvFileSub" style="font-size:13px;color:#5B5F6B">PDF or Word, up to 5 MB</span></span>
+            <input type="file" accept=".pdf,.doc,.docx" name="cv_file" id="cvFile" style="display:none">
+          </label>
+          
+          <button type="submit" style="grid-column:1/-1;justify-self:start;background:#4F46E5;color:#FFFFFF;border:0;border-radius:999px;padding:16px 32px;font-size:16.5px;font-weight:600;cursor:pointer" class="hv10">Submit your CV</button>
+        </form>
+      
+    </div>
+  </section>
+
+  <section id="contact" data-reveal="1" style="max-width:1240px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:48px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#4F46E5">Contact</div>
+      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(34px,4.2vw,50px);line-height:.98;letter-spacing:-.045em;color:#14213D">Say hello.</h2>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #E2DED6">
+        <a href="mailto:contact@qleaps.in" style="display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #E2DED6;color:#14213D" class="hv0"><span style="font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5B5F6B">Email</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em">contact@qleaps.in</span></a>
+        <a href="tel:+919930822894" style="display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #E2DED6;color:#14213D" class="hv0"><span style="font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5B5F6B">Phone</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em">+91 99308 22894</span></a>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #E2DED6;color:#14213D"><span style="font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5B5F6B">Based in</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;text-align:right">Mumbai, hiring across India</span></div>
+      </div>
+    </div>
+    <div style="background:#E9E7F5;border-radius:28px;padding:clamp(24px,4vw,40px)">
+      
+        <div id="msgThanks" style="display:none;flex-direction:column;gap:12px;align-items:flex-start;min-height:240px;justify-content:center">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;letter-spacing:-.03em;color:#14213D">Message sent.</div>
+          <div style="font-size:17px;line-height:1.55">We’ll reply within two working days.</div>
+        </div>
+      
+      
+        <form id="msgForm" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:14px">
+          <input type="hidden" name="form-name" value="contact"><p hidden><label>Leave empty <input name="bot-field"></label></p>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:#14213D">Send a quick message</div>
+          <input required="" name="name" placeholder="Your name" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #FFFFFF;background:#FFFFFF;color:#1F2328;outline-color:#4F46E5">
+          <input required="" type="email" name="email" placeholder="Email" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #FFFFFF;background:#FFFFFF;color:#1F2328;outline-color:#4F46E5">
+          <textarea required="" name="text" placeholder="How can we help?" rows="4" style="font-size:17px;padding:13px 14px;border-radius:12px;border:1.5px solid #FFFFFF;background:#FFFFFF;color:#1F2328;resize:vertical;outline-color:#4F46E5"></textarea>
+          <button type="submit" style="align-self:flex-start;background:#14213D;color:#FFFFFF;border:0;border-radius:999px;padding:14px 26px;font-size:17px;font-weight:600;cursor:pointer" class="hv9">Send message</button>
+        </form>
+      
+    </div>
+  </section>
+
+  <footer style="background:#14213D;color:#FAF8F5;position:relative;overflow:hidden">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style="position:absolute;left:0;top:0;width:100%;height:160px;opacity:.55"><path d="M-20 190 Q520 -60 1220 130" fill="none" stroke="#4F46E5" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 14" vector-effect="non-scaling-stroke"></path></svg>
+    <div style="max-width:1240px;margin:0 auto;padding:72px clamp(20px,4vw,48px) 36px;display:flex;flex-direction:column;gap:48px;position:relative">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <img src="assets/logo/ql-logo-horizontal-rev.svg" alt="Quantum Leaps" style="height:clamp(52px,6vw,68px);display:block;align-self:flex-start">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:.92;letter-spacing:-.05em">Make the right <span style="display:inline-block;background-image:linear-gradient(#FF6B4A,#FF6B4A);background-repeat:no-repeat;background-size:100% .1em;background-position:0 94%">leap.</span></div>
+        </div>
+        <div style="position:relative;width:170px"><span style="position:absolute;right:18%;top:8%;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;color:#E9E7F5;opacity:0;animation:qlZ 3.9s ease-out 0.0s infinite">z</span><span style="position:absolute;right:18%;top:8%;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:#E9E7F5;opacity:0;animation:qlZ 3.9s ease-out 1.3s infinite">z</span><span style="position:absolute;right:18%;top:8%;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;color:#E9E7F5;opacity:0;animation:qlZ 3.9s ease-out 2.6s infinite">z</span><img src="assets/mascot/scout-sleepy.svg" alt="Scout, napping" style="width:100%;display:block;transform-origin:50% 100%;animation:qlBreathe 3.4s ease-in-out infinite"></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px;padding-top:24px;border-top:1px solid rgba(250,248,245,.18);font-size:14px;color:#E9E7F5">
+        <span>© 2026 Quantum Leaps · Mumbai, India</span>
+        <div style="display:flex;gap:24px;flex-wrap:wrap">
+          <a href="#specialisms" data-target="specialisms" style="color:#E9E7F5" class="hv11">Specialisms</a>
+          <a href="#roles" data-target="roles" style="color:#E9E7F5" class="hv11">Open roles</a>
+          <a href="#cv" data-target="cv" style="color:#E9E7F5" class="hv11">Submit your CV</a>
+          <a href="privacy.html" style="color:#E9E7F5" class="hv11">Privacy policy</a>
+          <a href="https://www.linkedin.com/" style="color:#E9E7F5" class="hv11">LinkedIn</a>
+        </div>
       </div>
     </div>
   </footer>
-
-  <script src="main.js"></script>
+</div>
 </body>
 </html>
