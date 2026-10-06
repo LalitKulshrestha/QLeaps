@@ -1,0 +1,10 @@
+# Git ignore
+.env
+.env.local
+.env.production
+*.env
+node_modules/
+.netlify/
+.DS_Store
+Thumbs.db
+*.log
