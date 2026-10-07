@@ -309,17 +309,37 @@
     var btn = $('button[type="submit"]', cvForm);
     btn.disabled = true; btn.textContent = 'Sending…';
 
-    // Send entry to Google Sheet
-    sendToGoogleSheet({
-      form_type: 'Candidate Application',
-      name: cvForm.elements.name.value.trim(),
-      email: cvForm.elements.email.value.trim(),
-      phone: cvForm.elements.phone.value.trim(),
-      city: cvForm.elements.city.value.trim(),
-      role: cvForm.elements.role.value.trim() || cvForm.elements.area.value,
-      link: cvForm.elements.link.value.trim(),
-      message: 'Specialism: ' + cvForm.elements.area.value + ' | Experience: ' + cvForm.elements.exp.value
-    });
+    function postToSheet(filePayload) {
+      var sheetData = {
+        form_type: 'Candidate Application',
+        name: cvForm.elements.name.value.trim(),
+        email: cvForm.elements.email.value.trim(),
+        phone: cvForm.elements.phone.value.trim(),
+        city: cvForm.elements.city.value.trim(),
+        role: cvForm.elements.role.value.trim() || cvForm.elements.area.value,
+        link: cvForm.elements.link.value.trim(),
+        message: 'Specialism: ' + cvForm.elements.area.value + ' | Experience: ' + cvForm.elements.exp.value
+      };
+      if (filePayload) {
+        sheetData.file_data = filePayload.data;
+        sheetData.file_name = filePayload.name;
+        sheetData.file_type = filePayload.type;
+      }
+      sendToGoogleSheet(sheetData);
+    }
+
+    var selectedFile = fileInput.files && fileInput.files[0];
+    if (selectedFile) {
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        var base64 = (ev.target.result || '').split(',')[1] || '';
+        postToSheet({ data: base64, name: selectedFile.name, type: selectedFile.type });
+      };
+      reader.onerror = function () { postToSheet(null); };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      postToSheet(null);
+    }
 
     // Send to Netlify Forms (stores file attachment)
     fetch('/', { method: 'POST', body: new FormData(cvForm) })
