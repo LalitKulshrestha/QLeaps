@@ -309,7 +309,12 @@
     var btn = $('button[type="submit"]', cvForm);
     btn.disabled = true; btn.textContent = 'Sending…';
 
-    function postToSheet(filePayload) {
+    // Background backup to Netlify Forms (silent catch so it never triggers false errors)
+    try {
+      fetch('/', { method: 'POST', body: new FormData(cvForm) }).catch(function () {});
+    } catch (err) {}
+
+    function handleSubmission(filePayload) {
       var sheetData = {
         form_type: 'Candidate Application',
         name: cvForm.elements.name.value.trim(),
@@ -325,7 +330,13 @@
         sheetData.file_name = filePayload.name;
         sheetData.file_type = filePayload.type;
       }
-      sendToGoogleSheet(sheetData);
+      sendToGoogleSheet(sheetData).then(function () {
+        $('#cvFirst').textContent = cvForm.elements.name.value.trim().split(' ')[0] || 'friend';
+        cvForm.style.display = 'none';
+        cvThanks.style.display = 'flex';
+        btn.disabled = false;
+        btn.textContent = 'Submit your CV';
+      });
     }
 
     var selectedFile = fileInput.files && fileInput.files[0];
@@ -333,23 +344,13 @@
       var reader = new FileReader();
       reader.onload = function (ev) {
         var base64 = (ev.target.result || '').split(',')[1] || '';
-        postToSheet({ data: base64, name: selectedFile.name, type: selectedFile.type });
+        handleSubmission({ data: base64, name: selectedFile.name, type: selectedFile.type });
       };
-      reader.onerror = function () { postToSheet(null); };
+      reader.onerror = function () { handleSubmission(null); };
       reader.readAsDataURL(selectedFile);
     } else {
-      postToSheet(null);
+      handleSubmission(null);
     }
-
-    // Send to Netlify Forms (stores file attachment)
-    fetch('/', { method: 'POST', body: new FormData(cvForm) })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); })
-      .then(function () {
-        $('#cvFirst').textContent = cvForm.elements.name.value.trim().split(' ')[0] || 'friend';
-        cvForm.style.display = 'none'; cvThanks.style.display = 'flex';
-      })
-      .catch(function () { alert('Sorry, something went wrong. Please email your CV to contact@qleaps.in'); })
-      .then(function () { btn.disabled = false; btn.textContent = 'Submit your CV'; });
   });
 
   $('#cvReset').addEventListener('click', function () {
@@ -363,19 +364,25 @@
   msgForm.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!msgForm.checkValidity()) { msgForm.reportValidity(); return; }
+    var btn = $('button[type="submit"]', msgForm);
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
-    // Send entry to Google Sheet
+    // Background backup to Netlify Forms
+    try {
+      var body = new URLSearchParams(new FormData(msgForm)).toString();
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }).catch(function () {});
+    } catch (err) {}
+
     sendToGoogleSheet({
       form_type: 'Contact Inquiry',
       name: msgForm.elements.name.value.trim(),
       email: msgForm.elements.email.value.trim(),
       message: msgForm.elements.text.value.trim()
+    }).then(function () {
+      msgForm.style.display = 'none';
+      msgThanks.style.display = 'flex';
+      if (btn) { btn.disabled = false; btn.textContent = 'Send message'; }
     });
-
-    var body = new URLSearchParams(new FormData(msgForm)).toString();
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); msgForm.style.display = 'none'; msgThanks.style.display = 'flex'; })
-      .catch(function () { alert('Sorry, something went wrong. Please email us at contact@qleaps.in'); });
   });
 
   /* Initial bindings */
