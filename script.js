@@ -4,7 +4,7 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   /* --- GOOGLE SHEETS INTEGRATION CONFIG --- */
-  var GOOGLE_SCRIPT_WEBAPP_URL = ''; // Paste Apps Script Web App URL here when deployed (e.g. https://script.google.com/macros/s/.../exec)
+  var GOOGLE_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby0XQE0A8Bfsm6J10yGDsK_Efd30VGuRzN9jL0ovfeiBJ0qCh5dnwWC4UAf_L99YK6Pag/exec';
   var OPEN_ROLES_CSV_URL = 'https://docs.google.com/spreadsheets/d/1r2VMu159qXGBvh51opvg574rQeKKr6vNsJUVuaurb0c/gviz/tq?tqx=out:csv&sheet=Open%20Roles';
 
   function sendToGoogleSheet(params) {
