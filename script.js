@@ -85,24 +85,118 @@
   if (scout) scout.addEventListener('click', function () { hop(false); });
   setInterval(function () { if (!document.hidden && !bubbleOn) hop(true); }, 7000);
 
-  /* Fit beats volume: 30 dots filter down to 3 */
-  var fit = $('#qlFit');
-  if (fit) {
-    var fitOn = false;
-    var setFit = function (on) {
-      fitOn = on;
-      $$('.ql-fd', fit).forEach(function (d) {
-        var h = d.getAttribute('data-hi') === '1';
-        d.style.background = on && h ? '#FF6B4A' : '#E9E7F5';
-        d.style.opacity = on && !h ? '0.12' : '0.9';
-        d.style.transform = 'scale(' + (on ? (h ? 1.3 : 0.7) : 1) + ')';
+  /* --- 1. THE "30 DOWN TO 3" TACTILE SIEVE --- */
+  var fitWrap = $('#qlFit');
+  if (fitWrap) {
+    var fitSlider = $('#qlFitSlider');
+    var fitBtnVolume = $('#qlFitBtnVolume');
+    var fitBtnFit = $('#qlFitBtnFit');
+    var fitScoutImg = $('#qlFitScoutImg');
+    var fitScoutBubble = $('#qlFitScoutBubble');
+    var fitCap = $('#qlFitCap');
+    var fitHint = $('#qlFitHint');
+    var fitTray = $('#qlFitCardsTray');
+    var dots = $$('.ql-fd', fitWrap);
+
+    function applySieveState(progress) { // progress from 0 (Volume) to 100 (Fit)
+      var ratio = progress / 100;
+      var isFit = ratio >= 0.7;
+      var isMid = ratio > 0.25 && ratio < 0.7;
+
+      // Update dots with physics scale, opacity, scatter bounce, and pulse rings
+      dots.forEach(function (d, idx) {
+        var isMatch = d.getAttribute('data-hi') === '1';
+        if (isMatch) {
+          d.style.background = '#FF6B4A';
+          d.style.opacity = '1';
+          d.style.transform = 'scale(' + (1 + ratio * 0.45) + ') translate(0, 0)';
+          d.style.animation = isFit ? 'qlPulseRing 2.2s infinite' : 'none';
+        } else {
+          var dotScale = Math.max(0.14, 1 - ratio * 0.86);
+          var dotOpacity = Math.max(0.06, 0.9 - ratio * 0.84);
+          // Scatter physics: radial dispersal
+          var angle = (idx * 47) % 360;
+          var dist = ratio * 18;
+          var scatterX = Math.cos(angle * Math.PI / 180) * dist;
+          var scatterY = Math.sin(angle * Math.PI / 180) * dist;
+          d.style.background = '#E9E7F5';
+          d.style.opacity = dotOpacity;
+          d.style.transform = 'translate(' + scatterX.toFixed(1) + 'px,' + scatterY.toFixed(1) + 'px) scale(' + dotScale + ')';
+          d.style.animation = 'none';
+        }
       });
-      $('#qlFitCap').textContent = on ? '3 who fit.' : '30 who might.';
-      $('#qlFitHint').textContent = on ? 'That’s the shortlist.' : 'Hover or tap to filter';
-    };
-    fit.addEventListener('mouseenter', function () { setFit(true); });
-    fit.addEventListener('mouseleave', function () { setFit(false); });
-    fit.addEventListener('click', function () { setFit(!fitOn); });
+
+      // Update button highlights
+      if (fitBtnVolume && fitBtnFit) {
+        fitBtnVolume.style.background = ratio < 0.5 ? 'rgba(255,255,255,.22)' : 'transparent';
+        fitBtnVolume.style.color = ratio < 0.5 ? '#FFFFFF' : '#E9E7F5';
+        fitBtnFit.style.background = ratio >= 0.5 ? '#FF6B4A' : 'transparent';
+        fitBtnFit.style.color = '#FFFFFF';
+      }
+
+      // Update Scout's commentary & pose
+      if (isFit) {
+        if (fitScoutImg) fitScoutImg.src = 'assets/mascot/scout-excited.svg';
+        if (fitScoutBubble) {
+          fitScoutBubble.textContent = 'Three who fit beat thirty who might. Shortlist locked! 🎯';
+          fitScoutBubble.style.borderColor = '#FF6B4A';
+          fitScoutBubble.style.background = 'rgba(255,107,74,.25)';
+        }
+        if (fitCap) fitCap.textContent = '3 who fit.';
+        if (fitHint) fitHint.textContent = 'The curated shortlist';
+        if (fitTray) fitTray.style.display = 'flex';
+      } else if (isMid) {
+        if (fitScoutImg) fitScoutImg.src = 'assets/mascot/scout-default.svg';
+        if (fitScoutBubble) {
+          fitScoutBubble.textContent = 'Filtering noise... testing craft, culture & track record.';
+          fitScoutBubble.style.borderColor = '#4F46E5';
+          fitScoutBubble.style.background = 'rgba(79,70,229,.35)';
+        }
+        if (fitCap) fitCap.textContent = Math.round(30 - ratio * 27) + ' candidates filtering...';
+        if (fitHint) fitHint.textContent = 'Keep sliding toward Fit';
+        if (fitTray) fitTray.style.display = 'none';
+      } else {
+        if (fitScoutImg) fitScoutImg.src = 'assets/mascot/scout-thinking.svg';
+        if (fitScoutBubble) {
+          fitScoutBubble.textContent = '30 resumes is mostly keyword noise. Slide to filter...';
+          fitScoutBubble.style.borderColor = 'rgba(79,70,229,.6)';
+          fitScoutBubble.style.background = 'rgba(79,70,229,.35)';
+        }
+        if (fitCap) fitCap.textContent = '30 who might.';
+        if (fitHint) fitHint.textContent = 'Drag slider or tap to filter';
+        if (fitTray) fitTray.style.display = 'none';
+      }
+    }
+
+    if (fitSlider) {
+      fitSlider.addEventListener('input', function () {
+        applySieveState(parseFloat(fitSlider.value) || 0);
+      });
+    }
+
+    if (fitBtnVolume) {
+      fitBtnVolume.addEventListener('click', function () {
+        if (fitSlider) fitSlider.value = 0;
+        applySieveState(0);
+      });
+    }
+
+    if (fitBtnFit) {
+      fitBtnFit.addEventListener('click', function () {
+        if (fitSlider) fitSlider.value = 100;
+        applySieveState(100);
+      });
+    }
+
+    var dotsGrid = $('#qlFitDotsGrid');
+    if (dotsGrid) {
+      dotsGrid.addEventListener('click', function () {
+        var cur = parseFloat(fitSlider ? fitSlider.value : 0) || 0;
+        var nextVal = cur >= 50 ? 0 : 100;
+        if (fitSlider) fitSlider.value = nextVal;
+        applySieveState(nextVal);
+      });
+    }
   }
 
   /* How we work: highlight step on hover */
@@ -284,14 +378,202 @@
     cvForm.elements[k].addEventListener('change', function () { clearErr(k); });
   });
 
-  var fileInput = $('#cvFile'), fileLabel = $('#cvFileLabel'), fileSub = $('#cvFileSub'), fileBox = $('#cvFileBox');
-  function resetFileUi() { fileLabel.textContent = 'Attach your CV *'; fileSub.textContent = 'PDF or Word, up to 5 MB'; fileSub.style.color = '#5B5F6B'; fileBox.style.borderColor = '#4F46E5'; }
-  fileInput.addEventListener('change', function () {
-    var f = fileInput.files && fileInput.files[0];
-    if (!f) return resetFileUi();
-    if (f.size > 5 * 1024 * 1024) { fileInput.value = ''; fileLabel.textContent = 'Attach your CV *'; fileSub.textContent = 'That file is over 5 MB. Please attach a smaller one.'; fileSub.style.color = errColor; fileBox.style.borderColor = errColor; return; }
-    fileLabel.textContent = f.name; fileSub.textContent = 'Click to replace'; fileSub.style.color = '#5B5F6B'; fileBox.style.borderColor = '#4F46E5';
-  });
+  /* --- 2. SCOUT CATCHES THE CV (DRAG & DROP CATCHER) --- */
+  var fileInput = $('#cvFile'),
+      fileLabel = $('#cvFileLabel'),
+      fileSub = $('#cvFileSub'),
+      fileBox = $('#cvFileBox'),
+      scoutCatcherImg = $('#scoutCatcherImg'),
+      scoutCatcherBubble = $('#scoutCatcherBubble'),
+      cvPaperPlane = $('#cvPaperPlane'),
+      cvBoxIcon = $('#cvBoxIcon'),
+      cvBrowsePill = $('#cvBrowsePill');
+
+  function resetFileUi() {
+    if (fileLabel) fileLabel.textContent = 'Drop your CV here, or browse';
+    if (fileSub) {
+      fileSub.textContent = 'PDF or Word, up to 5 MB';
+      fileSub.style.color = '#5B5F6B';
+    }
+    if (cvBoxIcon) {
+      cvBoxIcon.style.background = '#4F46E5';
+      cvBoxIcon.textContent = '↑';
+    }
+    if (cvBrowsePill) {
+      cvBrowsePill.textContent = 'Browse files';
+      cvBrowsePill.style.color = '#4F46E5';
+      cvBrowsePill.style.background = '#E9E7F5';
+    }
+    if (fileBox) {
+      fileBox.classList.remove('file-attached', 'drag-active');
+      fileBox.style.borderColor = '#4F46E5';
+    }
+    if (scoutCatcherImg) {
+      scoutCatcherImg.src = 'assets/mascot/scout-default.svg';
+      scoutCatcherImg.style.transform = 'none';
+      scoutCatcherImg.style.animation = 'none';
+    }
+    if (scoutCatcherBubble) {
+      scoutCatcherBubble.textContent = 'Drag your CV over here — I’ll catch it! 🐾';
+      scoutCatcherBubble.style.borderColor = '#14213D';
+      scoutCatcherBubble.style.background = '#FFFFFF';
+    }
+    if (cvPaperPlane) {
+      cvPaperPlane.style.animation = 'none';
+      cvPaperPlane.style.opacity = '0';
+    }
+  }
+
+  function handleFileSelected(file) {
+    if (!file) return resetFileUi();
+    if (file.size > 5 * 1024 * 1024) {
+      fileInput.value = '';
+      if (fileLabel) fileLabel.textContent = 'File exceeds 5 MB limit';
+      if (fileSub) {
+        fileSub.textContent = 'Please attach a file under 5 MB.';
+        fileSub.style.color = errColor;
+      }
+      if (fileBox) {
+        fileBox.classList.remove('file-attached');
+        fileBox.style.borderColor = errColor;
+      }
+      if (scoutCatcherImg) scoutCatcherImg.src = 'assets/mascot/scout-skeptical.svg';
+      if (scoutCatcherBubble) {
+        scoutCatcherBubble.textContent = 'Woof! That file is over 5 MB. Can we trim it down? 🦴';
+        scoutCatcherBubble.style.borderColor = errColor;
+        scoutCatcherBubble.style.background = '#FEF3F2';
+      }
+      return;
+    }
+
+    // Trigger paper plane animation swooping into Scout
+    if (cvPaperPlane) {
+      cvPaperPlane.style.animation = 'qlPaperPlaneFlight .85s cubic-bezier(.2,.8,.3,1) forwards';
+    }
+
+    // Scout perks up, wags tail and catches the CV
+    setTimeout(function () {
+      if (scoutCatcherImg) {
+        scoutCatcherImg.src = 'assets/mascot/scout-excited.svg';
+        scoutCatcherImg.style.animation = 'qlScoutCatchHop .85s cubic-bezier(.34,1.56,.64,1)';
+      }
+      if (scoutCatcherBubble) {
+        scoutCatcherBubble.textContent = 'Good boy got it! Taking this straight to the team.';
+        scoutCatcherBubble.style.borderColor = '#12B76A';
+        scoutCatcherBubble.style.background = '#F6FEF9';
+      }
+    }, 380);
+
+    // Update Drop Box UI
+    if (fileBox) fileBox.classList.add('file-attached');
+    if (fileLabel) fileLabel.textContent = file.name;
+    var sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+    if (fileSub) {
+      fileSub.textContent = sizeMb + ' MB · Scout caught your CV safe and sound';
+      fileSub.style.color = '#12B76A';
+    }
+    if (cvBoxIcon) {
+      cvBoxIcon.style.background = '#12B76A';
+      cvBoxIcon.textContent = '✓';
+    }
+    if (cvBrowsePill) {
+      cvBrowsePill.textContent = 'Replace file';
+      cvBrowsePill.style.color = '#12B76A';
+      cvBrowsePill.style.background = '#ECFDF3';
+    }
+  }
+
+  if (fileBox) {
+    function updateScoutGaze(e) {
+      if (fileInput.files && fileInput.files.length) return;
+      var rect = fileBox.getBoundingClientRect();
+      var relX = Math.max(0, Math.min(1, (e.clientX - rect.left) / (rect.width || 1)));
+      var tilt = (relX - 0.5) * 22; // -11deg to +11deg tilt towards cursor
+      var gazeX = (relX - 0.5) * 12; // -6px to +6px tracking
+      if (scoutCatcherImg) {
+        scoutCatcherImg.src = 'assets/mascot/scout-thinking.svg';
+        scoutCatcherImg.style.transform = 'translate(' + gazeX.toFixed(1) + 'px, -12px) rotate(' + tilt.toFixed(1) + 'deg) scale(1.14)';
+      }
+    }
+
+    // Hover & gaze tracking
+    fileBox.addEventListener('mouseenter', function (e) {
+      updateScoutGaze(e);
+    });
+    fileBox.addEventListener('mousemove', function (e) {
+      updateScoutGaze(e);
+    });
+    fileBox.addEventListener('mouseleave', function () {
+      if (!fileInput.files || !fileInput.files.length) {
+        if (scoutCatcherImg) {
+          scoutCatcherImg.src = 'assets/mascot/scout-default.svg';
+          scoutCatcherImg.style.transform = 'none';
+        }
+      }
+    });
+
+    // Drag events: Scout's ears perk up and his gaze follows cursor
+    fileBox.addEventListener('dragenter', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fileBox.classList.add('drag-active');
+      updateScoutGaze(e);
+      if (scoutCatcherBubble) {
+        scoutCatcherBubble.textContent = 'Ears perked! Drop it right here! 🐾';
+        scoutCatcherBubble.style.borderColor = '#FF6B4A';
+        scoutCatcherBubble.style.background = '#FFF5F2';
+      }
+    });
+
+    fileBox.addEventListener('dragover', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fileBox.classList.add('drag-active');
+      updateScoutGaze(e);
+      if (scoutCatcherBubble) {
+        scoutCatcherBubble.textContent = 'Ears perked! Drop it right here! 🐾';
+        scoutCatcherBubble.style.borderColor = '#FF6B4A';
+        scoutCatcherBubble.style.background = '#FFF5F2';
+      }
+    });
+
+    ['dragleave', 'dragend'].forEach(function (eventName) {
+      fileBox.addEventListener(eventName, function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileBox.classList.remove('drag-active');
+        if (!fileInput.files || !fileInput.files.length) {
+          if (scoutCatcherImg) {
+            scoutCatcherImg.src = 'assets/mascot/scout-default.svg';
+            scoutCatcherImg.style.transform = 'none';
+          }
+          if (scoutCatcherBubble) {
+            scoutCatcherBubble.textContent = 'Drag your CV over here — I’ll catch it! 🐾';
+            scoutCatcherBubble.style.borderColor = '#14213D';
+            scoutCatcherBubble.style.background = '#FFFFFF';
+          }
+        }
+      });
+    });
+
+    fileBox.addEventListener('drop', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fileBox.classList.remove('drag-active');
+      var droppedFiles = e.dataTransfer && e.dataTransfer.files;
+      if (droppedFiles && droppedFiles.length) {
+        fileInput.files = droppedFiles;
+        handleFileSelected(droppedFiles[0]);
+      }
+    });
+  }
+
+  if (fileInput) {
+    fileInput.addEventListener('change', function () {
+      var f = fileInput.files && fileInput.files[0];
+      handleFileSelected(f);
+    });
+  }
 
   function validate() {
     var el = cvForm.elements, ok = true;
