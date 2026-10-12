@@ -70,15 +70,17 @@
     </ul>
 
     <h2>2. What data we collect</h2>
-    <p>We collect the following personal data when you submit the contact form on our website:</p>
+    <p>We collect the following personal data when you submit a hiring enquiry or candidate application on our website:</p>
     <ul>
       <li><strong>Name</strong> — to address you correctly</li>
       <li><strong>Email address</strong> — to respond to your enquiry</li>
       <li><strong>Message content</strong> — to understand your request</li>
+      <li><strong>Company and hiring brief</strong> — to understand an employer enquiry</li>
+      <li><strong>Candidate details</strong> — phone, city, specialism, experience, desired role, portfolio link and the CV you attach</li>
       <li><strong>Consent record</strong> — that you agreed to be contacted</li>
       <li><strong>Submission timestamp and IP address</strong> — for security and fraud prevention</li>
     </ul>
-    <p>We also use <strong>Cloudflare Turnstile</strong> on our form to prevent spam. Cloudflare processes minimal signals to verify you are human. No user data is stored or shared beyond this verification. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's privacy policy</a>.</p>
+    <p>Our forms submit information to our existing Google Apps Script handler. Network requests sent by your browser cannot confirm whether that handler successfully stored the submission. Please contact us directly if you need confirmation.</p>
 
     <h2>3. Why we collect it</h2>
     <p>We process your personal data for the following purposes:</p>
@@ -93,7 +95,7 @@
     <ul>
       <li>Respond to your message, typically within 2 business days</li>
       <li>Contact you about relevant roles or hiring opportunities (if you consented)</li>
-      <li>Send an automated confirmation email of your submission</li>
+      <li>Review candidate applications and discuss relevant opportunities</li>
     </ul>
     <p>We will <strong>never</strong>:</p>
     <ul>
@@ -103,13 +105,11 @@
     </ul>
 
     <h2>5. Who we share data with</h2>
-    <p>To operate our website and send you emails, we use the following third-party services:</p>
+    <p>We use the following services to operate this website and process submissions:</p>
     <ul>
-      <li><strong>Resend</strong> — email delivery (<a href="https://resend.com/privacy" target="_blank" rel="noopener">privacy policy</a>)</li>
-      <li><strong>Netlify</strong> — website hosting and serverless functions (<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">privacy policy</a>)</li>
-      <li><strong>Cloudflare</strong> — spam protection (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">privacy policy</a>)</li>
+      <li><strong>Google Apps Script and Google workspace services</strong> — process form submissions and attached CVs through our configured Google integration (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>)</li>
+      <li><strong>Netlify</strong> — website hosting (<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">privacy policy</a>)</li>
     </ul>
-    <p>All processors are instructed to handle data only on our behalf and in accordance with this policy.</p>
 
     <h2>6. How long we keep your data</h2>
     <p>We retain enquiry data for a maximum of <strong>2 years</strong>, after which it is deleted. If you ask us to delete your data, we will do so within 30 days.</p>
@@ -135,7 +135,7 @@
     <p>Withdrawal of consent does not affect the lawfulness of processing before withdrawal.</p>
 
     <h2>9. Cookies</h2>
-    <p>Our website does not use analytics cookies or tracking cookies. The only cookie set is by Cloudflare Turnstile for security purposes (essential, short-lived).</p>
+    <p>This landing page does not set analytics or advertising cookies. Submitted information is processed through the Google integration described above.</p>
 
     <h2>10. Security</h2>
     <p>We use HTTPS (TLS) on all pages. Our serverless function validates and sanitises all inputs before processing. API keys are stored as environment variables and never exposed client-side.</p>
