@@ -5,12 +5,20 @@
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var GOOGLE_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby0XQE0A8Bfsm6J10yGDsK_Efd30VGuRzN9jL0ovfeiBJ0qCh5dnwWC4UAf_L99YK6Pag/exec';
   var backendReady = false, jobs = [], selectedJob = null;
+  // Keep content and anchor destinations clear of the persistent header.
+  function measureHeader() {
+    document.documentElement.style.setProperty('--header-height', Math.ceil($('.site-header').getBoundingClientRect().height) + 'px');
+  }
+  measureHeader();
+  if ('ResizeObserver' in window) new ResizeObserver(measureHeader).observe($('.site-header'));
+  else window.addEventListener('resize', measureHeader);
+
   /* Smooth scroll for in-page links */
   function scrollToId(id) {
     var el = document.getElementById(id);
     if (!el) return;
     el.style.opacity = '1'; el.style.transform = 'none';
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - (document.querySelector('.site-header').getBoundingClientRect().height + 12), behavior: 'smooth' });
   }
   $$('[data-target]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); if (a.getAttribute('data-view')) setAudience(a.getAttribute('data-view')); scrollToId(a.getAttribute('data-target')); });
@@ -34,14 +42,47 @@
   /* Hero: arc draw, Scout hop and speech bubble */
   var arc = $('#qlArc'), dot = $('#qlDot'), scout = $('#qlScout'), bubble = $('#qlBubble');
   var lines = ['Hi, I’m Scout. Looking for your next leap?', 'I sniff out good fits.', 'Three who fit beat thirty who might.', 'Your CV goes to a person. Not a pile.', 'One more jump. Then treats.'];
+  var arriving = false;
   var lineIdx = 0, hopping = false, bubbleOn = false, bubbleT;
   function showBubble(on) { if (!bubble) return; bubbleOn = on; bubble.style.transform = 'scale(' + (on ? 1 : 0) + ')'; }
   setTimeout(function () { if (arc) arc.setAttribute('stroke-dashoffset', '0'); }, 150);
-  setTimeout(function () { showBubble(true); }, 1800);
-  setTimeout(function () { showBubble(false); }, 5200);
+  function scoutEntrance() {
+    if (!scout || reducedMotion) return;
+    arriving = true;
+    showBubble(false);
+    scout.classList.add('scout-arriving');
+    var finished = false, fallback;
+    function finish() {
+      if (finished) return;
+      finished = true; clearTimeout(fallback);
+      scout.removeEventListener('animationend', onEnd);
+      scout.classList.remove('scout-arriving');
+      scout.classList.add('scout-settled');
+      arriving = false;
+      bubble.textContent = 'Made it! Ready for your next leap?';
+      showBubble(true);
+      bubbleT = setTimeout(function () { showBubble(false); }, 3200);
+    }
+    function onEnd(event) {
+      if (event.target === scout && event.animationName === 'qlScoutEntrance') finish();
+    }
+    scout.addEventListener('animationend', onEnd);
+    fallback = setTimeout(finish, 4100);
+  }
+  // Run once when the hero is actually visible, including visits to a deep link.
+  if (scout && !reducedMotion) {
+    if ('IntersectionObserver' in window) {
+      var entranceObserver = new IntersectionObserver(function (entries) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) {
+          entranceObserver.disconnect(); scoutEntrance();
+        }
+      }, { threshold: 0.15 });
+      entranceObserver.observe(scout.parentElement);
+    } else { scoutEntrance(); }
+  }
 
   function hop(quiet) {
-    if (!scout || hopping || reducedMotion) return;
+    if (!scout || arriving || hopping || reducedMotion) return;
     hopping = true;
     if (!quiet) {
       lineIdx = (lineIdx + 1) % lines.length;
@@ -246,7 +287,7 @@
   function syncHash() {
     var hash = location.hash.slice(1);
     if (['roles','cv','insights','returners'].indexOf(hash) >= 0) setAudience('talent');
-    if (['contact','post-job','specialisms','how','fit','buyers'].indexOf(hash) >= 0) setAudience('hiring');
+    if (['contact','post-job','specialisms','how','fit','buyers','ai-matching'].indexOf(hash) >= 0) setAudience('hiring');
   }
   window.addEventListener('hashchange', syncHash);
 
@@ -481,6 +522,46 @@
   }
   $$('.ql-tip').forEach(function(tip){$('.ql-tip-btn',tip).addEventListener('click',function(){var open=$('.ql-tip-pts',tip).style.display==='none';$$('.ql-tip').forEach(function(other){$('.ql-tip-pts',other).style.display='none';$('.ql-tip-btn',other).textContent='Read the tips →';});if(open){$('.ql-tip-pts',tip).style.display='flex';$('.ql-tip-btn',tip).textContent='Show less';}});});
   bindForm('jobForm','jobStatus','job');bindForm('cvForm','cvStatus','candidate');bindForm('msgForm','msgStatus','contact');
+
+  /* Five-scene walkthrough: reasons, uncertainty and review, not a match score. */
+  var aiStory=$('.ai-story'), aiPlay=$('#aiPlay'), aiReplay=$('#aiReplay');
+  var aiScene=0, aiTimer=null, aiPlaying=false, aiAutoPlayed=false;
+  var aiScenes=[
+    ['01 / DEFINE THE BRIEF','Start with the work. Not a list of keywords.','Example brief: a growth marketer who can plan acquisition campaigns, use customer insight and collaborate with creative teams.','The hiring brief','thinking','What does this role need?','Define the role before searching for a match.','WHAT MATTERS','Campaigns. Insight. Collaboration.','Define the work before comparing profiles.'],
+    ['02 / THE KEYWORD TRAP','A different title can hide relevant experience.','An exact-title filter looks for “growth marketer”. This profile says “brand strategist”, even though the person has worked on acquisition campaigns.','Title mismatch','skeptical','Read beyond the headline.','An exact-title filter can overlook transferable experience.','WHAT THE FILTER SEES','Brand strategist ≠ Growth marketer','The title differs. That is not evidence that the person cannot do the work.'],
+    ['03 / AI-ASSISTED DISCOVERY','Show the evidence behind the possibility.','The proposed AI step compares work described in the CV against the brief. Each suggestion should point to supporting evidence, rather than an unexplained match percentage.','Potential relevance','default','Show me the evidence.','AI suggests a possibility; relevant experience still needs verification.','WHY THIS PROFILE SURFACED','Campaign work → acquisition brief','Customer research → messaging. Creative collaboration → cross-functional work. These are signals, not verified achievements.'],
+    ['04 / CHECK THE UNCERTAINTY','Missing information needs a second look.','A second check compares extracted information with the original CV. Unreadable pages, missing dates or uncertain claims should stay in a review queue instead of becoming an automatic rejection.','Needs verification','thinking','Missing isn’t the same as unsuitable.','Extraction errors and unknowns are routed for review in the proposed workflow.','WHAT STILL NEEDS CHECKING','Ownership. Outcomes. Availability.','Who owned the work? What were the outcomes? Are expectations and availability aligned? A second AI pass alone cannot guarantee accuracy.'],
+    ['05 / RECRUITER REVIEW','A useful recommendation starts a conversation.','A recruiter checks the source CV, resolves the open questions and speaks with the candidate. A hiring recommendation can then explain both the evidence and its limits.','Conversation to arrange','excited','Now we can ask the right questions.','People review the suggestion. The employer makes the hiring decision.','THE NEXT STEP','Discuss the work. Confirm the context.','Explore contribution, motivation, compensation and availability. The demonstration does not rank, reject or select a real person.']
+  ];
+  function aiPause(){aiStory.classList.remove('is-playing');clearTimeout(aiTimer);aiTimer=null;aiPlaying=false;aiPlay.textContent=aiScene===4?'Replay the story':'Play the story';}
+  function aiShow(scene){
+    aiScene=scene;aiStory.dataset.scene=String(scene);
+    var copy=aiScenes[scene];
+    $('#aiSceneNumber').textContent=copy[0];$('#aiSceneTitle').textContent=copy[1];$('#aiSceneDescription').textContent=copy[2];$('#aiProfileLabel').textContent=copy[3];$('#aiScout').src='assets/mascot/scout-'+copy[4]+'.svg';$('#aiScout').alt='Scout '+copy[4];$('#aiScoutLine').textContent=copy[5];$('#aiStoryStatus').textContent='Step '+(scene+1)+' of 5 · '+copy[6];$('#aiEvidenceLabel').textContent=copy[7];$('#aiEvidenceTitle').textContent=copy[8];$('#aiEvidenceDetail').textContent=copy[9];
+    $$('[data-ai-scene]').forEach(function(button){button.setAttribute('aria-pressed',String(Number(button.dataset.aiScene)===scene));});
+    aiReplay.hidden=scene===0;
+    if (!reducedMotion) {
+      aiStory.classList.remove('cards-enter');
+      // Restart the short entrance on manual selection and timed scene changes.
+      void aiStory.offsetWidth;
+      aiStory.classList.add('cards-enter');
+    }
+  }
+  function aiNext(){
+    if(!aiPlaying)return;
+    if(aiScene<4){aiShow(aiScene+1);aiTimer=setTimeout(aiNext,1800);}else{aiPause();}
+  }
+  aiPlay.addEventListener('click',function(){
+    if(aiPlaying){aiPause();return;}
+    if(aiScene===4)aiShow(0);
+    if(reducedMotion){aiShow(Math.min(4,aiScene+1));aiPlay.textContent=aiScene===4?'Replay the story':'Next step';return;}
+    aiPlaying=true;aiStory.classList.add('is-playing');aiPlay.textContent='Pause the story';aiTimer=setTimeout(aiNext,1800);
+  });
+  aiReplay.addEventListener('click',function(){aiPause();aiShow(0);});
+  $$('[data-ai-scene]').forEach(function(button){button.addEventListener('click',function(){aiPause();aiShow(Number(button.dataset.aiScene));aiPlay.textContent=aiScene===4?'Replay the story':'Play the story';});});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)aiPause();});
+  if('IntersectionObserver' in window){var aiVisibility=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)aiPause();else if(!aiAutoPlayed&&!reducedMotion){aiAutoPlayed=true;aiPlay.click();}});});aiVisibility.observe(aiStory);}
+
   // Discover v2 without requiring any new Netlify server or paid form service.
   loadJobs();syncHash();
 })();

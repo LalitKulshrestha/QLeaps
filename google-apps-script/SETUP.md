@@ -28,3 +28,9 @@ Use your own authorised test data:
 - Confirm enquiries still append to Submissions and that no candidate data appears in the public job response.
 
 No new paid services or Netlify functions are required. Existing Netlify, Google Apps Script and Drive quotas apply. File validation checks extension, size and basic file signatures; it is not a malware scanner. Public form submissions should be monitored for abuse.
+
+## Optional sheet cleanup and formatting
+Add `Polish.gs` as a new file in the same Apps Script project and run `polishQuantumLeaps`. It orders and styles Jobs, Applications and Submissions, adds filters and status colours, freezes headers, and hides request-token columns. The obsolete Open Roles tab is archived and hidden if it contains data; only empty default/template tabs are deleted. Existing submissions are retained. This editor-only helper needs no web-app redeploy and is not callable through the public webhook.
+
+## Private workbook with public submissions
+In the existing web-app deployment, confirm **Execute as: Me** (the owner/deployer with access to this workbook), while allowing public access to the web app. The workbook's **General access** can then be **Restricted**; grant named recruitment colleagues access individually. The public visitor accesses the webhook, not the workbook. After restricting, verify the public jobs feed and an authorised test submission. Do not expose an admin or formatting action through `doGet`/`doPost`.

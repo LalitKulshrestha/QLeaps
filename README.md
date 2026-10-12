@@ -10,6 +10,9 @@ A static, image-led hiring landing page on Netlify. Vanilla HTML, CSS and JavaSc
 - The existing enquiry form remains available.
 - Keyboard controls and reduced-motion preferences are supported.
 
+## AI matching presentation
+The employer view includes a five-scene, user-controlled demonstration of AI-assisted discovery followed by recruiter review. It uses fictional profile data and existing Scout artwork, makes no AI calls, and is labelled as a capability preview while the matching backend is in development. Pause/replay, manual scene selection and reduced motion are supported.
+
 ## Google deployment — required for job posting
 Replace the current Apps Script source with `google-apps-script/Code.gs`, run its setup helper once, then update the EXISTING deployment. Follow `google-apps-script/SETUP.md`.
 
