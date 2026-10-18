@@ -5,7 +5,7 @@
 function polishQuantumLeaps() {
   var ss = qlSpreadsheet_();
   var specs = [
-    {name:'Jobs', count:15, header:'#4F46E5', stripe:'#F1EFFB', statusCol:3},
+    {name:'Jobs', count:17, header:'#4F46E5', stripe:'#F1EFFB', statusCol:3},
     {name:'Applications', count:16, header:'#17645D', stripe:'#EDF6F3', statusCol:15},
     {name:'Submissions', count:12, header:'#14213D', stripe:'#F3F5F8', statusCol:0}
   ];

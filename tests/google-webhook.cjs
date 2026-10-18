@@ -53,5 +53,9 @@ const formula=post({...job,company:'=IMPORTXML("x")',request_id:'7'.repeat(32)})
 const contact=post({...base,form_type:'Contact Inquiry',message:'Discuss our search',request_id:'8'.repeat(32)});assert.equal(contact.status,'success');assert.equal(original.rows[1][2],'Historical');assert.equal(original.rows[2][8],'Discuss our search');
 assert.equal(ctx.doGet({parameter:{callback:'alert(1)'}}).mime,'json');assert.equal(ctx.doGet({parameter:{action:'jobs',callback:'ql_ab123'}}).mime,'javascript');
 apps.failWrite=true;const before=files.length;assert.equal(post({...app,job_id:second.reference,request_id:'9'.repeat(32)}).status,'error');assert.equal(files[before].trashed,true,'failed sheet write must trash the newly uploaded CV');
+const jdRequest={...job,request_id:'0'.repeat(32),jd_data:Buffer.from('%PDF-test JD').toString('base64'),jd_name:'role.pdf',jd_type:'application/pdf'};
+const jdResult=post(jdRequest);assert.equal(jdResult.status,'success');const jdRow=jobSheet.rows.find(r=>r[0]===jdResult.reference);assert.equal(jdRow[16],'role.pdf');assert.ok(jdRow[15].includes('drive.google.com'));assert.equal(files.at(-1).sharing[0],'private');
+jobSheet.failWrite=true;const failedJdIndex=files.length;assert.equal(post({...jdRequest,request_id:'ab'.repeat(16)}).status,'error');assert.equal(files[failedJdIndex].trashed,true);jobSheet.failWrite=false;
+const feed=parse(ctx.doGet({parameter:{action:'jobs'}}));assert.equal(feed.jd_attachments,true);assert.ok(!JSON.stringify(feed.jobs).includes('drive.google.com'));
 assert.equal(acquired,released,'all acquired locks must be released');
 console.log('PASS: legacy data preservation, approval/expiry, linked applications, per-job deduplication, idempotent retries, private CVs, receipt privacy, input validation, formula neutralisation and upload cleanup.');

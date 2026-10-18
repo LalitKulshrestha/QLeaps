@@ -11,6 +11,25 @@
   to = "/.netlify/functions/lead"
   status = 200
 
+# Canonical URL normalization: enforce clean URLs without index.html
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blogs/index.html"
+  to = "/blogs/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/careers/index.html"
+  to = "/careers/"
+  status = 301
+  force = true
+
 # SPA fallback — serve index.html for unknown routes (without forcing POST/static overrides)
 [[redirects]]
   from = "/*"
@@ -27,7 +46,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://script.google.com https://script.googleusercontent.com https://challenges.cloudflare.com https://fonts.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.pexels.com; connect-src 'self' https://api.resend.com https://challenges.cloudflare.com https://docs.google.com https://script.google.com https://script.googleusercontent.com; frame-src https://challenges.cloudflare.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://script.google.com https://script.googleusercontent.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com;"
 
 # Cache static assets
 [[headers]]

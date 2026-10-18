@@ -34,3 +34,6 @@ Add `Polish.gs` as a new file in the same Apps Script project and run `polishQua
 
 ## Private workbook with public submissions
 In the existing web-app deployment, confirm **Execute as: Me** (the owner/deployer with access to this workbook), while allowing public access to the web app. The workbook's **General access** can then be **Restricted**; grant named recruitment colleagues access individually. The public visitor accesses the webhook, not the workbook. After restricting, verify the public jobs feed and an authorised test submission. Do not expose an admin or formatting action through `doGet`/`doPost`.
+
+## JD attachments update
+Replace Code.gs with the current version, run setupQuantumLeaps again, and update the existing web-app deployment. Setup appends Jobs columns P:Q (JD URL / JD filename) and creates a private JD folder. Existing job and submission rows are retained. The website enables the optional attachment only after the handler advertises JD support. The summary remains required for a readable public listing; JD URLs are private and are never returned in the public job feed.

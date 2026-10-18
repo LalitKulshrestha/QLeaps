@@ -11,7 +11,7 @@ var QL_CONFIG = {
   version: 2,
   maxFileBytes: 5 * 1024 * 1024
 };
-var QL_JOBS_HEADERS = ['Job ID', 'Created', 'Status', 'Company', 'Title', 'Specialism', 'Location', 'Working arrangement', 'Experience', 'Salary range', 'Description', 'Closes', 'Employer name', 'Employer email', 'Request ID'];
+var QL_JOBS_HEADERS = ['Job ID', 'Created', 'Status', 'Company', 'Title', 'Specialism', 'Location', 'Working arrangement', 'Experience', 'Salary range', 'Description', 'Closes', 'Employer name', 'Employer email', 'Request ID', 'JD URL', 'JD filename'];
 var QL_APPLICATION_HEADERS = ['Application ID', 'Submitted', 'Job ID', 'Job title', 'Company', 'Name', 'Email', 'Phone', 'City', 'Specialism', 'Experience', 'Portfolio', 'Resume URL', 'Consent', 'Status', 'Request ID'];
 var QL_SUBMISSION_HEADERS = ['Submitted', 'Form type', 'Name', 'Email', 'Phone', 'City', 'Role', 'Profile / resume', 'Message', 'Job ID', 'Reference', 'Request ID'];
 var QL_AREAS = ['Marketing and digital', 'Creative', 'Design and product', 'Technology'];
@@ -52,6 +52,11 @@ function setupQuantumLeaps() {
     var folder = DriveApp.createFolder(QL_CONFIG.resumeFolderName + ' — Private');
     folder.setSharing(DriveApp.Access.PRIVATE, DriveApp.Permission.NONE);
     PropertiesService.getScriptProperties().setProperty('QL_RESUME_FOLDER_ID', folder.getId());
+  }
+  if (!PropertiesService.getScriptProperties().getProperty('QL_JD_FOLDER_ID')) {
+    var jdFolder = DriveApp.createFolder('Quantum Leaps JDs — Private');
+    jdFolder.setSharing(DriveApp.Access.PRIVATE, DriveApp.Permission.NONE);
+    PropertiesService.getScriptProperties().setProperty('QL_JD_FOLDER_ID', jdFolder.getId());
   }
   SpreadsheetApp.flush();
   return 'Ready. Approve rows in Jobs to publish them. Keep the spreadsheet and resume folder private.';
@@ -130,7 +135,7 @@ function qlReceipt_(ss, requestId) {
 function doGet(e) {
   var p = (e && e.parameter) || {};
   try {
-    if (p.action === 'jobs') return qlResponse_({status:'success', version:2, jobs:qlPublicJobs_(qlSpreadsheet_())}, p.callback);
+    if (p.action === 'jobs') return qlResponse_({status:'success', version:2, jd_attachments:true, jobs:qlPublicJobs_(qlSpreadsheet_())}, p.callback);
     if (p.action === 'receipt') {
       if (!/^[a-f0-9]{32}$/.test(String(p.request_id || ''))) throw new Error('Invalid reference token.');
       return qlResponse_(qlReceipt_(qlSpreadsheet_(), p.request_id), p.callback);
@@ -141,7 +146,7 @@ function doGet(e) {
     return qlResponse_({status:'error', version:2, message:'The service is temporarily unavailable. Please contact our team.'}, p.callback);
   }
 }
-function qlSaveResume_(p, name) {
+function qlSaveResume_(p, name, folderProperty) {
   if (!p.file_data || !p.file_name) throw new Error('Please attach your CV.');
   var filename = qlText_(p.file_name, 160).replace(/[^a-zA-Z0-9._ -]/g, '_');
   var ext = (filename.match(/\.(pdf|doc|docx)$/i) || [])[1];
@@ -153,7 +158,7 @@ function qlSaveResume_(p, name) {
   var valid = ext === 'pdf' ? signature.slice(0, 5).join(',') === '37,80,68,70,45' :
     ext === 'docx' ? signature.slice(0, 4).join(',') === '80,75,3,4' : signature.join(',') === '208,207,17,224,161,177,26,225';
   if (!valid) throw new Error('The CV file does not match its PDF or Word format.');
-  var folderId = PropertiesService.getScriptProperties().getProperty('QL_RESUME_FOLDER_ID');
+  var folderId = PropertiesService.getScriptProperties().getProperty(folderProperty || 'QL_RESUME_FOLDER_ID');
   if (!folderId) throw new Error('Please contact our team to complete your application.');
   var mime = {pdf:'application/pdf', doc:'application/msword', docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}[ext];
   var file = DriveApp.getFolderById(folderId).createFile(Utilities.newBlob(bytes, mime, name.replace(/[^a-zA-Z0-9]/g, '_') + '_' + filename));
@@ -166,7 +171,15 @@ function qlJob_(ss, p, name, email, requestId) {
   if (!company || !title || !city || !exp || desc.length < 30 || QL_AREAS.indexOf(area) < 0 || ['On-site','Hybrid','Remote'].indexOf(mode) < 0) throw new Error('Please complete the required job details.');
   if (closes && (!/^\d{4}-\d{2}-\d{2}$/.test(closes) || isNaN(new Date(closes).getTime()) || new Date(closes).toISOString().slice(0,10) !== closes || closes < Utilities.formatDate(new Date(),'Asia/Kolkata','yyyy-MM-dd'))) throw new Error('Choose a valid closing date in the future.');
   var ref=qlReference_('QLJ');
-  qlAppend_(qlSheet_(ss,'Jobs',QL_JOBS_HEADERS), [ref,new Date(),'Pending',company,title,area,city,mode,exp,qlText_(p.salary,100),desc,closes,name,email,requestId]);
+  var jdFile = null;
+  if (p.jd_data || p.jd_name) {
+    try { jdFile = qlSaveResume_({file_data:p.jd_data,file_name:p.jd_name,file_type:p.jd_type}, 'JD_' + company, 'QL_JD_FOLDER_ID'); }
+    catch (err) { throw new Error(String(err.message).replace(/CV/g, 'JD')); }
+  }
+  try {
+    qlAppend_(qlSheet_(ss,'Jobs',QL_JOBS_HEADERS), [ref,new Date(),'Pending',company,title,area,city,mode,exp,qlText_(p.salary,100),desc,closes,name,email,requestId,jdFile ? jdFile.getUrl() : '',jdFile ? qlText_(p.jd_name,160) : '']);
+    SpreadsheetApp.flush();
+  } catch (err) { if (jdFile) jdFile.setTrashed(true); throw err; }
   return {status:'success',reference:ref,message:'Your job is saved for review.',version:2};
 }
 function qlApplication_(ss,p,name,email,requestId) {
