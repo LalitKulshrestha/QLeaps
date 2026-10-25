@@ -12,7 +12,7 @@ var QL_CONFIG = {
   maxFileBytes: 5 * 1024 * 1024
 };
 var QL_JOBS_HEADERS = ['Job ID', 'Created', 'Status', 'Company', 'Title', 'Specialism', 'Location', 'Working arrangement', 'Experience', 'Salary range', 'Description', 'Closes', 'Employer name', 'Employer email', 'Request ID', 'JD URL', 'JD filename'];
-var QL_APPLICATION_HEADERS = ['Application ID', 'Submitted', 'Job ID', 'Job title', 'Company', 'Name', 'Email', 'Phone', 'City', 'Specialism', 'Experience', 'Portfolio', 'Resume URL', 'Consent', 'Status', 'Request ID'];
+var QL_APPLICATION_HEADERS = ['Application ID', 'Submitted', 'Job ID', 'Job title', 'Company', 'Name', 'Email', 'Phone', 'City', 'Specialism', 'Experience', 'Portfolio', 'Resume URL', 'Consent', 'Status', 'Request ID', 'LinkedIn', 'Current title / organisation', 'Notice period', 'Relocation', 'Target CTC'];
 var QL_SUBMISSION_HEADERS = ['Submitted', 'Form type', 'Name', 'Email', 'Phone', 'City', 'Role', 'Profile / resume', 'Message', 'Job ID', 'Reference', 'Request ID'];
 var QL_AREAS = ['Marketing and digital', 'Creative', 'Design and product', 'Technology'];
 
@@ -135,7 +135,7 @@ function qlReceipt_(ss, requestId) {
 function doGet(e) {
   var p = (e && e.parameter) || {};
   try {
-    if (p.action === 'jobs') return qlResponse_({status:'success', version:2, jd_attachments:true, jobs:qlPublicJobs_(qlSpreadsheet_())}, p.callback);
+    if (p.action === 'jobs') return qlResponse_({status:'success', version:2, jd_attachments:true, candidate_details:true, jobs:qlPublicJobs_(qlSpreadsheet_())}, p.callback);
     if (p.action === 'receipt') {
       if (!/^[a-f0-9]{32}$/.test(String(p.request_id || ''))) throw new Error('Invalid reference token.');
       return qlResponse_(qlReceipt_(qlSpreadsheet_(), p.request_id), p.callback);
@@ -190,7 +190,8 @@ function qlApplication_(ss,p,name,email,requestId) {
     if (!job || !qlIsOpen_(job)) throw new Error('This role is no longer accepting applications. Please choose another role.');
     title=String(job[4]);company=String(job[3]);
   }
-  var phone=qlText_(p.phone,30), area=qlText_(p.area,100), portfolio=qlText_(p.link,500);
+  var phone=qlText_(p.phone,30), area=qlText_(p.area,100), portfolio=qlText_(p.link,500), linkedin=qlText_(p.linkedin,500);
+  if (linkedin && !/^https?:\/\/[^\s]+$/i.test(linkedin)) throw new Error('Please use a valid LinkedIn URL.');
   if (qlPhone_(phone).length !== 10 || QL_AREAS.indexOf(area)<0) throw new Error('Please check your phone number and specialism.');
   if (portfolio && !/^https?:\/\/[^\s]+$/i.test(portfolio)) throw new Error('Please use a valid portfolio URL.');
   var sheet=qlSheet_(ss,'Applications',QL_APPLICATION_HEADERS), rows=qlRows_(sheet,QL_APPLICATION_HEADERS.length);
@@ -202,7 +203,9 @@ function qlApplication_(ss,p,name,email,requestId) {
   var ref=existing>=0 ? String(rows[existing][0]) : qlReference_('QLA');
   var resume=qlSaveResume_(p,name);
   try {
-    var row=[ref,new Date(),jobId,title,company,name,email,phone,qlText_(p.city,100),area,qlText_(p.experience,100),portfolio,resume.getUrl(),'yes',existing>=0 ? rows[existing][14] : 'New',requestId];
+    // Cached older clients must not erase newly captured optional details on reapply.
+    function detail(key,max,column) { return Object.prototype.hasOwnProperty.call(p,key) ? qlText_(p[key],max) : existing>=0 ? rows[existing][column] : ''; }
+    var row=[ref,new Date(),jobId,title,company,name,email,phone,qlText_(p.city,100),area,qlText_(p.experience,100),portfolio,resume.getUrl(),'yes',existing>=0 ? rows[existing][14] : 'New',requestId,detail('linkedin',500,16),detail('current_title',200,17),detail('notice',100,18),detail('relocation',150,19),detail('salary',100,20)];
     if(existing>=0) qlWrite_(sheet,existing+2,row); else qlAppend_(sheet,row);
     SpreadsheetApp.flush();
   } catch(err) {resume.setTrashed(true);throw err;}
@@ -219,7 +222,7 @@ function qlLegacy_(ss,p,name,email,requestId) {
   var sheet=qlSheet_(ss,'Submissions',QL_SUBMISSION_HEADERS), ref=qlReference_('QLC');
   var message=qlText_(p.message,3000);
   if(!message) throw new Error('Please add your enquiry.');
-  qlAppend_(sheet,[new Date(),'Contact Inquiry',name,email,qlText_(p.phone,30),qlText_(p.city,100),qlText_(p.role,200),qlText_(p.link,500),message,'',ref,requestId]);
+  qlAppend_(sheet,[new Date(),p.form_type === 'Editorial Feedback' ? 'Editorial Feedback' : 'Contact Inquiry',name,email,qlText_(p.phone,30),qlText_(p.city,100),qlText_(p.role,200),qlText_(p.link,500),message,'',ref,requestId]);
   return {status:'success',reference:ref,version:2};
 }
 function doPost(e) {

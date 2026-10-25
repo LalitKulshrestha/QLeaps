@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://qleaps.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://qleaps.in/blogs/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://qleaps.in/careers/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://qleaps.in/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/specialisms/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/how-we-work/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/contact/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/roles/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/submit-cv/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/careers/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/notice-period/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/search-economics/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/compensation-benchmarks/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/offer-questions/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/portfolio-thinking/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://qleaps.in/blogs/serving-notice/</loc><lastmod>2026-10-25</lastmod></url>
 </urlset>

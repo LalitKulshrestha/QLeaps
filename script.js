@@ -2,15 +2,223 @@
   'use strict';
   var $ = function(s,r) { return (r || document).querySelector(s); };
   var $$ = function(s,r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reducedMotion=motionPreference.matches, motionPaused=reducedMotion;
+  var motionButton=document.querySelector('#motionToggle');
+  function updateMotion() {
+    document.documentElement.classList.toggle('motion-paused',motionPaused);
+    if(motionButton){motionButton.textContent=motionPaused?'Play ambient motion':'Pause ambient motion';motionButton.setAttribute('aria-pressed',String(!motionPaused));}
+    document.dispatchEvent(new Event('ql-motion-change'));
+  }
+  if(motionButton)motionButton.addEventListener('click',function(){motionPaused=!motionPaused;updateMotion();});
+  motionPreference.addEventListener('change',function(e){reducedMotion=e.matches;motionPaused=reducedMotion;updateMotion();});
+  updateMotion();
+  var heroVideo=document.querySelector('.hero-video-player'), videoVisible=false;
+  function syncVideo(){
+    if(!heroVideo)return;
+    if(motionPaused||document.hidden||!videoVisible){heroVideo.pause();return;}
+    heroVideo.play().catch(function(){heroVideo.controls=true;});
+  }
+  if(heroVideo){
+    if('IntersectionObserver' in window)new IntersectionObserver(function(entries){videoVisible=entries[0].isIntersecting;syncVideo();}).observe(heroVideo);
+    else {videoVisible=true;syncVideo();}
+    document.addEventListener('ql-motion-change',syncVideo);document.addEventListener('visibilitychange',syncVideo);
+  }
+  /* Original, soft grand-piano-style motif, occasional shore waves and distant birds synthesized without samples. Audio is created only after an explicit opt-in. */
+  (function initBackgroundMusic(){
+    if(location.pathname!=='/'&&location.pathname!=='/index.html')return;
+    var AudioEngine = window.AudioContext || window.webkitAudioContext;
+    if(!AudioEngine)return;
+    var musicButton=document.createElement('button');
+    musicButton.type='button';musicButton.className='music-toggle';
+    musicButton.setAttribute('role','switch');
+    musicButton.setAttribute('aria-label','Background music');
+    musicButton.setAttribute('aria-checked','false');
+    musicButton.title='Optional soft piano, gentle shore waves and distant birds';
+    musicButton.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg><span class="music-switch-track" aria-hidden="true"><span class="music-switch-thumb"></span></span><span class="music-state" aria-hidden="true">Off</span>';
+    document.body.appendChild(musicButton);
+    var engine=null,master=null,timer=null,enabled=false,step=0,nextTime=0,nextNatureTime=0;
+    var eighth=60/84/2;
+    // Light syncopated notes over warm harmony, without percussion or a driving bass.
+    var harmony=[[50,54,57,61,64],[50,54,57,61,64],[47,50,54,57,61],[47,50,54,57,61],[52,55,59,62,66],[57,61,64,67,71],[50,54,57,61,64],[50,54,57,61,64]];
+    var melody=[73,null,76,78,null,76,73,null,69,null,73,76,null,74,73,null,71,null,73,74,null,73,69,null,66,null,69,73,null,71,69,null,71,null,74,78,null,76,74,null,73,null,76,79,null,76,73,null,74,null,78,81,null,78,76,null,73,null,69,71,null,73,74,null];
+    function tone(note,time,duration,level,bass){
+      var voice=engine.createGain();
+      var frequency=440*Math.pow(2,(note-69)/12);
+      voice.gain.setValueAtTime(0,time);
+      voice.gain.linearRampToValueAtTime(level,time+.009);
+      voice.gain.exponentialRampToValueAtTime(level*.7,time+.11);
+      voice.gain.exponentialRampToValueAtTime(.0001,time+duration);
+      voice.connect(master);
+      var sources=[];
+      [1,2,3,4,5,6].forEach(function(partial){
+        var oscillator=engine.createOscillator(),weight=engine.createGain();
+        oscillator.type='sine';
+        // Slight string inharmonicity and faster upper-partial decay soften the piano tone.
+        oscillator.frequency.value=frequency*partial*Math.sqrt(1+.00008*partial*partial);
+        var strength=[0,1,.28,.12,.05,.018,.008][partial];
+        weight.gain.setValueAtTime(strength,time);
+        weight.gain.exponentialRampToValueAtTime(.0001,time+duration/(1+(partial-1)*.3));
+        oscillator.connect(weight);weight.connect(voice);
+        oscillator.start(time);oscillator.stop(time+duration+.04);
+        oscillator.onended=function(){oscillator.disconnect();weight.disconnect();};
+        sources.push(oscillator);
+      });
+      sources[0].addEventListener('ended',function(){voice.disconnect();});
+    }
+    var waterBuffer=null,nextBirdTime=0;
+    function natureSwell(time){
+      // One quiet incoming wave and a longer retreat, followed by genuine silence.
+      if(!waterBuffer){
+        waterBuffer=engine.createBuffer(1,Math.ceil(engine.sampleRate*8),engine.sampleRate);
+        var samples=waterBuffer.getChannelData(0),deep=0;
+        for(var i=0;i<samples.length;i++){
+          var white=Math.random()*2-1;
+          deep=.98*deep+.02*white;
+          samples[i]=deep*4+white*.18;
+        }
+      }
+      var shore=engine.createBufferSource(),low=engine.createBiquadFilter(),high=engine.createBiquadFilter(),envelope=engine.createGain();
+      shore.buffer=waterBuffer;
+      high.type='highpass';high.frequency.value=65;high.Q.value=.45;
+      low.type='lowpass';low.Q.value=.35;
+      low.frequency.setValueAtTime(650,time);
+      low.frequency.linearRampToValueAtTime(1500,time+2.4);
+      low.frequency.linearRampToValueAtTime(500,time+7.5);
+      envelope.gain.setValueAtTime(0,time);
+      envelope.gain.linearRampToValueAtTime(.025,time+.35);
+      envelope.gain.linearRampToValueAtTime(.14,time+2.4);
+      envelope.gain.linearRampToValueAtTime(.07,time+4.2);
+      envelope.gain.linearRampToValueAtTime(.018,time+6);
+      envelope.gain.linearRampToValueAtTime(0,time+7.5);
+      shore.connect(high);high.connect(low);low.connect(envelope);envelope.connect(master);
+      shore.start(time);shore.stop(time+7.7);
+      shore.onended=function(){shore.disconnect();high.disconnect();low.disconnect();envelope.disconnect();};
+    }
+    function distantBird(time){
+      // Brief, irregular warbles: no sustained pure-tone whistle or repeating alarm.
+      var base=1750+Math.random()*350;
+      [0,.19,.43].forEach(function(offset,index){
+        var start=time+offset,duration=.09+Math.random()*.05;
+        var bird=engine.createOscillator(),flutter=engine.createOscillator(),depth=engine.createGain(),gain=engine.createGain();
+        bird.type='triangle';flutter.frequency.value=27+Math.random()*12;depth.gain.value=35;
+        flutter.connect(depth);depth.connect(bird.frequency);
+        bird.frequency.setValueAtTime(base*(index===1?1.18:1),start);
+        bird.frequency.exponentialRampToValueAtTime(base*(index===2?.92:1.35),start+duration*.45);
+        bird.frequency.exponentialRampToValueAtTime(base*.98,start+duration);
+        gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(.022,start+.018);
+        gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+        bird.connect(gain);gain.connect(master);bird.start(start);flutter.start(start);
+        bird.stop(start+duration+.02);flutter.stop(start+duration+.02);
+        bird.onended=function(){bird.disconnect();flutter.disconnect();depth.disconnect();gain.disconnect();};
+      });
+    }
+    function schedule(){
+      if(!enabled||!engine||engine.state!=='running'||document.hidden)return;
+      // A delayed background timer must never queue a burst of missed notes.
+      if(nextTime<engine.currentTime)nextTime=engine.currentTime+.05;
+      if(engine.currentTime+.18>=nextNatureTime){natureSwell(engine.currentTime+.08);nextNatureTime=engine.currentTime+13+Math.random()*6;}
+      if(engine.currentTime+.18>=nextBirdTime){distantBird(engine.currentTime+.08);nextBirdTime=engine.currentTime+16+Math.random()*12;}
+      while(nextTime<engine.currentTime+.18){
+        var bar=Math.floor(step/8)%8,position=step%8,chord=harmony[bar];
+        if(position===0)chord.forEach(function(note,i){tone(note,nextTime+i*.018,4.5,.022,false);});
+        var note=melody[step%melody.length];
+        if(note!==null)tone(note-12,nextTime,3.2,.038,false);
+        nextTime+=eighth;step=(step+1)%64;
+      }
+    }
+    var wanted=false,startedAt=0;
+    function updateMusicButton(){
+      musicButton.setAttribute('aria-checked',String(enabled));
+      musicButton.querySelector('.music-state').textContent=enabled?'On':(wanted?'Resume':'Off');
+      musicButton.title=wanted&&!enabled?'Tap to resume music if your browser blocks playback.':'Optional soft piano, gentle shore waves and distant birds';
+    }
+    function releaseAudio(){
+      enabled=false;clearInterval(timer);timer=null;
+      var previous=engine,previousMaster=master;engine=null;master=null;
+      if(previous){
+        previousMaster.gain.cancelScheduledValues(previous.currentTime);
+        previousMaster.gain.setTargetAtTime(0,previous.currentTime,.025);
+        setTimeout(function(){previous.close().catch(function(){});},120);
+      }
+      updateMusicButton();
+    }
+    function stopMusic(){wanted=false;startedAt=0;releaseAudio();}
+    function startMusic(){
+      wanted=true;if(!startedAt)startedAt=Date.now();
+      try{
+        if(!engine){
+          engine=new AudioEngine();waterBuffer=null;master=engine.createGain();master.gain.value=.22;
+          var limiter=engine.createDynamicsCompressor();
+          limiter.threshold.value=-18;limiter.knee.value=18;limiter.ratio.value=3;
+          var warmth=engine.createBiquadFilter();warmth.type='lowpass';warmth.frequency.value=2400;warmth.Q.value=.5;
+          master.connect(warmth);warmth.connect(limiter);limiter.connect(engine.destination);
+          var current=engine;
+          function activate(){
+            if(engine!==current||!wanted||current.state!=='running'||document.hidden)return;
+            if(!enabled){
+              enabled=true;step=Math.floor(Math.max(0,Date.now()-startedAt)/1000/eighth)%64;
+              nextTime=current.currentTime+.06;nextNatureTime=current.currentTime+.1;nextBirdTime=current.currentTime+5;
+              clearInterval(timer);timer=setInterval(schedule,80);schedule();
+            }
+            updateMusicButton();
+          }
+          current.addEventListener('statechange',activate);
+          current.resume().then(activate).catch(function(){if(engine===current)updateMusicButton();});
+        }else{
+          engine.resume().catch(function(){updateMusicButton();});
+        }
+      }catch(error){releaseAudio();}
+      updateMusicButton();
+    }
+    musicButton.addEventListener('click',function(){if(enabled)stopMusic();else startMusic();});
+    // Homepage-only audio; gesture fallback handles stricter browser playback policies.
+    function resumeAfterGesture(event){
+      if(wanted&&!enabled&&!musicButton.contains(event.target))startMusic();
+    }
+    document.addEventListener('pointerdown',resumeAfterGesture,{passive:true});
+    document.addEventListener('keydown',resumeAfterGesture);
+    document.addEventListener('visibilitychange',function(){
+      if(!wanted||!engine)return;
+      if(document.hidden)engine.suspend().catch(function(){});
+      else engine.resume().then(function(){if(engine){nextTime=engine.currentTime+.06;schedule();}}).catch(function(){enabled=false;updateMusicButton();});
+    });
+    window.addEventListener('pagehide',releaseAudio);
+    window.addEventListener('pageshow',function(event){
+      if(!event.persisted)return;
+      if(wanted)startMusic();else releaseAudio();
+    });
+    if(wanted)startMusic();
+
+  })();
+
   var GOOGLE_SCRIPT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby0XQE0A8Bfsm6J10yGDsK_Efd30VGuRzN9jL0ovfeiBJ0qCh5dnwWC4UAf_L99YK6Pag/exec';
-  var backendReady = false, jdReady = false, jobs = [], selectedJob = null;
+  var backendReady = false, candidateDetailsReady = false, jdReady = false, jobs = [], selectedJob = null, jobsState = 'loading';
   // Keep content and anchor destinations clear of the persistent header.
   function measureHeader() {
-    document.documentElement.style.setProperty('--header-height', Math.ceil($('.site-header').getBoundingClientRect().height) + 'px');
+    document.documentElement.style.setProperty('--header-height', Math.ceil(($('.site-header') || document.body).getBoundingClientRect().height) + 'px');
   }
+  var headerEl = $('.site-header'), navToggle = $('.nav-toggle');
+  function closeNavigation(returnFocus) {
+    if (!headerEl || !navToggle) return;
+    headerEl.classList.remove('is-open'); navToggle.setAttribute('aria-expanded','false');
+    if (returnFocus) navToggle.focus();
+  }
+  if (headerEl && navToggle) {
+    headerEl.classList.add('nav-ready');
+    navToggle.addEventListener('click',function(){
+      var open = navToggle.getAttribute('aria-expanded') !== 'true';
+      headerEl.classList.toggle('is-open',open); navToggle.setAttribute('aria-expanded',String(open));
+    });
+    headerEl.addEventListener('keydown',function(e){if(e.key==='Escape')closeNavigation(true);});
+    headerEl.addEventListener('click',function(e){if(e.target.closest('nav a'))closeNavigation(false);});
+    document.addEventListener('click',function(e){if(!headerEl.contains(e.target))closeNavigation(false);});
+    headerEl.addEventListener('focusout',function(e){if(e.relatedTarget&&!headerEl.contains(e.relatedTarget))closeNavigation(false);});
+  }
+  var requestedJobId = new URLSearchParams(location.search).get('job_id');
+  var requestedJobResolved = !requestedJobId;
   measureHeader();
-  if ('ResizeObserver' in window) new ResizeObserver(measureHeader).observe($('.site-header'));
+  if ('ResizeObserver' in window && $('.site-header')) new ResizeObserver(measureHeader).observe($('.site-header'));
   else window.addEventListener('resize', measureHeader);
 
   /* Smooth scroll for in-page links */
@@ -21,7 +229,7 @@
     el.style.opacity = '1'; el.style.transform = 'none';
     var header = document.querySelector('.site-header');
     var headerH = header ? header.getBoundingClientRect().height : 70;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - (headerH + 12), behavior: 'smooth' });
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - (headerH + 12), behavior: reducedMotion ? 'auto' : 'smooth' });
   }
   $$('[data-target]').forEach(function (a) {
     a.addEventListener('click', function (e) {
@@ -49,77 +257,32 @@
     });
   }
 
-  /* Hero: arc draw, Scout hop and speech bubble */
-  var arc = $('#qlArc'), dot = $('#qlDot'), scout = $('#qlScout'), bubble = $('#qlBubble');
-  var lines = ['Hi, I’m Scout. Looking for your next leap?', 'I sniff out good fits.', 'Three who fit beat thirty who might.', 'Your CV goes to a person. Not a pile.', 'One more jump. Then treats.'];
-  var arriving = false;
-  var lineIdx = 0, hopping = false, bubbleOn = false, bubbleT;
-  function showBubble(on) { if (!bubble) return; bubbleOn = on; bubble.style.transform = 'scale(' + (on ? 1 : 0) + ')'; }
-  setTimeout(function () { if (arc) arc.setAttribute('stroke-dashoffset', '0'); }, 150);
-  function scoutEntrance() {
-    if (!scout || reducedMotion) return;
-    arriving = true;
-    showBubble(false);
-    scout.classList.add('scout-arriving');
-    var finished = false, fallback;
-    function finish() {
-      if (finished) return;
-      finished = true; clearTimeout(fallback);
-      scout.removeEventListener('animationend', onEnd);
-      scout.classList.remove('scout-arriving');
-      scout.classList.add('scout-settled');
-      if (bubble) {
-        bubble.textContent = 'Made it! Ready for your next leap?';
-        showBubble(true);
-        bubbleT = setTimeout(function () { showBubble(false); }, 3200);
-      }
-    }
-    function onEnd(event) {
-      if (event.target === scout && event.animationName === 'qlScoutEntrance') finish();
-    }
-    scout.addEventListener('animationend', onEnd);
-    fallback = setTimeout(finish, 4100);
-  }
-  // Run once when the hero is actually visible, including visits to a deep link.
-  if (scout && !reducedMotion) {
-    if ('IntersectionObserver' in window) {
-      var entranceObserver = new IntersectionObserver(function (entries) {
-        if (entries.some(function (entry) { return entry.isIntersecting; })) {
-          entranceObserver.disconnect(); scoutEntrance();
-        }
-      }, { threshold: 0.15 });
-      entranceObserver.observe(scout.parentElement);
-    } else { scoutEntrance(); }
+  var closingFlow = $('.closing-conversation');
+  if(closingFlow && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      closingFlow.classList.toggle('flow-visible',entries[0].isIntersecting);
+    }).observe(closingFlow);
   }
 
-  function hop(quiet) {
-    if (!scout || arriving || hopping || reducedMotion) return;
-    hopping = true;
-    if (!quiet) {
-      lineIdx = (lineIdx + 1) % lines.length;
-      bubble.textContent = lines[lineIdx];
-      showBubble(true);
-      clearTimeout(bubbleT);
-      bubbleT = setTimeout(function () { showBubble(false); }, 3200);
-    }
-    scout.style.transition = 'transform .3s cubic-bezier(.2,.8,.3,1)';
-    scout.style.transform = 'translateY(-70px) rotate(-8deg) scale(1,1.04)';
-    setTimeout(function () {
-      scout.style.transition = 'transform .12s ease-out';
-      scout.style.transform = 'translateY(0) rotate(0deg) scale(1.06,.92)';
-      if (dot) dot.style.transform = 'scale(1.4)';
-    }, 320);
-    setTimeout(function () {
-      hopping = false;
-      scout.style.transition = 'transform .5s cubic-bezier(.3,1.8,.5,1)';
-      scout.style.transform = 'translateY(0) rotate(0deg) scale(1,1)';
-    }, 470);
-    setTimeout(function () { if (dot) dot.style.transform = 'scale(1)'; }, 760);
-  }
-  if (scout) { scout.addEventListener('click', function () { hop(false); }); scout.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hop(false); } }); }
-  setInterval(function () { if (!reducedMotion && !document.hidden && !bubbleOn) hop(true); }, 7000);
+  /* A visitor-controlled story connects hiring to the work ahead. */
+  var moveStories = {
+    account: ['01 / 03', 'The pitch is won.\nNow deliver on it.', 'Build the team around the brief: the craft, the pace and the people your new account needs.', 'The work ahead · Team gaps · Start dates'],
+    specialist: ['02 / 03', 'One missing skill.\nA whole new possibility.', 'Find the depth your team needs, from marketing and creative craft to design, engineering and data.', 'The skill gap · Relevant work · Ways of working'],
+    leader: ['03 / 03', 'The next chapter\nneeds the right lead.', 'Start with the decisions, team and responsibilities this person will own. Then shape the search around them.', 'The mandate · Team context · First priorities']
+  };
+  $$('[data-move]').forEach(function(button){
+    button.addEventListener('click',function(){
+      var story=moveStories[button.getAttribute('data-move')];
+      if(!story)return;
+      $$('[data-move]').forEach(function(other){other.setAttribute('aria-pressed',String(other===button));});
+      $('#moveIndex').textContent=story[0];$('#moveTitle').textContent=story[1];
+      $('#moveDescription').textContent=story[2];$('#moveFocus').textContent=story[3];
+      var panel=$('.move-brief');
+      if(!reducedMotion&&!motionPaused&&panel.animate)panel.animate([{opacity:.45,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],{duration:280,easing:'ease-out'});
+    });
+  });
 
-  /* --- 1. THE "30 DOWN TO 3" TACTILE SIEVE --- */
+  /* Interactive illustrative shortlist */
   var fitWrap = $('#qlFit');
   if (fitWrap) {
     var fitSlider = $('#qlFitSlider');
@@ -134,6 +297,9 @@
 
     function applySieveState(progress) { // progress from 0 (Volume) to 100 (Fit)
       var ratio = progress / 100;
+      if (fitBtnVolume) fitBtnVolume.setAttribute('aria-pressed', String(progress === 0));
+      if (fitBtnFit) fitBtnFit.setAttribute('aria-pressed', String(progress === 100));
+      if (fitSlider) fitSlider.setAttribute('aria-valuetext', progress + '% through the illustrative shortlist example');
       var isFit = ratio >= 0.7;
       var isMid = ratio > 0.25 && ratio < 0.7;
 
@@ -239,6 +405,7 @@
     st.addEventListener('mouseenter', function () {
       steps.forEach(function (o, j) {
         var d = $('.ql-step-dot', o);
+        if (!d) return;
         d.style.background = i === j ? '#4F46E5' : '#14213D';
         d.style.transform = 'scale(' + (i === j ? 1.14 : 1) + ')';
       });
@@ -321,9 +488,11 @@
     // Attempt standard CORS fetch with credentials: 'omit' to prevent 3rd-party cookies
     var query = new URLSearchParams(params);
     var url = GOOGLE_SCRIPT_WEBAPP_URL + '?' + query.toString();
+    var readController=new AbortController(), readTimeout=setTimeout(function(){readController.abort();},8000);
     try {
       var res = await fetch(url, {
         method: 'GET',
+        signal: readController.signal,
         mode: 'cors',
         credentials: 'omit',
         headers: { 'Accept': 'application/json' }
@@ -333,8 +502,8 @@
         if (json && typeof json === 'object') return json;
       }
     } catch (fetchErr) {
-      // Fall through to JSONP only if fetch fails in legacy environments
-    }
+      // ContentService can require its read-only JSONP path.
+    } finally {clearTimeout(readTimeout);}
 
     // Google ContentService's documented JSONP fallback. Read-only public jobs or
     // random-token receipts only; no personal details or resume URLs in responses.
@@ -361,21 +530,36 @@
         var result = await googleRead({action:'jobs'});
         if (result.version !== 2 || result.status !== 'success' || !Array.isArray(result.jobs)) throw new Error('Job service not ready');
         backendReady = true;
+        candidateDetailsReady = result.candidate_details === true;
+        jobsState='ready';
+        status($('#applicationServiceStatus'),candidateDetailsReady ? 'Ready to receive your CV. Uploaded files are private to our recruitment team.' : 'CV submissions are temporarily unavailable. Please email contact@qleaps.in or try again shortly.',candidateDetailsReady?'':'error');
         jdReady = result.jd_attachments === true;
-        $('#jdFile').disabled = !jdReady;
-        $('#jdAvailability').textContent = jdReady ? 'Optional PDF or Word JD, up to 5 MB. Stored privately for our recruitment team.' : 'JD uploads will be available shortly. Please include the key requirements in the role summary.';
+        var jdFile = $('#jdFile');
+        if (jdFile) jdFile.disabled = !jdReady;
+        var jdAvail = $('#jdAvailability');
+        if (jdAvail) jdAvail.textContent = jdReady ? 'Optional PDF or Word JD, up to 5 MB. Stored privately for our recruitment team.' : 'JD uploads will be available shortly. Please include the key requirements in the role summary.';
         jobs = result.jobs.filter(function (job) { return typeof job.id === 'string' && /^QLJ-[A-F0-9]{12}$/.test(job.id); });
         jobsLoadedAt = Date.now();
-        $('#postJobButton').disabled = $('#jobForm').dataset.saved === 'true';
-        $('#postingAvailability').textContent = 'Your role is saved for our team to review. Only approved jobs appear on the website.';
+        var postJobBtn = $('#postJobButton');
+        var jobFrm = $('#jobForm');
+        if (postJobBtn && jobFrm) postJobBtn.disabled = jobFrm.dataset.saved === 'true';
+        var postAvail = $('#postingAvailability');
+        if (postAvail) postAvail.textContent = 'Your role is saved for our team to review. Only approved jobs appear on the website.';
+        resolveRequestedJob();
         renderJobs();
       } catch (error) {
+        jobsState='error';
+        status($('#applicationServiceStatus'),'We couldn’t connect the CV service. Please email contact@qleaps.in or try again shortly.','error');
+        var jStatus = $('#jobsStatus');
+        var pAvail = $('#postingAvailability');
         if (!backendReady) {
-          $('#jobsStatus').textContent = 'We’re getting the latest opportunities ready. You can still share your CV below or contact our team.';
-          $('#postingAvailability').textContent = 'Public job posting will be available shortly. In the meantime, share your hiring brief with our team below.';
+          if (jStatus) jStatus.textContent = 'We couldn’t load current opportunities. Please retry or contact our team; no roles are shown until confirmed.';
+          if (pAvail) pAvail.textContent = 'Public job posting will be available shortly. In the meantime, share your hiring brief with our team below.';
         } else {
-          $('#jobsStatus').textContent = 'We couldn’t refresh the roles. Please try again later; availability is checked when you apply.';
+          if (jStatus) jStatus.textContent = 'We couldn’t refresh the roles. Please try again later; availability is checked when you apply.';
         }
+      } finally {
+        var list = $('#rolesList'); if(list) list.setAttribute('aria-busy','false');
       }
     })();
     try { await jobsLoading; } finally { jobsLoading = null; }
@@ -387,23 +571,43 @@
     return el;
   }
   function renderJobs() {
-    var search = $('#jobSearch').value.trim().toLowerCase();
-    var area = $('#jobCategory').value;
+    var mandatesTitles = $('#activeMandatesTitles');
+    var mandatesStatus = $('#activeMandatesStatus');
+    if (mandatesTitles && mandatesStatus) {
+      if (jobs.length > 0) {
+        var topTitles = jobs.slice(0, 4).map(function (j) { return j.title; }).join(' · ');
+        mandatesTitles.textContent = topTitles;
+        mandatesStatus.textContent = '● ' + jobs.length + (jobs.length === 1 ? ' active mandate approved' : ' active mandates approved');
+        mandatesStatus.style.color = '#047857';
+      } else {
+        mandatesTitles.textContent = 'Marketing · Creative · Design · Technology';
+        mandatesStatus.textContent = 'No public roles listed right now · General CVs welcome';
+        mandatesStatus.style.color = '#2563EB';
+      }
+    }
+
+    var searchEl = $('#jobSearch');
+    var search = searchEl ? searchEl.value.trim().toLowerCase() : '';
+    var catEl = $('#jobCategory');
+    var area = catEl ? catEl.value : '';
     var matching = jobs.filter(function (job) {
       return (!area || job.area === area) && (!search || [job.title,job.company,job.location].join(' ').toLowerCase().indexOf(search) !== -1);
     });
     var list = $('#rolesList');
+    if (!list) return;
     list.replaceChildren();
-    $('#jobsStatus').textContent = !jobs.length ? 'No approved roles are listed right now. Share your CV so we can discuss future opportunities.' :
-      !matching.length ? 'No roles match those filters. Try another search or share your CV.' : matching.length + (matching.length === 1 ? ' open role' : ' open roles');
+    var jobsStatus = $('#jobsStatus');
+    if (jobsStatus) {
+      jobsStatus.textContent = jobsState==='loading' ? 'Loading approved opportunities…' : jobsState==='error' ? 'We couldn’t refresh current roles. Please retry or contact our team.' : !jobs.length ? 'No approved roles are listed right now. Share your CV so we can discuss future opportunities.' :
+        !matching.length ? 'No roles match those filters. Try another search or share your CV.' : matching.length + (matching.length === 1 ? ' open role' : ' open roles');
+    }
     matching.forEach(function (job) {
       var card = element('article',undefined,'job-card');
       var head = element('div',undefined,'job-card-head');
       var info = element('div');
-      info.append(element('h3',job.title),element('p',job.company,'job-company'));
-      var apply = element('button','Apply for this role','job-apply');
-      apply.type='button';
-      apply.addEventListener('click',function () { selectJob(job); setAudience('talent'); scrollToId('cv'); });
+      info.append(element('h2',job.title,'job-title'),element('p',job.company,'job-company'));
+      var apply = element('a','Apply for this role','job-apply');
+      apply.href = '/submit-cv/?job_id=' + encodeURIComponent(job.id);
       head.append(info,apply);
       var meta = element('div',undefined,'job-meta');
       [job.area,job.location,job.work_mode,job.experience,job.salary,job.closes ? 'Closes ' + job.closes : ''].filter(Boolean).forEach(function (text) {meta.append(element('span',text));});
@@ -428,6 +632,12 @@
     }
     status($('#cvStatus'),'','');
     selectedJob = job;
+    requestedJobResolved = true;
+    requestedJobId = job ? job.id : null;
+    if (!job && new URLSearchParams(location.search).has('job_id')) {
+      var cleanUrl = new URL(location.href); cleanUrl.searchParams.delete('job_id');
+      history.replaceState(null,'',cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+    }
     var appJobId = $('#applicationJobId');
     if (appJobId) appJobId.value = job ? job.id : '';
     var target = $('#applicationTarget');
@@ -450,65 +660,189 @@
     }
   }
 
-  /* Scout's original CV catcher: cursor gaze, drag reactions and paper-plane catch. */
-  var fileInput=$('#cvFile'), fileBox=$('#cvFileBox'), catcher=$('#scoutCatcherImg'), catcherBubble=$('#scoutCatcherBubble');
-  function resetFile() {
-    var lbl = $('#cvFileLabel'); if (lbl) lbl.textContent='Drop your CV here, or browse';
-    var sub = $('#cvFileSub'); if (sub) { sub.textContent='PDF or Word, up to 5 MB'; sub.style.color='#5B5F6B'; }
-    if (fileBox) fileBox.classList.remove('file-attached','drag-active');
-    if (catcher) { catcher.src='assets/mascot/scout-default.svg';catcher.style.transform='none'; }
-    if (catcherBubble) catcherBubble.textContent='Drag your CV over here — I’ll catch it!';
-    var pill = $('#cvBrowsePill'); if (pill) pill.textContent='Browse files';
-  }
-  function fileValid(file) {return !!file && /\.(pdf|doc|docx)$/i.test(file.name) && file.size>0 && file.size<=5*1024*1024;}
-  function showFile(file) {
-    if(!file) {resetFile();return;}
-    if(!fileValid(file)) {
-      if (fileInput) fileInput.value='';
-      resetFile();
-      var sub = $('#cvFileSub');
-      if (sub) { sub.textContent='Please choose a PDF or Word file up to 5 MB.'; sub.style.color='#b42318'; }
-      if (catcher) catcher.src='assets/mascot/scout-skeptical.svg';
-      if (catcherBubble) catcherBubble.textContent='That one needs another look. PDF or Word, up to 5 MB.';
-      return;
-    }
-    if (fileBox) fileBox.classList.add('file-attached');
-    var lbl = $('#cvFileLabel'); if (lbl) lbl.textContent=file.name;
-    var sub = $('#cvFileSub'); if (sub) sub.textContent=(file.size/(1024*1024)).toFixed(2)+' MB · Attached and ready to submit';
-    var pill = $('#cvBrowsePill'); if (pill) pill.textContent='Replace file';
-    if (catcher) catcher.src='assets/mascot/scout-excited.svg';
-    if (catcherBubble) catcherBubble.textContent='Caught it! Ready for your next leap?';
-    if(!reducedMotion) {
-      var plane=$('#cvPaperPlane');
-      if (plane) {
-        plane.style.animation='none';
-        void plane.offsetWidth;
-        plane.style.animation='qlPaperPlaneFlight .85s ease forwards';
-      }
-      if (catcher) {
-        catcher.style.animation='qlScoutCatchHop .85s ease';
-        setTimeout(function(){catcher.style.animation='none';},900);
-      }
+  function resolveRequestedJob() {
+    if (!$('#cvForm') || !requestedJobId) return;
+    var match = jobs.find(function(job){return job.id === requestedJobId;});
+    if (match) { selectJob(match); return; }
+    requestedJobResolved = false;
+    var target = $('#applicationTarget');
+    if(target) {
+      target.hidden=false; target.replaceChildren(element('span','This role is closed or unavailable. Choose a general application or browse current roles.'));
+      var general=element('button','Make a general application','clear-job'); general.type='button';
+      general.addEventListener('click',function(){selectJob(null);}); target.append(general);
     }
   }
-  function gaze(event) {
-    if(reducedMotion || !fileInput || fileInput.files.length || !fileBox || !catcher) return;
-    var rect=fileBox.getBoundingClientRect();
-    var ratio=Math.max(0,Math.min(1,(event.clientX-rect.left)/(rect.width||1)));
-    catcher.src='assets/mascot/scout-thinking.svg';
-    catcher.style.transform='translate(' + ((ratio-.5)*12).toFixed(1)+'px,-8px) rotate('+((ratio-.5)*20).toFixed(1)+'deg)';
+  if(requestedJobId && $('#applicationTarget')) {
+    $('#applicationTarget').hidden=false;
+    $('#applicationTarget').textContent='Checking the role you selected…';
   }
-  if (fileBox && fileInput && catcher && catcherBubble) {
-    fileBox.addEventListener('mousemove',gaze);
-    fileBox.addEventListener('mouseleave',function(){catcher.style.transform='none';if(!fileInput.files.length)catcher.src='assets/mascot/scout-default.svg';});
-    fileBox.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();fileInput.click();}});
-    ['dragenter','dragover'].forEach(function(type){fileBox.addEventListener(type,function(e){e.preventDefault();fileBox.classList.add('drag-active');gaze(e);catcherBubble.textContent='Drop it here. I’m ready.';});});
-    fileBox.addEventListener('dragleave',function(e){if(!fileBox.contains(e.relatedTarget)){fileBox.classList.remove('drag-active');catcher.style.transform='none';}});
-    fileBox.addEventListener('drop',function(e){e.preventDefault();fileBox.classList.remove('drag-active');if(e.dataTransfer.files.length){fileInput.files=e.dataTransfer.files;showFile(fileInput.files[0]);}});
-    fileInput.addEventListener('change',function(){showFile(fileInput.files[0]);});
+  var retryJobs=$('#retryJobs');
+  if(retryJobs)retryJobs.addEventListener('click',function(){
+    var list=$('#rolesList'); if(list)list.setAttribute('aria-busy','true');
+    status($('#jobsStatus'),'Checking current opportunities…',''); loadJobs(true);
+  });
+
+  /* Tactile CV Upload & Scout Mascot Reactivity */
+  var fileInput=$('#cvFile'), dropzone=$('#cvDropzone')||$('#cvFileBox'), scoutIcon=$('#scoutCvIcon')||$('#scoutCatcherImg'), cvDropText=$('#cvDropText')||$('#cvFileLabel'), cvErrSpan=$('[data-err="cv"]');
+
+  function getMascotSrc(iconName) {
+    if (!scoutIcon) return 'assets/mascot/' + iconName;
+    var current = scoutIcon.getAttribute('src') || '';
+    var idx = current.lastIndexOf('/');
+    var prefix = idx !== -1 ? current.substring(0, idx + 1) : 'assets/mascot/';
+    return prefix + iconName;
   }
 
-  function status(el,message,type) {el.textContent=message;el.className='submission-status'+(type?' '+type:'');}
+  function fileValid(file) {
+    return !!file && /\.(pdf|doc|docx)$/i.test(file.name) && file.size > 0 && file.size <= 5 * 1024 * 1024;
+  }
+
+  function resetCvUpload() {
+    if (fileInput) fileInput.value = '';
+    if (dropzone) dropzone.classList.remove('drag-active', 'file-attached');
+    if (scoutIcon) {
+      scoutIcon.src = getMascotSrc('scout-default.svg');
+      scoutIcon.classList.remove('scout-animated-wag', 'scout-animated-perk');
+    }
+    if (cvDropText) {
+      cvDropText.textContent = 'Drop your CV here or click to browse';
+    }
+    var attachedCard = $('#cvAttachedCard');
+    if (attachedCard) attachedCard.remove();
+    var defaultInfo = $('#cvDefaultInfo');
+    if (defaultInfo) defaultInfo.style.display = 'flex';
+  }
+
+  function handleCvFile(file) {
+    if (!file) {
+      resetCvUpload();
+      return;
+    }
+    if (!fileValid(file)) {
+      resetCvUpload();
+      if (fileInput) fileInput.value = '';
+      if (scoutIcon) {
+        scoutIcon.src = getMascotSrc('scout-skeptical.svg');
+        scoutIcon.classList.remove('scout-animated-wag');
+      }
+      if (cvErrSpan) cvErrSpan.textContent = 'Please choose a PDF or Word document up to 5 MB.';
+      return;
+    }
+
+    if (cvErrSpan) cvErrSpan.textContent = '';
+    if (dropzone) dropzone.classList.remove('drag-active');
+    if (scoutIcon) {
+      scoutIcon.src = getMascotSrc('scout-excited.svg');
+      scoutIcon.classList.add('scout-animated-wag');
+    }
+
+    var defaultInfo = $('#cvDefaultInfo');
+    if (defaultInfo) defaultInfo.style.display = 'flex';
+    if (cvDropText) cvDropText.textContent='CV attached. Click to choose a different file.';
+
+    var existingCard = $('#cvAttachedCard');
+    if (existingCard) existingCard.remove();
+
+    var sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+    var card = document.createElement('div');
+    card.id = 'cvAttachedCard';
+    card.className = 'cv-attached-card';
+    card.innerHTML =
+      '<div class="cv-attached-info">' +
+        '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>' +
+          '<polyline points="14 2 14 8 20 8"></polyline>' +
+          '<line x1="16" y1="13" x2="8" y2="13"></line>' +
+          '<line x1="16" y1="17" x2="8" y2="17"></line>' +
+          '<polyline points="10 9 9 9 8 9"></polyline>' +
+        '</svg>' +
+        '<div style="display:flex;flex-direction:column;gap:2px">' +
+          '<span class="cv-attached-name">' + 'Attached document' + '</span>' +
+          '<span class="cv-attached-size">' + sizeMb + ' MB · Ready to submit</span>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="cv-remove-btn" id="cvRemoveFileBtn">Remove file</button>';
+
+    $('.cv-attached-name',card).textContent = file.name;
+    var container = dropzone.querySelector('div') || dropzone;
+    dropzone.parentElement.appendChild(card);
+
+    var removeBtn = $('#cvRemoveFileBtn');
+    if (removeBtn) {
+      removeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        resetCvUpload(); fileInput.focus();
+      });
+    }
+  }
+
+  if (dropzone && fileInput) {
+    var innerDiv = dropzone.querySelector('div');
+    if (innerDiv && !$('#cvDefaultInfo')) {
+      innerDiv.id = 'cvDefaultInfo';
+    }
+
+    ['dragenter', 'dragover'].forEach(function (type) {
+      dropzone.addEventListener(type, function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('drag-active');
+        if (scoutIcon) {
+          scoutIcon.src = getMascotSrc('scout-excited.svg');
+          scoutIcon.classList.add('scout-animated-wag');
+        }
+        if (cvDropText) cvDropText.textContent = 'Release to hand your CV to Scout!';
+      });
+    });
+
+    dropzone.addEventListener('dragleave', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!dropzone.contains(e.relatedTarget)) {
+        dropzone.classList.remove('drag-active');
+        if (!fileInput.files.length) {
+          if (scoutIcon) {
+            scoutIcon.src = getMascotSrc('scout-default.svg');
+            scoutIcon.classList.remove('scout-animated-wag');
+          }
+          if (cvDropText) cvDropText.textContent = 'Drop your CV here or click to browse';
+        }
+      }
+    });
+
+    dropzone.addEventListener('drop', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove('drag-active');
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        handleCvFile(fileInput.files[0]);
+        fileInput.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+    });
+
+    fileInput.addEventListener('change', function () {
+      if (fileInput.files && fileInput.files.length) {
+        handleCvFile(fileInput.files[0]);
+      }
+    });
+
+    var cvForm = $('#cvForm');
+    if (cvForm && scoutIcon) {
+      cvForm.addEventListener('focusin', function (e) {
+        var tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'select' || tag === 'textarea') {
+          scoutIcon.classList.remove('scout-animated-perk');
+          void scoutIcon.offsetWidth;
+          scoutIcon.classList.add('scout-animated-perk');
+          setTimeout(function () { scoutIcon.classList.remove('scout-animated-perk'); }, 450);
+        }
+      });
+    }
+  }
+
+  function status(el,message,type) {if(!el)return;el.textContent=message;el.className='submission-status'+(type?' '+type:'');}
   function readFile(file) {
     return new Promise(function(resolve,reject){var reader=new FileReader();reader.onload=function(){resolve(String(reader.result).split(',')[1]);};reader.onerror=function(){reject(new Error('We couldn’t read that CV. Please choose the file again.'));};reader.readAsDataURL(file);});
   }
@@ -528,10 +862,16 @@
     form.addEventListener('submit',async function(e){
       e.preventDefault();
       if(form.dataset.sending==='true') return;
-      if(!form.reportValidity()||form.elements['bot-field'].value) return;
+      var honeypot=form.elements['bot-field'];
+      if(!form.reportValidity()||(honeypot&&honeypot.value)) return;
+      if(kind==='candidate' && !requestedJobResolved){status(message,'Please resolve the selected role above, or choose a general application.','error');return;}
+      if(kind==='candidate' && !candidateDetailsReady){
+        status(message,'CV submissions are temporarily unavailable while we connect the application service. Please email contact@qleaps.in or try again shortly.','error');
+        loadJobs(true); return;
+      }
       if(kind==='job'&&!backendReady){status(message,'Please share your hiring brief with our team below while job posting is being connected.','error');return;}
       var payload=new URLSearchParams();
-      payload.set('name',form.elements.name.value.trim());payload.set('email',form.elements.email.value.trim());payload.set('consent','yes');
+      payload.set('name',form.elements.namedItem('name').value.trim());payload.set('email',form.elements.namedItem('email').value.trim());payload.set('consent','yes');
       var btn=form.querySelector('button[type=submit]'), previous=btn.textContent;
       form.dataset.sending='true';
       btn.disabled=true;btn.textContent='Sending…';status(message,'','');
@@ -539,23 +879,30 @@
       try {
         if(kind==='job') {
           payload.set('action','post_job');payload.set('form_type','Job Posting');
-          ['company','role','area','city','work_mode','experience','salary','description','closes'].forEach(function(k){payload.set(k,form.elements[k].value.trim());});
+          ['company','role','area','city','work_mode','experience','salary','description','closes'].forEach(function(k){payload.set(k,form.elements[k] ? form.elements[k].value.trim() : '');});
           var jd=form.elements.jd_file.files[0];
           if(jd){if(!jdReady)throw new Error('JD uploads are not available yet.');if(!fileValid(jd))throw new Error('Choose a PDF or Word JD up to 5 MB.');payload.set('jd_data',await readFile(jd));payload.set('jd_name',jd.name);payload.set('jd_type',jd.type);}
         } else if(kind==='candidate') {
-          var file=fileInput.files[0];
+          var file=(fileInput&&fileInput.files&&fileInput.files[0])||(form.elements.cv&&form.elements.cv.files&&form.elements.cv.files[0]);
           if(!fileValid(file))throw new Error('Please attach a PDF or Word CV up to 5 MB.');
-          if(form.elements.phone.value.replace(/\D/g,'').length<10)throw new Error('Please enter a valid phone number.');
+          if(form.elements.phone&&form.elements.phone.value.replace(/\D/g,'').length<10)throw new Error('Please enter a valid phone number.');
           payload.set('form_type','Candidate Application');
           if(backendReady)payload.set('action','apply');
-          ['phone','city','role','link','area'].forEach(function(k){payload.set(k,form.elements[k].value.trim());});
-          payload.set('experience',form.elements.exp.value);
-          payload.set('job_id',$('#applicationJobId').value);
+          ['phone','city','role','link','linkedin','current_title','notice','relocation','salary','area'].forEach(function(k){if(form.elements[k])payload.set(k,form.elements[k].value.trim());});
+          var expVal=form.elements.exp?form.elements.exp.value:'';
+          payload.set('experience',expVal);
+          var appJobId=$('#applicationJobId');
+          payload.set('job_id',appJobId?appJobId.value:'');
           if(payload.get('job_id')&&!backendReady)throw new Error('Please refresh the opportunities before applying to this role.');
-          payload.set('message','Specialism: '+form.elements.area.value+' | Experience: '+form.elements.exp.value);
+          var areaVal=form.elements.area?form.elements.area.value:'General';
+          payload.set('message','Specialism: '+areaVal+(expVal?' | Experience: '+expVal:''));
           payload.set('file_data',await readFile(file));payload.set('file_name',file.name);payload.set('file_type',file.type);
         } else {
-          payload.set('form_type','Contact Inquiry');payload.set('message',form.elements.text.value.trim());
+          var isFeedback=kind==='feedback';
+          var textControl=form.elements[isFeedback?'message':'text'];
+          var context=isFeedback ? ['Topic: '+form.elements.topic.value,'Role / organisation: '+form.elements.role.value].join(' | ')+'\n\n' : '';
+          payload.set('form_type',isFeedback?'Editorial Feedback':'Contact Inquiry');
+          payload.set('message',context+textControl.value.trim());
           if(backendReady)payload.set('action','contact');
         }
         var raw=payload.toString();
@@ -601,91 +948,40 @@
     });
   });
   bindForm('jobForm','jobStatus','job');bindForm('cvForm','cvStatus','candidate');bindForm('msgForm','msgStatus','contact');
-  if ($('#feedbackForm')) bindForm('feedbackForm','feedbackStatus','contact');
+  if ($('#feedbackForm')) bindForm('feedbackForm','feedbackStatus','feedback');
 
-  /* Blog Read Memo drawers */
-  $$('.blog-card').forEach(function(card){
-    var btn = $('.blog-read-btn', card), drawer = $('.blog-drawer', card);
-    if(btn && drawer) {
-      btn.addEventListener('click', function(){
-        var isOpen = drawer.classList.contains('open');
-        drawer.classList.toggle('open');
-        btn.textContent = isOpen ? 'Read Memo →' : 'Close Memo ↑';
-      });
-    }
-  });
-
-  /* Blog filter buttons */
+  /* One filter state: category and query always apply together. */
+  var activeBlogCategory='all', blogSearch=$('#blogSearch');
+  function filterBlog() {
+    var query=blogSearch ? blogSearch.value.trim().toLowerCase() : '', count=0;
+    $$('.blog-card').forEach(function(card){
+      var visible=(activeBlogCategory==='all'||card.dataset.category===activeBlogCategory)&&(!query||card.textContent.toLowerCase().includes(query));
+      card.hidden=!visible; if(visible)count++;
+    });
+    var results=$('#blogResultsStatus'); if(results)results.textContent=count ? count+' articles found' : 'No articles match. Try another topic or clear your search.';
+  }
   $$('.blog-filter-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      $$('.blog-filter-btn').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var filter = btn.dataset.filter;
-      $$('.blog-card').forEach(function(card){
-        if(!filter || filter === 'all' || card.dataset.category === filter) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    btn.setAttribute('aria-pressed',String(btn.classList.contains('active')));
+    btn.addEventListener('click',function(){
+      activeBlogCategory=btn.dataset.filter||'all';
+      $$('.blog-filter-btn').forEach(function(other){other.classList.toggle('active',other===btn);other.setAttribute('aria-pressed',String(other===btn));});
+      filterBlog();
     });
   });
+  if(blogSearch)blogSearch.addEventListener('input',filterBlog);
+  $$('.blog-card').forEach(function(card,index){
+    var btn=$('.blog-read-btn',card),drawer=$('.blog-drawer',card);
+    if(!btn||!drawer)return;
+    drawer.id='memo-content-'+index;btn.setAttribute('aria-controls',drawer.id);btn.setAttribute('aria-expanded','false');
+    btn.addEventListener('click',function(){var open=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Close Memo ↑':'Read Memo →';});
+  });
 
-  /* Blog Search bar */
-  var blogSearch = $('#blogSearch');
-  if (blogSearch) {
-    blogSearch.addEventListener('input', function() {
-      var query = blogSearch.value.trim().toLowerCase();
-      $$('.blog-card').forEach(function(card) {
-        var text = card.textContent.toLowerCase();
-        card.style.display = (!query || text.indexOf(query) !== -1) ? 'flex' : 'none';
-      });
-    });
+  var legacyDestinations={how:'/how-we-work/',contact:'/contact/#contact','post-job':'/contact/#post-job',roles:'/roles/',cv:'/submit-cv/#cv','ai-matching':'/how-we-work/',insights:'/blogs/',returners:'/careers/#returners-program'};
+  if((location.pathname==='/'||location.pathname==='/index.html')&&legacyDestinations[location.hash.slice(1)]) {
+    location.replace(legacyDestinations[location.hash.slice(1)]);
   }
-
-  /* Five-scene walkthrough: reasons, uncertainty and review, not a match score. */
-  var aiStory=$('.ai-story'), aiPlay=$('#aiPlay'), aiReplay=$('#aiReplay');
-  if (aiStory && aiPlay) {
-    var aiScene=0, aiTimer=null, aiPlaying=false, aiAutoPlayed=false;
-    var aiScenes=[
-      ['01 / DEFINE THE BRIEF','Start with the work. Not a list of keywords.','Example brief: a growth marketer who can plan acquisition campaigns, use customer insight and collaborate with creative teams.','The hiring brief','thinking','What does this role need?','Define the role before searching for a match.','WHAT MATTERS','Campaigns. Insight. Collaboration.','Define the work before comparing profiles.'],
-      ['02 / THE KEYWORD TRAP','A different title can hide relevant experience.','An exact-title filter looks for “growth marketer”. This profile says “brand strategist”, even though the person has worked on acquisition campaigns.','Title mismatch','skeptical','Read beyond the headline.','An exact-title filter can overlook transferable experience.','WHAT THE FILTER SEES','Brand strategist ≠ Growth marketer','The title differs. That is not evidence that the person cannot do the work.'],
-      ['03 / AI-ASSISTED DISCOVERY','Show the evidence behind the possibility.','The proposed AI step compares work described in the CV against the brief. Each suggestion should point to supporting evidence, rather than an unexplained match percentage.','Potential relevance','default','Show me the evidence.','AI suggests a possibility; relevant experience still needs verification.','WHY THIS PROFILE SURFACED','Campaign work → acquisition brief','Customer research → messaging. Creative collaboration → cross-functional work. These are signals, not verified achievements.'],
-      ['04 / CHECK THE UNCERTAINTY','Missing information needs a second look.','A second check compares extracted information with the original CV. Unreadable pages, missing dates or uncertain claims should stay in a review queue instead of becoming an automatic rejection.','Needs verification','thinking','Missing isn’t the same as unsuitable.','Extraction errors and unknowns are routed for review in the proposed workflow.','WHAT STILL NEEDS CHECKING','Ownership. Outcomes. Availability.','Who owned the work? What were the outcomes? Are expectations and availability aligned? A second AI pass alone cannot guarantee accuracy.'],
-      ['05 / RECRUITER REVIEW','A useful recommendation starts a conversation.','A recruiter checks the source CV, resolves the open questions and speaks with the candidate. A hiring recommendation can then explain both the evidence and its limits.','Conversation to arrange','excited','Now we can ask the right questions.','People review the suggestion. The employer makes the hiring decision.','THE NEXT STEP','Discuss the work. Confirm the context.','Explore contribution, motivation, compensation and availability. The demonstration does not rank, reject or select a real person.']
-    ];
-    function aiPause(){aiStory.classList.remove('is-playing');clearTimeout(aiTimer);aiTimer=null;aiPlaying=false;aiPlay.textContent=aiScene===4?'Replay the story':'Play the story';}
-    function aiShow(scene){
-      aiScene=scene;aiStory.dataset.scene=String(scene);
-      var copy=aiScenes[scene];
-      $('#aiSceneNumber').textContent=copy[0];$('#aiSceneTitle').textContent=copy[1];$('#aiSceneDescription').textContent=copy[2];$('#aiProfileLabel').textContent=copy[3];$('#aiScout').src='assets/mascot/scout-'+copy[4]+'.svg';$('#aiScout').alt='Scout '+copy[4];$('#aiScoutLine').textContent=copy[5];$('#aiStoryStatus').textContent='Step '+(scene+1)+' of 5 · '+copy[6];$('#aiEvidenceLabel').textContent=copy[7];$('#aiEvidenceTitle').textContent=copy[8];$('#aiEvidenceDetail').textContent=copy[9];
-      $$('[data-ai-scene]').forEach(function(button){button.setAttribute('aria-pressed',String(Number(button.dataset.aiScene)===scene));});
-      if (aiReplay) aiReplay.hidden=scene===0;
-      if (!reducedMotion) {
-        aiStory.classList.remove('cards-enter');
-        // Restart the short entrance on manual selection and timed scene changes.
-        void aiStory.offsetWidth;
-        aiStory.classList.add('cards-enter');
-      }
-    }
-    function aiNext(){
-      if(!aiPlaying)return;
-      if(aiScene<4){aiShow(aiScene+1);aiTimer=setTimeout(aiNext,1800);}else{aiPause();}
-    }
-    aiPlay.addEventListener('click',function(){
-      if(aiPlaying){aiPause();return;}
-      if(aiScene===4)aiShow(0);
-      if(reducedMotion){aiShow(Math.min(4,aiScene+1));aiPlay.textContent=aiScene===4?'Replay the story':'Next step';return;}
-      aiPlaying=true;aiStory.classList.add('is-playing');aiPlay.textContent='Pause the story';aiTimer=setTimeout(aiNext,1800);
-    });
-    if (aiReplay) aiReplay.addEventListener('click',function(){aiPause();aiShow(0);});
-    $$('[data-ai-scene]').forEach(function(button){button.addEventListener('click',function(){aiPause();aiShow(Number(button.dataset.aiScene));aiPlay.textContent=aiScene===4?'Replay the story':'Play the story';});});
-    document.addEventListener('visibilitychange',function(){if(document.hidden)aiPause();});
-    if('IntersectionObserver' in window){var aiVisibility=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)aiPause();else if(!aiAutoPlayed&&!reducedMotion){aiAutoPlayed=true;aiPlay.click();}});});aiVisibility.observe(aiStory);}
-  }
-
   syncHash();
-  if (location.hash === '#roles' || location.hash === '#cv') {
+  if ($('#cvForm') || $('#jobForm') || $('#rolesList') || location.hash === '#roles' || location.hash === '#cv') {
     loadJobs();
   } else if ('requestIdleCallback' in window) {
     requestIdleCallback(function () {
@@ -716,7 +1012,7 @@
 
     var width = 0, height = 0, dpr = 1;
     var animFrameId = null;
-    var isVisible = true;
+    var isVisible = false;
     var lastClashTime = 0;
 
     var circle1 = {
@@ -740,6 +1036,17 @@
 
     var clashes = [];
 
+    function orbitInset(){return 2;}
+    function containCircle(circle){
+      var inset=orbitInset();
+      var left=inset+circle.r,right=width-inset-circle.r;
+      var top=inset+circle.r,bottom=height-inset-circle.r;
+      if(circle.x<left){circle.x=left;circle.vx=Math.abs(circle.vx);}
+      if(circle.x>right){circle.x=right;circle.vx=-Math.abs(circle.vx);}
+      if(circle.y<top){circle.y=top;circle.vy=Math.abs(circle.vy);}
+      if(circle.y>bottom){circle.y=bottom;circle.vy=-Math.abs(circle.vy);}
+    }
+
     function resize() {
       var rect = topSection.getBoundingClientRect();
       width = rect.width;
@@ -753,8 +1060,9 @@
       canvas.style.height = height + 'px';
 
       var scale = Math.max(0.65, Math.min(1.15, width / 1100));
-      circle1.r = circle1.baseR * scale;
-      circle2.r = circle2.baseR * scale;
+      var radiusLimit = Math.max(12, (Math.min(width,height) - 2 * orbitInset()) * .36);
+      circle1.r = Math.min(circle1.baseR * scale, radiusLimit);
+      circle2.r = Math.min(circle2.baseR * scale, radiusLimit);
 
       if (circle1.x === 0 && circle1.y === 0) {
         circle1.x = width * 0.72;
@@ -762,121 +1070,36 @@
         circle2.x = width * 0.32;
         circle2.y = height * 0.68;
       }
+      containCircle(circle1);containCircle(circle2);
     }
 
-    function generateNaturalBolt(x1, y1, x2, y2, roughness, depth) {
-      var pts = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
-      for (var d = 0; d < depth; d++) {
-        var nextPts = [];
-        for (var i = 0; i < pts.length - 1; i++) {
-          var p1 = pts[i];
-          var p2 = pts[i + 1];
-          var midX = (p1.x + p2.x) * 0.5;
-          var midY = (p1.y + p2.y) * 0.5;
-          var dx = p2.x - p1.x;
-          var dy = p2.y - p1.y;
-          var dist = Math.hypot(dx, dy);
-          if (dist > 4) {
-            var px = -dy / dist;
-            var py = dx / dist;
-            var disp = (Math.random() - 0.5) * roughness * dist;
-            midX += px * disp;
-            midY += py * disp;
-          }
-          nextPts.push(p1);
-          nextPts.push({ x: midX, y: midY });
-        }
-        nextPts.push(pts[pts.length - 1]);
-        pts = nextPts;
-      }
-      return pts;
-    }
-
+    // A short, local electrical arc follows the tangent at the point of contact.
     function triggerClash(cx, cy, nx, ny, c1, c2) {
-      c1.pulse = 1.0;
-      c2.pulse = 1.0;
+      if (reducedMotion || motionPaused || Date.now() - lastClashTime < 1600) return;
+      c1.pulse = 0.65;
+      c2.pulse = 0.65;
       lastClashTime = Date.now();
-
-      // Tangent along the contact boundary
+      var span = Math.min(150, width * 0.2);
       var tx = -ny, ty = nx;
-      var contactAngle = Math.atan2(ty, tx);
-      var span = Math.min(c1.r, c2.r) * 1.35;
-
-      var bolts = [];
-
-      // Primary lightning discharge: arcs across the contact zone at the natural collision angle
-      var startX = cx - tx * (span * 0.48) - nx * 8 + (Math.random() - 0.5) * 14;
-      var startY = cy - ty * (span * 0.48) - ny * 8 + (Math.random() - 0.5) * 14;
-      var endX = cx + tx * (span * 0.48) + nx * 8 + (Math.random() - 0.5) * 14;
-      var endY = cy + ty * (span * 0.48) + ny * 8 + (Math.random() - 0.5) * 14;
-      var mainBolt = generateNaturalBolt(startX, startY, endX, endY, 0.48, 4);
-
-      // Secondary companion crackle bolt
-      var secStartX = cx - tx * (span * 0.38) + nx * 10 + (Math.random() - 0.5) * 16;
-      var secStartY = cy - ty * (span * 0.38) + ny * 10 + (Math.random() - 0.5) * 16;
-      var secEndX = cx + tx * (span * 0.38) - nx * 10 + (Math.random() - 0.5) * 16;
-      var secEndY = cy + ty * (span * 0.38) - ny * 10 + (Math.random() - 0.5) * 16;
-      var secBolt = generateNaturalBolt(secStartX, secStartY, secEndX, secEndY, 0.52, 4);
-
-      bolts.push({ points: mainBolt, isFork: false });
-      bolts.push({ points: secBolt, isFork: false });
-
-      // Realistic jagged fork branches shooting off at sharp angles from the trunk
-      var forkCount = 3 + Math.floor(Math.random() * 2);
-      for (var f = 0; f < forkCount; f++) {
-        var forkIdx = Math.floor(mainBolt.length * (0.2 + 0.6 * Math.random()));
-        var forkOrigin = mainBolt[forkIdx];
-        var forkDir = (Math.random() > 0.5 ? 1 : -1);
-        var forkAngle = contactAngle + forkDir * (0.55 + Math.random() * 0.55);
-        var forkLen = 35 + Math.random() * 55;
-        var forkEndX = forkOrigin.x + Math.cos(forkAngle) * forkLen;
-        var forkEndY = forkOrigin.y + Math.sin(forkAngle) * forkLen;
-        bolts.push({
-          points: generateNaturalBolt(forkOrigin.x, forkOrigin.y, forkEndX, forkEndY, 0.45, 3),
-          isFork: true
-        });
+      var points = [];
+      for (var j = 0; j <= 12; j++) {
+        var along = (j / 12 - 0.5) * span;
+        var offset = j === 0 || j === 12 || j === 6 ? 0 : (Math.random() - 0.5) * 24;
+        points.push({x:cx + tx * along + nx * offset,y:cy + ty * along + ny * offset});
       }
-
-      // Cross-discharge tendrils leaping across the air gap between the two orbs
-      var bridgeCount = 2;
-      for (var b = 0; b < bridgeCount; b++) {
-        var offset = (b - 0.5) * (span * 0.3);
-        var p1x = cx - nx * 16 + tx * offset;
-        var p1y = cy - ny * 16 + ty * offset;
-        var p2x = cx + nx * 16 + tx * (offset + (Math.random() - 0.5) * 12);
-        var p2y = cy + ny * 16 + ty * (offset + (Math.random() - 0.5) * 12);
-        bolts.push({
-          points: generateNaturalBolt(p1x, p1y, p2x, p2y, 0.5, 3),
-          isFork: true
-        });
-      }
-
-      // Natural directional sparks scattering along the collision interface
-      var sparks = [];
-      var sparkCount = 14;
-      for (var s = 0; s < sparkCount; s++) {
-        var tanSpeed = (Math.random() - 0.5) * 8.0;
-        var normSpeed = (Math.random() - 0.5) * 4.0;
-        sparks.push({
-          x: cx + tx * (Math.random() - 0.5) * 16 + nx * (Math.random() - 0.5) * 8,
-          y: cy + ty * (Math.random() - 0.5) * 16 + ny * (Math.random() - 0.5) * 8,
-          vx: tx * tanSpeed + nx * normSpeed,
-          vy: ty * tanSpeed + ny * normSpeed,
-          size: 1.2 + Math.random() * 2.0,
-          alpha: 1.0
-        });
-      }
-
-      clashes.push({
-        x: cx,
-        y: cy,
-        angle: contactAngle,
-        span: span,
-        bolts: bolts,
-        sparks: sparks,
-        age: 0,
-        maxAge: 18
+      var bolts = [{points:points,isFork:false}];
+      [3,8].forEach(function(index){
+        var root = points[index];
+        var side = index === 3 ? -1 : 1;
+        bolts.push({isFork:true,points:[root,{x:root.x+nx*side*18+tx*8,y:root.y+ny*side*18+ty*8},{x:root.x+nx*side*30-tx*4,y:root.y+ny*side*30-ty*4}]});
       });
+      var sparks = [];
+      for (var k = 0; k < 8; k++) {
+        var angle = Math.random() * Math.PI * 2;
+        var speed = 0.8 + Math.random() * 1.8;
+        sparks.push({x:cx,y:cy,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,alpha:1,size:0.7+Math.random()});
+      }
+      clashes.push({x:cx,y:cy,span:span,age:0,maxAge:24,bolts:bolts,sparks:sparks});
     }
 
     function update() {
@@ -889,11 +1112,7 @@
       circle1.y += circle1.vy * speedFactor;
       if (circle1.pulse > 0) circle1.pulse = Math.max(0, circle1.pulse - 0.04);
 
-      var pad1 = 20;
-      if (circle1.x - circle1.r < -pad1) { circle1.x = -pad1 + circle1.r; circle1.vx = Math.abs(circle1.vx); }
-      if (circle1.x + circle1.r > width + pad1) { circle1.x = width + pad1 - circle1.r; circle1.vx = -Math.abs(circle1.vx); }
-      if (circle1.y - circle1.r < -pad1) { circle1.y = -pad1 + circle1.r; circle1.vy = Math.abs(circle1.vy); }
-      if (circle1.y + circle1.r > height + pad1) { circle1.y = height + pad1 - circle1.r; circle1.vy = -Math.abs(circle1.vy); }
+      containCircle(circle1);
 
       // Circle 2 motion
       circle2.x += circle2.vx * speedFactor;
@@ -901,11 +1120,7 @@
       circle2.dashOffset += 0.45;
       if (circle2.pulse > 0) circle2.pulse = Math.max(0, circle2.pulse - 0.04);
 
-      var pad2 = 20;
-      if (circle2.x - circle2.r < -pad2) { circle2.x = -pad2 + circle2.r; circle2.vx = Math.abs(circle2.vx); }
-      if (circle2.x + circle2.r > width + pad2) { circle2.x = width + pad2 - circle2.r; circle2.vx = -Math.abs(circle2.vx); }
-      if (circle2.y - circle2.r < -pad2) { circle2.y = -pad2 + circle2.r; circle2.vy = Math.abs(circle2.vy); }
-      if (circle2.y + circle2.r > height + pad2) { circle2.y = height + pad2 - circle2.r; circle2.vy = -Math.abs(circle2.vy); }
+      containCircle(circle2);
 
       // Collision detection between Circle 1 and Circle 2
       var dx = circle2.x - circle1.x;
@@ -947,6 +1162,9 @@
           triggerClash(cx, cy, nx, ny, circle1, circle2);
         }
       }
+
+      // Collision separation can push a circle outward; contain it again before drawing.
+      containCircle(circle1);containCircle(circle2);
 
       // Gentle convergence bias if no clash for > 5 seconds
       if (Date.now() - lastClashTime > 4500 && dist > minDist * 1.3) {
@@ -1044,8 +1262,8 @@
           var bloomFade = 1 - c.age / 12;
           var bloomR = c.span * 0.75;
           var bloomGrad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, bloomR);
-          bloomGrad.addColorStop(0, 'rgba(255, 255, 255, ' + (0.75 * bloomFade).toFixed(3) + ')');
-          bloomGrad.addColorStop(0.25, 'rgba(216, 180, 254, ' + (0.45 * bloomFade).toFixed(3) + ')');
+          bloomGrad.addColorStop(0, 'rgba(255, 255, 255, ' + (0.35 * bloomFade).toFixed(3) + ')');
+          bloomGrad.addColorStop(0.25, 'rgba(216, 180, 254, ' + (0.24 * bloomFade).toFixed(3) + ')');
           bloomGrad.addColorStop(0.65, 'rgba(147, 51, 234, ' + (0.12 * bloomFade).toFixed(3) + ')');
           bloomGrad.addColorStop(1, 'rgba(147, 51, 234, 0)');
           ctx.save();
@@ -1072,8 +1290,8 @@
             ctx.beginPath();
             bolt.points.forEach(function (pt, idx) {
               // Rapid micro-jitter on each frame gives authentic live electric plasma crackle
-              var jx = (Math.random() - 0.5) * 3.2;
-              var jy = (Math.random() - 0.5) * 3.2;
+              var jx = (Math.random() - 0.5) * 0.8;
+              var jy = (Math.random() - 0.5) * 0.8;
               if (idx === 0) ctx.moveTo(pt.x + jx, pt.y + jy);
               else ctx.lineTo(pt.x + jx, pt.y + jy);
             });
@@ -1108,24 +1326,309 @@
     }
 
     function loop() {
-      if (isVisible) {
-        update();
-        draw();
-      }
-      animFrameId = requestAnimationFrame(loop);
+      animFrameId=null;
+      if(!isVisible||document.hidden||motionPaused)return;
+      update();draw();animFrameId=requestAnimationFrame(loop);
+    }
+    function syncCanvas(){
+      if(animFrameId!==null){cancelAnimationFrame(animFrameId);animFrameId=null;}
+      if(motionPaused){draw();return;}
+      if(isVisible&&!document.hidden)animFrameId=requestAnimationFrame(loop);
+    }
+    window.addEventListener('resize',function(){resize();if(motionPaused)draw();},{passive:true});
+    if('ResizeObserver' in window)new ResizeObserver(function(){resize();if(motionPaused)draw();}).observe(topSection);
+    document.addEventListener('visibilitychange',syncCanvas);
+    document.addEventListener('ql-motion-change',syncCanvas);
+    resize();draw();
+    if('IntersectionObserver' in window)new IntersectionObserver(function(entries){isVisible=entries[0].isIntersecting;syncCanvas();}).observe(topSection);
+    else {isVisible=true;syncCanvas();}
+  }
+
+  /* ==========================================================================
+     Interactive Sample Calibrated Dossier Modal (The Executive Deliverable)
+     ========================================================================== */
+  var DOSSIER_CANDIDATES = [
+    {
+      id: 'cmo',
+      tabTitle: '01 · CMO (Growth & D2C)',
+      codeName: 'Candidate A — Chief Marketing Officer',
+      headline: 'Ex-Consumer Unicorn CMO · 14 Yrs Experience · Mumbai / Bengaluru',
+      targetRole: 'Chief Marketing Officer / Head of Growth',
+      overallScore: '9.6',
+      radarScores: [
+        { label: 'Domain & P&L Mastery', score: '9.8 / 10', pct: 98 },
+        { label: 'Growth & CAC Scaling', score: '9.7 / 10', pct: 97 },
+        { label: 'Cross-Functional Velocity', score: '9.4 / 10', pct: 94 },
+        { label: 'Motivation & transition discussion', score: '9.5 / 10', pct: 95 }
+      ],
+      preflight: [
+        { kicker: 'Current Compensation', val: '₹68L Base + 20% Variable + ESOPS' },
+        { kicker: 'Target Compensation', val: '₹82L – ₹85L Fixed Base' },
+        { kicker: 'Notice Period Status', val: '30 Days (Serving notice · 22 days remaining)' },
+        { kicker: 'Counter-Offer Risk', val: 'To discuss — transition plans need direct confirmation' },
+        { kicker: 'Confidential References', val: '2 Backchannel partner calls completed (Ex-CBO & Board)' },
+        { kicker: 'Location & Relocation', val: 'Bengaluru based · Open to Tier-1 Hybrid' }
+      ],
+      partnerCommentary: 'Exceptional 0-to-1 and 1-to-10 performance marketing architect. Scaled ARR from ₹30Cr to ₹180Cr in 30 months while cutting Blended CAC by 28%. Unusually analytical for a creative brand storyteller; builds attribution engines hands-on and holds agencies strictly accountable. Recommended for high-growth consumer or fintech ventures seeking immediate ARR velocity without undisciplined ad spend burn.',
+      tradeoff: 'Demands clear mandate ownership and direct CEO reporting line. Will become disenchanted if micromanaged by non-marketing executive committees. Best paired with an operations-heavy COO or disciplined CFO.',
+      diagnosticProbes: [
+        '“Walk through your exact unit-economic defense when Blended CAC spiked 40% post-iOS privacy rollout in your last venture.”',
+        '“How did you balance creative brand storytelling with 200+ weekly performance ad variants without brand equity dilution?”'
+      ]
+    },
+    {
+      id: 'vpe',
+      tabTitle: '02 · VP Engineering (Distributed Systems)',
+      codeName: 'Candidate B — VP of Engineering',
+      headline: 'High-Concurrency Systems & Platform Lead · 16 Yrs Experience · Bengaluru / Pune',
+      targetRole: 'VP of Engineering / Head of Platform Infrastructure',
+      overallScore: '9.5',
+      radarScores: [
+        { label: 'Architecture & Distributed Systems', score: '9.9 / 10', pct: 99 },
+        { label: 'Talent Magnet & Retention', score: '9.5 / 10', pct: 95 },
+        { label: 'High-Concurrency Delivery', score: '9.6 / 10', pct: 96 },
+        { label: 'Executive Governance & FinOps', score: '9.2 / 10', pct: 92 }
+      ],
+      preflight: [
+        { kicker: 'Current Compensation', val: '₹85L Fixed + ₹20L Bonus + RSUs' },
+        { kicker: 'Target Compensation', val: '₹1.05Cr Fixed + Meaningful Long-Term Equity' },
+        { kicker: 'Notice Period Status', val: '60 Days (Pre-agreed 30-day buyout release eligible)' },
+        { kicker: 'Counter-Offer Risk', val: 'To discuss — autonomy and reasons for moving' },
+        { kicker: 'Confidential References', val: 'Verified via former VP Product and Principal Cloud Architect' },
+        { kicker: 'Location & Relocation', val: 'Bengaluru / Pune · Open to Mumbai' }
+      ],
+      partnerCommentary: 'A rare engineering leader who scaled distributed microservices across 40,000 req/sec at 99.99% SLA while maintaining hands-on code review rigor. Built an 80-engineer organization with less than 6% annualized attrition over 4 years. Understands infrastructure FinOps deeply, having reduced AWS/GCP cloud run-rate by $1.2M annually without latency regression. Ideal anchor for Series B/C scale or enterprise modernization.',
+      tradeoff: 'Prioritizes architectural rigor and automated testing discipline over quick-and-dirty hackathon prototypes. Requires a clear product roadmap to prevent premature microservices decomposition.',
+      diagnosticProbes: [
+        '“Describe the most severe distributed transaction failure or data corruption your team handled in production, and how your post-mortem changed deployment guardrails.”',
+        '“How do you quantitatively govern the boundary between shipping new feature velocity and paying down technical debt?”'
+      ]
+    },
+    {
+      id: 'ecd',
+      tabTitle: '03 · Executive Creative Director (Brand & UX)',
+      codeName: 'Candidate C — Executive Creative Director',
+      headline: 'Award-Winning Creative & Brand Systems Lead · 13 Yrs Experience · Mumbai / NCR',
+      targetRole: 'Executive Creative Director / Head of Brand & Design',
+      overallScore: '9.4',
+      radarScores: [
+        { label: 'Creative Vision & Art Direction', score: '9.8 / 10', pct: 98 },
+        { label: 'Omnichannel Brand Identity', score: '9.6 / 10', pct: 96 },
+        { label: 'Consumer Cultural Resonance', score: '9.4 / 10', pct: 94 },
+        { label: 'Cross-Functional Design Velocity', score: '9.1 / 10', pct: 91 }
+      ],
+      preflight: [
+        { kicker: 'Current Compensation', val: '₹52L Fixed Base + Campaign Incentives' },
+        { kicker: 'Target Compensation', val: '₹62L – ₹65L Fixed Base' },
+        { kicker: 'Notice Period Status', val: '30 Days (Direct partner pre-alignment)' },
+        { kicker: 'Counter-Offer Risk', val: 'To discuss — motivations and counter-offer exposure' },
+        { kicker: 'Confidential References', val: 'Discreetly vetted with 2 Top Agency Founders & 1 CMO' },
+        { kicker: 'Location & Relocation', val: 'Mumbai / NCR · Open to Tier-1 Hybrid' }
+      ],
+      partnerCommentary: 'Combines tier-1 international design sensibility with deep understanding of multi-tier Indian consumer vernaculars. Built headline campaigns that achieved viral organic reach without inflated paid distribution budgets. Equally adept at crafting pixel-perfect design systems, television/digital film narratives, and packaging typography. Seeking a visionary leadership team ready to build a generational brand.',
+      tradeoff: 'Requires an executive seat at the table with direct access to founders. If treated as a ticket-execution production service for marketing managers, their strategic leverage will be lost.',
+      diagnosticProbes: [
+        '“How do you bridge the divide between purely aesthetic high-craft visual design and performance conversion metrics?”',
+        '“Tell us about a time a client or CEO rejected your boldest campaign proposal and how you steered alignment without diluting the core idea.”'
+      ]
+    }
+  ];
+
+  function initDossierModal() {
+    var activeIdx = 0, previousFocus = null, previousOverflow = '', inertStates = [];
+
+    function createModalDOM() {
+      var existing = $('#dossierBackdrop');
+      if (existing) return existing;
+      var isSubdir = window.location.pathname.includes('/') && window.location.pathname.split('/').filter(Boolean).length > 0;
+      var logoSrc = isSubdir ? '../assets/logo/ql-logo-horizontal-rev.svg' : 'assets/logo/ql-logo-horizontal-rev.svg';
+      var contactUrl = isSubdir ? '../contact/' : 'contact/';
+
+      var b = document.createElement('div');
+      b.id = 'dossierBackdrop';
+      b.className = 'dossier-backdrop';
+      b.setAttribute('role', 'dialog');
+      b.setAttribute('aria-modal', 'true');
+      b.setAttribute('aria-describedby','dossierSampleNote');
+      b.setAttribute('aria-label', 'Calibrated Shortlist Dossier');
+
+      b.innerHTML =
+        '<div class="dossier-modal">' +
+          '<div class="dossier-header">' +
+            '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">' +
+              '<img src="' + logoSrc + '" alt="Quantum Leaps" height="24">' +
+              '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em">Calibrated Shortlist Dossier</span>' +
+              '<span style="font-size:11px;font-weight:700;background:rgba(37,99,235,0.35);border:1px solid rgba(147,197,253,0.4);color:#93C5FD;padding:3px 10px;border-radius:999px;letter-spacing:.05em;text-transform:uppercase">Executive Deliverable</span>' +
+            '</div>' +
+            '<button type="button" class="dossier-close-btn" id="dossierCloseBtn" aria-label="Close dossier">✕</button>' +
+          '</div>' +
+          '<p class="dossier-sample-note" id="dossierSampleNote">Illustrative sample deliverable · Fictional profiles and figures. No real candidate, placement or benchmark data. Scores demonstrate a layout, not a validated prediction.</p>' +
+          '<div class="dossier-tabs" id="dossierTabs" role="group" aria-label="Example profiles"></div>' +
+          '<div class="dossier-body" id="dossierBody"></div>' +
+          '<div class="dossier-footer-cta">' +
+            '<div style="display:flex;flex-direction:column;gap:2px">' +
+              '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:15px;color:#0F172A">Ready for calibrated candidate dossiers on your next search?</span>' +
+              '<span style="font-size:13px;color:#64748B">Discuss your brief, assessment criteria and a realistic shortlist timeline.</span>' +
+            '</div>' +
+            '<a href="' + contactUrl + '" class="header-cta" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:10px 22px;border-radius:999px;background:#2563EB;color:#FFFFFF;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(37,99,235,0.3)">' +
+              'Let’s talk hiring →' +
+            '</a>' +
+          '</div>' +
+        '</div>';
+
+      document.body.appendChild(b);
+
+      b.addEventListener('click', function (e) {
+        if (e.target === b) closeDossier();
+      });
+
+      var closeBtn = $('#dossierCloseBtn', b);
+      if (closeBtn) closeBtn.addEventListener('click', closeDossier);
+
+      return b;
     }
 
-    window.addEventListener('resize', resize, { passive: true });
-    if ('ResizeObserver' in window) {
-      new ResizeObserver(resize).observe(topSection);
+    function renderTabs(b) {
+      var tabsContainer = $('#dossierTabs', b);
+      if (!tabsContainer) return;
+      tabsContainer.innerHTML = '';
+      DOSSIER_CANDIDATES.forEach(function (cand, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'dossier-tab-btn' + (idx === activeIdx ? ' active' : '');
+        btn.textContent = cand.tabTitle;
+        btn.setAttribute('aria-pressed',String(idx===activeIdx));
+        btn.addEventListener('click', function () {
+          activeIdx = idx;
+          renderTabs(b);
+          renderCandidate(b, DOSSIER_CANDIDATES[activeIdx]);
+          $$('.dossier-tab-btn',b)[activeIdx].focus();
+        });
+        tabsContainer.appendChild(btn);
+      });
     }
-    document.addEventListener('visibilitychange', function () {
-      isVisible = !document.hidden;
+
+    function renderCandidate(b, cand) {
+      var body = $('#dossierBody', b);
+      if (!body) return;
+
+      var scoresHtml = cand.radarScores.map(function (s) {
+        var parts = s.score.split('/');
+        var num = parts[0].trim();
+        var den = parts[1] ? ('/' + parts[1].trim()) : '';
+        return (
+          '<div class="dossier-score-card">' +
+            '<div class="dossier-score-header">' +
+              '<span class="dossier-score-label">' + s.label + '</span>' +
+              '<span class="dossier-score-val">' + num + ' <span class="dossier-score-denom">' + den + '</span></span>' +
+            '</div>' +
+            '<div class="dossier-meter">' +
+              '<div class="dossier-meter-fill" style="width:' + s.pct + '%"></div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      var preflightHtml = cand.preflight.map(function (p) {
+        return (
+          '<div class="dossier-preflight-item">' +
+            '<span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B">' + p.kicker + '</span>' +
+            '<span class="dossier-preflight-val">' + p.val + '</span>' +
+          '</div>'
+        );
+      }).join('');
+
+      var probesHtml = cand.diagnosticProbes.map(function (pr) {
+        return '<li style="margin-bottom:6px">' + pr + '</li>';
+      }).join('');
+
+      body.innerHTML =
+        '<div class="dossier-candidate-hero">' +
+          '<div style="display:flex;flex-direction:column;gap:6px;max-width:580px">' +
+            '<div style="display:flex;align-items:center;gap:8px">' +
+              '<span style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2563EB">Fictional candidate example</span>' +
+              '<span style="width:6px;height:6px;border-radius:50%;background:#059669"></span>' +
+              '<span style="font-size:12px;font-weight:700;color:#059669">Illustrative details</span>' +
+            '</div>' +
+            '<h2 style="margin:0;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,28px);color:#0F172A">' + cand.codeName + '</h2>' +
+            '<p style="margin:0;font-size:14.5px;color:#475569">' + cand.headline + '</p>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;align-items:flex-end;background:#F8FAFC;border:1px solid #E2E8F0;padding:10px 18px;border-radius:16px;gap:2px">' +
+            '<div style="display:flex;align-items:baseline;gap:4px">' +
+              '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:800;font-size:28px;color:#2563EB">' + cand.overallScore + '</span>' +
+              '<span style="font-size:14px;color:#64748B;font-weight:600">/ 10</span>' +
+            '</div>' +
+            '<span style="font-size:11px;font-weight:700;color:#059669;letter-spacing:.04em;text-transform:uppercase">Example rubric only</span>' +
+          '</div>' +
+        '</div>' +
+
+        '<div style="display:flex;flex-direction:column;gap:12px">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#64748B">01 / Competency &amp; Radar Scorecard</span>' +
+          '<div class="dossier-scorecard-grid">' + scoresHtml + '</div>' +
+        '</div>' +
+
+        '<div style="display:flex;flex-direction:column;gap:12px">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#64748B">02 / India Pre-Flight Operational Verification</span>' +
+          '<div class="dossier-preflight-box">' + preflightHtml + '</div>' +
+        '</div>' +
+
+        '<div class="dossier-commentary">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#2563EB">Quantum Leaps Partner Appraisal &amp; Context</span>' +
+          '<p style="margin:0;font-size:14.5px;line-height:1.65;color:#1E293B">' + cand.partnerCommentary + '</p>' +
+        '</div>' +
+
+        '<div class="dossier-tradeoff">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#D97706">Candid Tradeoff &amp; Executive Watchout</span>' +
+          '<p style="margin:0;font-size:14px;line-height:1.6;color:#78350F">' + cand.tradeoff + '</p>' +
+        '</div>' +
+
+        '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:18px;padding:20px 24px;display:flex;flex-direction:column;gap:10px">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#475569">Round-1 Recommended Executive Probes (Tailored for CEO / Board Interview)</span>' +
+          '<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:#334155;line-height:1.55">' + probesHtml + '</ul>' +
+        '</div>';
+    }
+
+    function openDossier() {
+      previousFocus=document.activeElement; previousOverflow=document.body.style.overflow;
+      var b = createModalDOM();
+      inertStates=Array.from(document.body.children).filter(function(el){return el!==b;}).map(function(el){var state=[el,el.inert];el.inert=true;return state;});
+      renderTabs(b);
+      renderCandidate(b, DOSSIER_CANDIDATES[activeIdx]);
+      b.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      $('#dossierCloseBtn',b).focus();
+    }
+
+    function closeDossier() {
+      var b = $('#dossierBackdrop');
+      if (b) {
+        b.classList.remove('active');
+        document.body.style.overflow = previousOverflow;
+      inertStates.forEach(function(state){state[0].inert=state[1];}); inertStates=[];
+      if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
+      }
+    }
+
+    document.addEventListener('keydown', function (e) {
+      var modal=$('#dossierBackdrop'); if(!modal||!modal.classList.contains('active'))return;
+      if (e.key === 'Escape') closeDossier();
+      if (e.key === 'Tab') {
+        var focusable=$$('button:not([disabled]),a[href],input:not([disabled]),[tabindex="0"]',modal).filter(function(el){return el.getClientRects().length;});
+        var first=focusable[0],last=focusable[focusable.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
     });
 
-    resize();
-    loop();
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.open-dossier-btn, [data-open-dossier]');
+      if (trigger) {
+        e.preventDefault();
+        openDossier();
+      }
+    });
   }
 
   initHeroClashCanvas();
+  initDossierModal();
 })();

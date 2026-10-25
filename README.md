@@ -1,38 +1,36 @@
 # Quantum Leaps
 
-A static, image-led hiring landing page on Netlify. Vanilla HTML, CSS and JavaScript; local fonts, existing photography and interactive Scout artwork. No build step, new paid service or animation dependency.
+Static specialist recruitment website for brands and agencies across India, from individual contributors to leadership search. Vanilla HTML, CSS and JS, local fonts/media, an image-led agency story and interactive hiring scenarios. No paid runtime or animation dependency.
 
-## Website
-- Hiring / job-seeker tabs switch the relevant content on the same page.
-- Original mixed-size specialism cards, photography, Scout poses and CV catcher are retained.
-- Employers submit job requirements for review; only approved roles are listed.
-- Candidates search approved roles and attach their profile and CV to a stable job ID, or submit a general application.
-- The existing enquiry form remains available.
-- Keyboard controls and reduced-motion preferences are supported.
+## Preview
 
-## AI matching presentation
-The employer view includes a five-scene, user-controlled demonstration of AI-assisted discovery followed by recruiter review. It uses fictional profile data and existing Scout artwork, makes no AI calls, and is labelled as a capability preview while the matching backend is in development. Pause/replay, manual scene selection and reduced motion are supported.
+Run `python3 -m http.server 8080 --bind 127.0.0.1` from this folder and open http://127.0.0.1:8080/. The source preview reads the public Google job feed. Avoid test submissions there; use `python3 tests/preview-server.py` on port 8081 for isolated synthetic form tests.
 
-## Google deployment — required for job posting
-Replace the current Apps Script source with `google-apps-script/Code.gs`, run its setup helper once, then update the EXISTING deployment. Follow `google-apps-script/SETUP.md`.
+## Build and checks
 
-The website detects v2 automatically. Until the script is deployed, job posting remains disabled, while enquiries and general CV applications use the existing webhook. The legacy webhook's opaque response cannot confirm receipt; the UI explicitly distinguishes processing from confirmed storage. V2 uses random-token receipts to confirm storage and display a reference without returning personal information.
+```sh
+node --check script.js
+node --check < google-apps-script/Code.gs
+node tests/google-webhook.cjs
+node scripts/build.cjs
+python3 tests/site-contracts.py
+git diff --check
+```
 
-The new script creates Jobs and Applications tabs, preserves existing Submissions data, validates roles before accepting applications, prevents cross-job deduplication, and keeps newly uploaded CVs private. Historical CV permissions are not changed automatically.
+Netlify reads `netlify.toml`: Node 22, build `node scripts/build.cjs`, publish `dist`. The allowlist includes only public pages, assets, CSS, JS, sitemap and robots file. Unknown paths use the published `404.html`; there is no SPA fallback. Generated `dist` is ignored by Git.
 
-Public JSONP responses expose approved job fields and non-personal submission receipts only. The Netlify CSP allows Google ContentService's script hosts. The Google Sheet itself should remain private.
+## Forms and data
 
-## Preview and checks
-Run `python3 -m http.server 8000 --bind 127.0.0.1` and visit http://127.0.0.1:8000. Without the Google v2 deployment, the preview uses the same graceful unavailable state as production.
+Google Apps Script handles enquiries, editorial feedback, private CV/JD uploads, job approval and non-personal receipt lookups. The workbook does not need public sharing. Jobs publish only when Approved and not expired. Each application retains its stable job reference; general applications have a blank Job ID.
 
-- `node --check script.js`
-- `node --check < google-apps-script/Code.gs`
-- `node tests/google-webhook.cjs` (offline Apps Script mocks; never contacts Google)
-- `git diff --check`
+The current handler advertises `candidate_details: true`; CV submissions are blocked against an older handler to prevent silent data loss. The existing deployment has been updated and its capabilities checked read-only. [Release checklist](RELEASE-CHECKLIST.md) and [Google setup instructions](google-apps-script/SETUP.md) describe the safe append-only migration.
 
-The browser workflow was also checked against a local mock job/receipt service, including role selection, Scout's CV attachment interaction and confirmed application reference. End-to-end Google storage must be verified after the script deployment with authorised test data.
+The sample dossier uses fictional data. AI matching is not marketed on the launch site; matching and introductions are handled by people. Guides are practical editorial material, not proprietary research or salary surveys. Actual vacancies, metrics and testimonials require verified business records.
 
-## Netlify
-The repository is `LalitKulshrestha/QLeaps`; production branch is `main`, publish directory is the repository root. No build command is required. The existing Netlify Git integration deploys on push.
+The legacy export, main.js and Netlify function source remain in the repository for reference but are not published or used by the current site. Existing Netlify/Google quotas apply.
 
-The legacy `main.js` and `netlify/functions/lead.js` are not used by the landing page. Netlify Forms is not enabled. Existing Netlify, Google Apps Script and Drive quotas apply.
+## Current release behaviour
+
+Scout is removed. The homepage keeps the circle collision lightning, interactive shortlist and hiring scenarios, and a subtle animated closing invitation. Optional synthesized piano/shore/bird ambience is homepage-only, off by default, with a note-icon switch at the bottom-left. No track downloads or external audio service are used.
+
+The Powered by Netlify badge is a hosting-dashboard setting, not a source-code component: Project configuration → General → Powered by Netlify badge → Off → Save. It does not require a rebuild.

@@ -1,15 +1,9 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
+  publish = "dist"
+  command = "node scripts/build.cjs"
 
 [build.environment]
-  NODE_VERSION = "18"
-
-# Redirect /api/lead to the serverless function
-[[redirects]]
-  from = "/api/lead"
-  to = "/.netlify/functions/lead"
-  status = 200
+  NODE_VERSION = "22"
 
 # Canonical URL normalization: enforce clean URLs without index.html
 [[redirects]]
@@ -30,12 +24,47 @@
   status = 301
   force = true
 
-# SPA fallback — serve index.html for unknown routes (without forcing POST/static overrides)
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+  from = "/contact/index.html"
+  to = "/contact/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-we-work/index.html"
+  to = "/how-we-work/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/roles/index.html"
+  to = "/roles/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/specialisms/index.html"
+  to = "/specialisms/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/submit-cv/index.html"
+  to = "/submit-cv/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blogs/:slug/index.html"
+  to = "/blogs/:slug/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 301
+  force = true
 
 # Security headers
 [[headers]]
@@ -62,4 +91,4 @@
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, must-revalidate"

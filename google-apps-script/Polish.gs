@@ -6,7 +6,7 @@ function polishQuantumLeaps() {
   var ss = qlSpreadsheet_();
   var specs = [
     {name:'Jobs', count:17, header:'#4F46E5', stripe:'#F1EFFB', statusCol:3},
-    {name:'Applications', count:16, header:'#17645D', stripe:'#EDF6F3', statusCol:15},
+    {name:'Applications', count:QL_APPLICATION_HEADERS.length, header:'#17645D', stripe:'#EDF6F3', statusCol:15},
     {name:'Submissions', count:12, header:'#14213D', stripe:'#F3F5F8', statusCol:0}
   ];
   // Validate first, so incomplete setup does not cause partial cleanup.
@@ -39,7 +39,8 @@ function polishQuantumLeaps() {
     sheet.setRowHeight(1,42);
     if(rowCount>1)sheet.setRowHeights(2,rowCount-1,30);
     sheet.setColumnWidths(1,spec.count,155);
-    if(!sheet.getFilter())sheet.getRange(1,1,sheet.getMaxRows(),spec.count).createFilter();
+    if(sheet.getFilter())sheet.getFilter().remove();
+    sheet.getRange(1,1,sheet.getMaxRows(),spec.count).createFilter();
     if(spec.name==='Jobs'){
       sheet.setColumnWidth(4,190);sheet.setColumnWidth(5,220);sheet.setColumnWidth(11,380);
       sheet.getRange(2,11,Math.max(1,sheet.getMaxRows()-1),1).setWrap(true);

@@ -59,3 +59,28 @@ jobSheet.failWrite=true;const failedJdIndex=files.length;assert.equal(post({...j
 const feed=parse(ctx.doGet({parameter:{action:'jobs'}}));assert.equal(feed.jd_attachments,true);assert.ok(!JSON.stringify(feed.jobs).includes('drive.google.com'));
 assert.equal(acquired,released,'all acquired locks must be released');
 console.log('PASS: legacy data preservation, approval/expiry, linked applications, per-job deduplication, idempotent retries, private CVs, receipt privacy, input validation, formula neutralisation and upload cleanup.');
+
+// Append-only candidate schema migration and new browser field contract.
+apps.failWrite=false;
+const detail=post({...app,job_id:'',experience:'6 years',notice:'60 Days',linkedin:'https://linkedin.com/in/example',current_title:'Designer, Example Studio',relocation:'Remote only',salary:'By agreement',request_id:'cd'.repeat(16)});
+assert.equal(detail.status,'success');
+const detailRow=apps.rows.find(r=>r[0]===detail.reference);
+assert.equal(detailRow[10],'6 years');
+assert.equal(detailRow[16],'https://linkedin.com/in/example');
+assert.equal(detailRow[17],'Designer, Example Studio');
+assert.equal(detailRow[18],'60 Days');
+assert.equal(detailRow[19],'Remote only');
+assert.equal(detailRow[20],'By agreement');
+const preserved=JSON.stringify(apps.rows.slice(1));
+apps.rows[0]=apps.rows[0].slice(0,16);
+ctx.setupQuantumLeaps();
+assert.equal(apps.rows[0][16],'LinkedIn');
+assert.equal(JSON.stringify(apps.rows.slice(1)),preserved,'schema upgrade must not move or modify existing records');
+assert.equal(parse(ctx.doGet({parameter:{action:'jobs'}})).candidate_details,true);
+assert.equal(post({...app,job_id:'',linkedin:'javascript:alert(1)',request_id:'ce'.repeat(16)}).status,'error');
+assert.equal(post({...app,job_id:'',file_data:Buffer.alloc(5*1024*1024+1).toString('base64'),request_id:'cf'.repeat(16)}).status,'error');
+console.log('PASS: candidate details, separate experience/notice, append-only migration, URL and 5 MB validation.');
+
+const legacyReapply=post({...app,job_id:'',request_id:'da'.repeat(16)});
+assert.equal(legacyReapply.reference,detail.reference);
+assert.equal(apps.rows.find(r=>r[0]===detail.reference)[18],'60 Days','cached older clients must retain newer metadata');

@@ -1,6 +1,6 @@
 # Update the existing Quantum Leaps Google script
 
-The website and Google backend are separate deployments. The website detects version 2 automatically. Until the Google deployment is updated, enquiries and general CV submissions use the existing handler; public job posting stays disabled.
+The website and Google backend are separate deployments. The website detects version 2 automatically. The updated website requires the handler to advertise `candidate_details: true` before accepting CVs. Update this backend before releasing the website so the additional candidate fields are not lost.
 
 1. Open your existing project: https://script.google.com/u/0/home/projects/17mGXCdz-Qq20nlnz_mTr_sR64giHLP-sAmeBFdk_LCmXPHoweoa9vwAf/edit
 2. Save a copy of the current Code.gs for rollback. Replace its complete contents with the supplied `Code.gs`. Do not add it alongside the old `doGet` and `doPost` functions.
@@ -37,3 +37,11 @@ In the existing web-app deployment, confirm **Execute as: Me** (the owner/deploy
 
 ## JD attachments update
 Replace Code.gs with the current version, run setupQuantumLeaps again, and update the existing web-app deployment. Setup appends Jobs columns P:Q (JD URL / JD filename) and creates a private JD folder. Existing job and submission rows are retained. The website enables the optional attachment only after the handler advertises JD support. The summary remains required for a readable public listing; JD URLs are private and are never returned in the public job feed.
+
+## Candidate details update — 25 October 2026
+
+Replace Code.gs, run setupQuantumLeaps and update the existing deployment. Applications columns A:P retain their original order. Setup appends Q:U: LinkedIn, Current title / organisation, Notice period, Relocation and Target CTC. Experience remains in K. Existing records are not rewritten. An older cached client cannot erase these optional values simply by omitting them on reapplication.
+
+The jobs response advertises `candidate_details: true`. CVs are blocked by the new frontend until this flag is present, preventing silent data loss with an older deployment. Both CV and JD uploads use the same 5 MB maximum. Editorial feedback is kept in Submissions with its topic and role context in Message.
+
+The optional Polish.gs helper now formats all 21 Applications columns. Rerun it after setup if desired; it does not alter the webhook deployment. See the root RELEASE-CHECKLIST.md for the release order and verification steps.
