@@ -1,0 +1,57 @@
+---
+import { services } from '../data/services.js';
+import { site } from '../data/site.js';
+import Arrow from './Arrow.astro';
+---
+
+<footer class="umbrella-footer">
+  <div class="footer-top">
+    <a href="/" aria-label="Quantum Leaps home"
+      ><img
+        src="/assets/logo/ql-logo-horizontal-rev.svg"
+        alt="Quantum Leaps"
+        width="701"
+        height="206"
+        loading="lazy"
+      /></a
+    ><p>Good people.<br />Stronger possibilities.</p><a
+      class="footer-email"
+      href={`mailto:${site.email}`}>{site.email}<Arrow diagonal /></a
+    >
+  </div>
+  <div class="footer-columns">
+    <div>
+      <h2>For your company</h2>{
+        services
+          .filter((s) => s.audience === 'For companies')
+          .map((s) => <a href={`/${s.slug}/`}>{s.name}</a>)
+      }
+    </div>
+    <div>
+      <h2>For your next move</h2><a href="/for-candidates/">Candidate options</a
+      ><a href="/career-prep/">Career Prep</a><a href="/roles/">Open roles</a><a
+        href="/submit-cv/">Submit your CV</a
+      ><a href="/careers/">Join our team</a>
+    </div>
+    <div>
+      <h2>Ideas & conversations</h2><a href="/working-examples/"
+        >Working examples</a
+      ><a href="/knowledge/">Knowledge hub</a><a href="/blogs/"
+        >Hiring & career guides</a
+      ><a href="/contact/">Get in touch</a><a href="/privacy.html"
+        >Privacy policy</a
+      >
+    </div>
+    <div class="footer-principle">
+      <h2>Your systems. Your control.</h2><p>
+        HR service support within your infrastructure and agreed access. Start
+        with a non-confidential conversation.
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} Quantum Leaps</span><span
+      >Based in India. Built around people.</span
+    ><a href="/privacy.html">Privacy & data</a>
+  </div>
+</footer>

@@ -1,0 +1,201 @@
+---
+import HubOpening from '../components/HubOpening.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Arrow from '../components/Arrow.astro';
+import { serviceBySlug } from '../data/services.js';
+const career = serviceBySlug('career-prep');
+---
+
+<SiteLayout
+  title="For Candidates: Jobs, CVs & Career Prep | Quantum Leaps"
+  description="Explore open roles, submit your CV for recruitment or choose an optional Career Prep package. Clear routes for your next career move."
+  path="/for-candidates/"
+>
+  <main id="main">
+    <HubOpening
+      label="For candidates"
+      title={'Your next move.\nStart in the right place.'}
+      description="Explore open roles, share your CV for future opportunities, or choose focused help with your profile and interview preparation."
+    >
+      <div class="candidate-start">
+        <p class="eyebrow">Ready for your next opportunity?</p><a
+          class="button"
+          href="/roles/">Browse open roles <Arrow /></a
+        ><a class="candidate-cv" href="/submit-cv/"
+          >No suitable role? Submit your CV <Arrow diagonal /></a
+        ><p>
+          Career Prep is optional. You can submit your CV without purchasing it.
+        </p>
+      </div>
+      <a slot="actions" class="candidate-prep" href="/career-prep/"
+        >Looking for profile or interview support? <Arrow diagonal /></a
+      >
+    </HubOpening>
+    <section class="wrap candidate-options" aria-label="Candidate options">
+      <article>
+        <span class="option-number">01 / Explore an opportunity</span><h2>
+          Find a role that fits.
+        </h2><p>
+          Browse approved vacancies and apply to the role you want to discuss.
+          Your application keeps its job reference.
+        </p><a class="button" href="/roles/">View open roles <Arrow /></a>
+      </article><article>
+        <span class="option-number">02 / Start a conversation</span><h2>
+          Put your work on our radar.
+        </h2><p>
+          No relevant role listed? Share your CV through the private recruitment
+          submission process for future conversations.
+        </p><a class="text-link" href="/submit-cv/"
+          >Submit your CV <Arrow diagonal /></a
+        >
+      </article><article class="prep-option">
+        <span class="option-number">03 / Optional paid preparation</span><h2>
+          Sharpen your next introduction.
+        </h2><p>
+          Profile review, CV and LinkedIn rework, first-shortlist CV tailoring,
+          and one mock interview with feedback.
+        </p><p class="candidate-price">
+          <strong>{career.price}</strong>
+          <s>{career.originalPrice}</s><small
+            >{career.priceLabel} · {career.offerLabel}</small
+          >
+        </p><a class="text-link" href="/career-prep/"
+          >See Career Prep details <Arrow diagonal /></a
+        >
+      </article>
+    </section>
+    <section class="wrap candidate-boundary">
+      <p>
+        Applying for recruitment opportunities and purchasing Career Prep are
+        separate choices. Career Prep does not guarantee an interview, shortlist
+        or job offer. Buying preparation is not a condition for submitting your
+        CV.
+      </p><a href="/knowledge/">Read the career guides <Arrow diagonal /></a>
+    </section>
+  </main>
+</SiteLayout>
+<style>
+  .candidate-start {
+    border-top: 3px solid var(--blue);
+    padding: 22px 24px;
+    background: var(--blue-light);
+  }
+  .candidate-start .eyebrow {
+    margin-bottom: 18px;
+  }
+  .candidate-start .button {
+    width: 100%;
+    gap: 18px;
+    font-size: 13px;
+  }
+  .candidate-cv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 44px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--blue);
+  }
+  .candidate-start p:last-child {
+    color: #475569;
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 12px;
+  }
+  .candidate-prep {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 44px;
+    color: var(--blue);
+    font-size: 12px;
+  }
+  .candidate-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    padding-bottom: 48px;
+  }
+  article {
+    padding: 28px 0;
+    border-top: 2px solid #cbd5e1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  article:first-child {
+    border-color: var(--blue);
+  }
+  .option-number,
+  .eyebrow {
+    color: var(--blue);
+    font-size: 11px;
+  }
+  h2 {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 24px 0 18px;
+  }
+  article > p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  article > a {
+    margin-top: 28px;
+  }
+  .candidate-price strong {
+    color: var(--ink);
+    font-size: 30px;
+  }
+  .candidate-price {
+    margin-top: 20px;
+  }
+  .candidate-price s {
+    font-size: 14px;
+  }
+  .candidate-price small {
+    display: block;
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .candidate-boundary {
+    padding: 28px;
+    border: 1px solid #bfdbfe;
+    background: #eff6ff;
+    margin-bottom: 64px;
+    display: flex;
+    gap: 36px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .candidate-boundary p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #475569;
+    max-width: 80ch;
+  }
+  .candidate-boundary a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--blue);
+    flex: none;
+    min-height: 44px;
+  }
+  @media (max-width: 860px) {
+    .candidate-options {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .candidate-boundary {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+</style>

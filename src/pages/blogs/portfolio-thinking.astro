@@ -1,0 +1,49 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import legacyPages from '../../data/legacy-pages.json';
+const page = legacyPages['blogs-portfolio-thinking'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={false}>
+  <main id="main" class="article-content">
+    <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blogs/"
+        >Hiring &amp; career guides</a
+      >
+    </nav><p class="overline">Quantum Leaps · Practical guidance</p><h1>
+      Show How You Think: A Better Portfolio Conversation
+    </h1><p class="article-meta">
+      By Quantum Leaps · Published and reviewed 25 October 2026 · 2 min read
+    </p><p class="article-note">
+      Make your contribution, constraints and decisions easy for a hiring team
+      to understand.
+    </p><h2>Start with relevant work</h2><p>
+      Choose a small number of projects that relate to the role. Explain the
+      audience, problem and constraints before showing the finished work. A
+      clear account of a modest project can be more useful than a beautiful
+      result with no explanation.
+    </p><h2>Make your contribution explicit</h2><p>
+      Describe what you owned, what others contributed and who made key
+      decisions. Hiring teams should not have to guess whether you led the
+      project, produced one part or supported delivery.
+    </p><h2>Show a decision and its tradeoff</h2><p>
+      Explain an alternative you considered and why you chose a different
+      direction. Share what you learned from feedback or testing. Only use
+      outcomes you can substantiate; if a result was not measured, say so.
+    </p><h2>Respect confidentiality</h2><p>
+      Use public work or material you have permission to share. Redact
+      confidential business details and explain the limitation. Never upload
+      client secrets simply to make a portfolio appear more impressive.
+    </p><ul>
+      <li>What was the problem?</li><li>
+        What did you personally contribute?
+      </li><li>Which constraint shaped the work?</li><li>
+        What evidence supports the result?
+      </li><li>What would you change next time?</li>
+    </ul><p>
+      <a href="/contact/">Discuss a hiring brief →</a> · <a href="/submit-cv/"
+        >Share your CV →</a
+      >
+    </p>
+  </main>
+</SiteLayout>

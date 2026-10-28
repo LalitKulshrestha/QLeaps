@@ -1,0 +1,71 @@
+---
+import Arrow from './Arrow.astro';
+const path = Astro.url.pathname;
+const links = [
+  {
+    href: '/services/',
+    label: 'Services',
+    active: [
+      '/services/',
+      '/people-setup/',
+      '/hiring-support/',
+      '/founder-voice/',
+    ].includes(path),
+  },
+  {
+    href: '/recruitment/',
+    label: 'Recruitment',
+    active: [
+      '/recruitment/',
+      '/roles/',
+      '/submit-cv/',
+      '/specialisms/',
+      '/how-we-work/',
+    ].includes(path),
+  },
+  {
+    href: '/knowledge/',
+    label: 'Knowledge',
+    active:
+      path.startsWith('/blogs/') ||
+      path === '/knowledge/' ||
+      path.startsWith('/working-examples/'),
+  },
+  {
+    href: '/for-candidates/',
+    label: 'For candidates',
+    active: ['/for-candidates/', '/career-prep/'].includes(path),
+  },
+];
+---
+
+<header class="site-header">
+  <a class="brand-logo" href="/" aria-label="Quantum Leaps home"
+    ><img
+      src="/assets/logo/ql-logo-horizontal.svg"
+      alt="Quantum Leaps"
+      width="701"
+      height="206"
+      class="site-logo"
+    /></a
+  >
+  <a class="mobile-hiring-cta" href="/contact/">Let’s talk <Arrow diagonal /></a
+  >
+  <button
+    class="nav-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mainNavigation">Menu</button
+  >
+  <nav id="mainNavigation" aria-label="Main navigation">
+    {
+      links.map((link) => (
+        <a href={link.href} aria-current={link.active ? 'page' : undefined}>
+          {link.label}
+        </a>
+      ))
+    }
+    <a class="header-cta-secondary" href="/roles/">Open roles</a>
+    <a class="header-cta" href="/contact/">Let’s talk <Arrow diagonal /></a>
+  </nav>
+</header>

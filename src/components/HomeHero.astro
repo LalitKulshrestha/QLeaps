@@ -1,0 +1,225 @@
+---
+import Arrow from './Arrow.astro';
+---
+
+<section class="home-hero" aria-labelledby="homeHeading">
+  <div class="hero-film" aria-hidden="true">
+    <video
+      data-background-video
+      loop
+      muted
+      playsinline
+      preload="none"
+      poster="/assets/photos/handshake-poster.jpg"
+    >
+      <source
+        src="/assets/video/handshake-offer-20261025.mp4"
+        type="video/mp4"
+      />
+    </video>
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-content">
+    <div class="hero-message">
+      <p class="hero-opening">For founders, teams & the next stage</p>
+      <h1 id="homeHeading">
+        Build the business.<br />Back it with the right people.
+      </h1>
+      <p class="hero-description">
+        Recruitment, HR foundations and founder communications.<br
+          class="desktop-break"
+        /> For growing companies, brands and agencies across India.
+      </p>
+      <div class="hero-actions">
+        <a class="hero-primary" href="/services/">For your company <Arrow /></a>
+        <a class="hero-contact" href="/services/#diagnostic"
+          >HR maturity diagnostic <Arrow diagonal /></a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="wrap hero-route">
+    <span>Specialist support. Agreed scope. Your systems.</span><a
+      href="/for-candidates/"
+      >Here for your next career move? <Arrow diagonal /></a
+    >
+  </div>
+</section>
+<style>
+  .home-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+    min-height: calc(100svh - var(--header-height, 80px));
+    background: #0f172a;
+    color: #fff;
+    overflow: hidden;
+  }
+  .hero-film,
+  .hero-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .hero-film video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 48%;
+    filter: saturate(0.6);
+  }
+  .hero-shade {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(15, 23, 42, 0.84),
+        rgba(15, 23, 42, 0.5) 48%,
+        rgba(15, 23, 42, 0.34)
+      ),
+      linear-gradient(90deg, #0f172a25, #0f172a40 50%, #0f172a25);
+  }
+  .hero-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 80px;
+  }
+  .hero-message {
+    text-align: center;
+    max-width: 1080px;
+    width: 100%;
+    text-shadow: 0 2px 24px #0f172a65;
+  }
+  .hero-opening {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+    margin: 0 0 26px;
+  }
+  .hero-opening::before,
+  .hero-opening::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: #cbd5e180;
+  }
+  .hero-message h1 {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(44px, 5.2vw, 76px);
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    margin: 0 0 24px;
+  }
+  .hero-description {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.7;
+    color: #e2e8f0;
+    margin: 0;
+  }
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 30px;
+    margin-top: 34px;
+    text-shadow: none;
+  }
+  .hero-primary,
+  .hero-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 48px;
+    font-size: 13px;
+  }
+  .hero-primary {
+    background: #ffffff;
+    color: #2563eb;
+    padding: 13px 22px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .hero-primary:hover {
+    background: #dbeafe;
+  }
+  .hero-contact {
+    border-bottom: 1px solid #cbd5e180;
+    gap: 16px;
+  }
+  .hero-contact:hover {
+    border-color: #fff;
+  }
+  .hero-route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-block: 20px 64px;
+    border-top: 1px solid #ffffff40;
+    color: #e2e8f0;
+    font-size: 11px;
+  }
+  .hero-route > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 44px;
+  }
+  @media (max-width: 700px) {
+    .hero-route {
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+      padding-bottom: 64px;
+    }
+
+    .hero-content {
+      padding-block: 72px 60px;
+    }
+    .hero-opening {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .hero-opening::before,
+    .hero-opening::after {
+      width: 22px;
+    }
+    .hero-message h1 {
+      font-size: 32px;
+      margin-bottom: 22px;
+    }
+    .hero-description {
+      font-size: 14px;
+      max-width: 36ch;
+      margin-inline: auto;
+    }
+    .desktop-break {
+      display: none;
+    }
+    .hero-actions {
+      gap: 16px;
+      flex-direction: column;
+      margin-top: 28px;
+    }
+  }
+  @media (max-height: 600px) and (min-width: 701px) {
+    .home-hero {
+      min-height: 510px;
+    }
+    .hero-content {
+      padding-block: 48px;
+    }
+  }
+</style>

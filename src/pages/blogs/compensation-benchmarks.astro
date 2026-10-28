@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import legacyPages from '../../data/legacy-pages.json';
+const page = legacyPages['blogs-compensation-benchmarks'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={false}>
+  <main id="main" class="article-content">
+    <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blogs/"
+        >Hiring &amp; career guides</a
+      >
+    </nav><p class="overline">Quantum Leaps · Practical guidance</p><h1>
+      Compensation Conversations: Look Beyond Headline CTC
+    </h1><p class="article-meta">
+      By Quantum Leaps · Published and reviewed 25 October 2026 · 2 min read
+    </p><p class="article-note">
+      A practical checklist for comparing fixed pay, variable pay and equity.
+      This is guidance, not a salary survey or market benchmark.
+    </p><h2>Separate the components</h2><p>
+      A headline CTC can combine fixed salary, variable pay, employer
+      contributions, benefits and equity. Ask for the structure, not just the
+      total. Compare recurring cash with recurring cash, and keep uncertain or
+      one-off components visible.
+    </p><h2>Understand variable pay</h2><p>
+      Ask what determines payment, whether targets are individual or
+      company-wide, when payment is made and whether joining mid-year affects
+      eligibility. Distinguish a target amount from a guaranteed amount.
+    </p><h2>Treat equity as a separate discussion</h2><p>
+      Ask about the instrument, vesting schedule, exercise price, expiry and
+      what happens when employment ends. Do not treat a private-company
+      valuation as cash available today. Candidates should seek appropriate
+      professional advice for tax or legal questions.
+    </p><h2>Align the role and the budget</h2><ul>
+      <li>Agree a hiring range before starting interviews.</li><li>
+        Identify which parts of the package can change.
+      </li><li>Discuss expectations early without promising an offer.</li><li>
+        Record joining bonuses, repayment terms and review dates clearly.
+      </li><li>
+        Compare responsibilities, learning and working arrangements alongside
+        pay.
+      </li>
+    </ul><p>
+      Compensation varies with role scope, location, company stage and
+      individual experience. Quantum Leaps is not presenting independently
+      measured salary bands in this guide.
+    </p><p>
+      <a href="/contact/">Discuss a hiring brief →</a> · <a href="/submit-cv/"
+        >Share your CV →</a
+      >
+    </p>
+  </main>
+</SiteLayout>

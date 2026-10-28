@@ -1,0 +1,52 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import legacyPages from '../../data/legacy-pages.json';
+const page = legacyPages['blogs-serving-notice'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={false}>
+  <main id="main" class="article-content">
+    <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blogs/"
+        >Hiring &amp; career guides</a
+      >
+    </nav><p class="overline">Quantum Leaps · Practical guidance</p><h1>
+      Serving Notice: Finish Well and Prepare for What’s Next
+    </h1><p class="article-meta">
+      By Quantum Leaps · Published and reviewed 25 October 2026 · 2 min read
+    </p><p class="article-note">
+      A practical handover and joining checklist that respects both your current
+      and future teams.
+    </p><h2>Confirm the dates</h2><p>
+      Discuss your contractual notice, leave balance, handover responsibilities
+      and proposed last working day with the appropriate person at your
+      employer. Keep your future employer informed of confirmed dates, and
+      distinguish requests from approvals.
+    </p><h2>Make the handover usable</h2><p>
+      Document current work, owners, deadlines and known risks in the systems
+      your team uses. Share access through approved company processes. Do not
+      forward private client files or internal credentials to a personal
+      account.
+    </p><h2>Prepare without working two jobs</h2><p>
+      Ask your future manager about onboarding, equipment and introductory
+      reading. Any pre-joining contact should respect your current obligations.
+      Do not perform confidential work for a future employer while creating a
+      conflict with your current role.
+    </p><h2>Keep communication clear</h2><ul>
+      <li>Confirm your last working day and joining date in writing.</li><li>
+        Keep the recruiter informed about material changes.
+      </li><li>
+        Discuss references and permission before sharing contact details.
+      </li><li>Retain your own permitted employment documents.</li><li>
+        Check where and when to arrive, or how remote onboarding works.
+      </li>
+    </ul><p>
+      A considered transition protects professional relationships and helps the
+      next team prepare.
+    </p><p>
+      <a href="/contact/">Discuss a hiring brief →</a> · <a href="/submit-cv/"
+        >Share your CV →</a
+      >
+    </p>
+  </main>
+</SiteLayout>

@@ -1,0 +1,201 @@
+---
+import HubOpening from '../components/HubOpening.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Arrow from '../components/Arrow.astro';
+import { articles } from '../data/site.js';
+---
+
+<SiteLayout
+  title="Knowledge Hub: Hiring & Career Guides | Quantum Leaps"
+  description="Practical hiring and career guides for companies and candidates. Explore clearer briefs, compensation conversations, portfolios and career decisions."
+  path="/knowledge/"
+>
+  <main id="main">
+    <HubOpening
+      label="Knowledge"
+      title={'Better questions.\nMore useful decisions.'}
+      description="Practical guides and starter templates for building teams, running people processes and making your next career move."
+    >
+      <article class="featured-guide">
+        <p class="eyebrow">Featured reading · For companies</p><h2>
+          Why a focused shortlist beats a pile of CVs
+        </h2><p>
+          What to look for beyond profile volume—and what makes an introduction
+          useful.
+        </p><a href="/blogs/search-economics/"
+          >Read the guide <Arrow diagonal /></a
+        >
+      </article>
+      <nav slot="actions" class="reading-paths" aria-label="Browse knowledge">
+        <a href="#company-guides">For companies</a><a href="#candidate-guides"
+          >For candidates</a
+        ><a href="/working-examples/">Working examples <Arrow diagonal /></a>
+      </nav>
+    </HubOpening>
+    {
+      ['For companies', 'For candidates'].map((category) => (
+        <section
+          class="wrap knowledge-category"
+          id={
+            category === 'For companies' ? 'company-guides' : 'candidate-guides'
+          }
+          aria-label={category}
+        >
+          <>
+            <p class="eyebrow">{category}</p>
+            <div class="knowledge-grid">
+              {articles
+                .filter((article) => article.category === category)
+                .map((article) => (
+                  <article>
+                    <h2>{article.title}</h2>
+                    <p>{article.description}</p>
+                    <a class="text-link" href={`/blogs/${article.slug}/`}>
+                      Read the guide
+                      <Arrow diagonal />
+                    </a>
+                  </article>
+                ))}
+            </div>
+          </>
+        </section>
+      ))
+    }
+    <section class="wrap sample-invitation">
+      <div>
+        <p class="eyebrow">Tools for the conversation</p><h2>
+          See how the work takes shape.
+        </h2><p>
+          Interview scorecards, onboarding checklists, people health check
+          briefs and founder voice prompts. Practical starter samples you can
+          review and download.
+        </p>
+      </div><a class="text-link" href="/working-examples/"
+        >Explore working examples <Arrow diagonal /></a
+      >
+    </section>
+  </main>
+</SiteLayout>
+<style>
+  .featured-guide {
+    background: #0f172a;
+    color: #fff;
+    padding: 26px;
+    border-top: 3px solid var(--blue);
+  }
+  .featured-guide .eyebrow {
+    color: #93c5fd;
+    font-size: 9px;
+  }
+  .featured-guide h2 {
+    font-size: 25px;
+    line-height: 1.2;
+    margin: 16px 0;
+  }
+  .featured-guide p:not(.eyebrow) {
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.7;
+  }
+  .featured-guide a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid #334155;
+    padding-top: 12px;
+    margin-top: 20px;
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .reading-paths {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+  .reading-paths a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--blue);
+    font-size: 12px;
+    border-bottom: 1px solid #cbd5e1;
+  }
+  .page-intro > .text-link {
+    margin-top: 28px;
+  }
+  .sample-invitation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    padding: 32px;
+    background: var(--blue-light);
+    border: 1px solid #bfdbfe;
+    margin-bottom: 48px;
+  }
+  .sample-invitation h2 {
+    font-size: 30px;
+    margin: 14px 0;
+  }
+  .sample-invitation p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 65ch;
+  }
+  .sample-invitation a {
+    flex-shrink: 0;
+    color: var(--blue);
+  }
+  @media (max-width: 860px) {
+    .sample-invitation {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px;
+    }
+  }
+  .knowledge-category {
+    padding-bottom: 64px;
+  }
+  .knowledge-category > .eyebrow {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    color: #1d4ed8;
+  }
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .knowledge-grid article {
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .knowledge-grid h2 {
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .knowledge-grid p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .knowledge-grid a {
+    align-self: flex-start;
+    margin-top: auto;
+    font-size: 13px;
+  }
+  @media (max-width: 700px) {
+    .knowledge-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .knowledge-grid article + article {
+      border-top: 1px solid var(--line);
+    }
+  }
+</style>

@@ -1,0 +1,487 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import legacyPages from '../data/legacy-pages.json';
+import pageStyle from '../styles/pages/contact.css?url';
+import { serviceBySlug } from '../data/services.js';
+const careerPrep = serviceBySlug('career-prep');
+const page = legacyPages['contact'];
+---
+
+<SiteLayout {...page} pageStyle={pageStyle} legacy={true} noindex={false}>
+  <main id="main">
+    <noscript
+      ><style is:global>
+        #msgForm,
+        #jobForm,
+        #cvForm,
+        #feedbackForm {
+          display: none !important;
+        }
+      </style><p class="no-script-note">
+        To send a brief or CV, enable JavaScript or email <a
+          href="mailto:contact@qleaps.in">contact@qleaps.in</a
+        >.
+      </p></noscript
+    >
+    <!-- Contact Hero Header -->
+    <section class="contact-hero">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:800px">
+        <span
+          style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+          >Let’s find your starting point</span
+        >
+        <h1
+          style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.5vw,54px);line-height:1.02;letter-spacing:-.035em;color:#0f172a"
+        >
+          Your next chapter starts here.
+        </h1>
+        <p style="margin:0;font-size:17px;line-height:1.6;color:#475569">
+          Tell us what you need help with. We’ll discuss the priority, agree the
+          scope and find a practical next step. Please keep your initial brief
+          non-confidential.
+        </p>
+      </div>
+    </section>
+
+    <!-- Direct Consultation Grid -->
+    <section id="service-enquiry" class="page-section" style="padding-top:0">
+      <div
+        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:48px;align-items:start"
+      >
+        <!-- Left: Partner Contact Info & Locations -->
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <div
+            style="display:flex;flex-direction:column;border-top:1px solid #E2E8F0"
+          >
+            <a
+              href="mailto:contact@qleaps.in"
+              style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #E2E8F0;color:#0F172A;text-decoration:none"
+              class="hv0"
+            >
+              <span
+                style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748B"
+                >Email</span
+              >
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em;color:#2563eb"
+                >contact@qleaps.in</span
+              >
+            </a>
+            <a
+              href="tel:+919930822894"
+              style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #E2E8F0;color:#0F172A;text-decoration:none"
+              class="hv0"
+            >
+              <span
+                style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748B"
+                >Phone</span
+              >
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em"
+                >+91 99308 22894</span
+              >
+            </a>
+            <div
+              style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #E2E8F0;color:#0F172A"
+            >
+              <span
+                style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748B"
+                >Locations served</span
+              >
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;text-align:right"
+                >Serving India · Mumbai · Bengaluru · NCR · Hyderabad · Pune</span
+              >
+            </div>
+          </div>
+
+          <!-- Search Leadership Cards (Commented out: Silent Partners - will be activated for high-touch escalations)
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#0f172a">Lalit Kulshrestha</span>
+            <span style="font-size:13px;color:#64748B">Managing Partner</span>
+            <a href="mailto:lalit@qleaps.in" style="font-size:13px;color:#2563eb;margin-top:4px">lalit@qleaps.in →</a>
+          </div>
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#0f172a">Meeta Sabnis</span>
+            <span style="font-size:13px;color:#64748B">Partner — Brand &amp; Creative</span>
+            <a href="mailto:meeta@qleaps.in" style="font-size:13px;color:#2563eb;margin-top:4px">meeta@qleaps.in →</a>
+          </div>
+        </div>
+        -->
+          <div
+            style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px"
+          >
+            <span
+              style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2563eb"
+              >What happens next</span
+            >
+            <p style="margin:0;font-size:14.5px;line-height:1.55;color:#475569">
+              Your enquiry comes directly to our team. We discuss your
+              priorities, agree a scope and explain the next steps. HR service
+              work happens within your infrastructure; recruitment has its own
+              clearly labelled submission process below.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Direct Consultation Form -->
+        <div
+          style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:24px;padding:clamp(24px,4vw,36px);box-shadow:0 10px 30px -10px rgba(15,23,42,.06)"
+        >
+          <p id="contact" class="confidential-note">
+            Please don’t send employee records, payroll files, appraisals or
+            confidential company documents here. HR service work is delivered
+            within your infrastructure and agreed access. This enquiry has no
+            file upload.
+          </p>
+          <form
+            id="msgForm"
+            name="contact"
+            method="POST"
+            action="#contact"
+            style="display:flex;flex-direction:column;gap:14px"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p hidden><label>Leave empty <input name="bot-field" /></label></p>
+            <div
+              style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.03em;color:#0F172A"
+            >
+              Tell us what you have in mind
+            </div>
+            <label class="field-label"
+              ><span>Service *</span><select name="service" required
+                ><option value="">Choose a service</option><option
+                  value="recruitment">Recruitment</option
+                ><option value="people-setup">People Setup</option><option
+                  value="hiring-support">Hiring Support</option
+                ><option value="founder-voice">Founder Voice</option><option
+                  value="career-prep"
+                  >Career Prep · {careerPrep.price}
+                  {careerPrep.priceLabel} · Was {careerPrep.originalPrice} · {
+                    careerPrep.offerLabel
+                  }</option
+                ></select
+              ></label
+            >
+            <label class="field-label"
+              ><span>Your name *</span><input
+                required
+                name="name"
+                aria-label="Your name"
+                autocomplete="name"
+                maxlength="100"
+                placeholder="Your name"
+                style="font-size:15.5px;padding:12px 14px;border-radius:12px;border:1px solid #CBD5E1;background:#F8FAFC;color:#0F172A"
+              /></label
+            >
+            <label class="field-label"
+              ><span>Email *</span><input
+                required
+                type="email"
+                autocapitalize="none"
+                spellcheck="false"
+                name="email"
+                aria-label="Email"
+                autocomplete="email"
+                maxlength="200"
+                placeholder="Work email"
+                style="font-size:15.5px;padding:12px 14px;border-radius:12px;border:1px solid #CBD5E1;background:#F8FAFC;color:#0F172A"
+              /></label
+            >
+            <label class="field-label"
+              ><span>What would you like support with? *</span><textarea
+                required
+                name="text"
+                aria-label="Your hiring brief"
+                maxlength="3000"
+                placeholder="Your priorities, the service you need and a broad timeline. Please leave out employee names, payroll figures and confidential details."
+                rows="4"
+                style="font-size:15.5px;padding:12px 14px;border-radius:12px;border:1px solid #CBD5E1;background:#F8FAFC;color:#0F172A;resize:vertical"
+              ></textarea></label
+            >
+            <label class="consent">
+              <input name="consent" type="checkbox" value="yes" required />
+              <span
+                >I agree to be contacted regarding this enquiry. <a
+                  href="/privacy.html"
+                  style="color:#2563eb;text-decoration:underline"
+                  >Privacy policy</a
+                ></span
+              >
+            </label>
+            <p
+              id="msgStatus"
+              class="submission-status"
+              role="status"
+              style="margin:0"
+            >
+            </p>
+            <button
+              type="submit"
+              style="align-self:flex-start;background:#2563eb;color:#FFFFFF;border:0;border-radius:999px;padding:12px 26px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,0.25);transition:all .2s ease"
+              >Start a conversation →</button
+            >
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Mandate Intake Option -->
+    <section
+      class="page-section section-page-defined"
+      id="post-job"
+      style="margin-top:20px;border-top:1px solid #E2E8F0;padding-top:60px"
+    >
+      <div class="post-job-header">
+        <div class="post-job-header-row">
+          <div>
+            <h2 class="post-job-title">Recruitment: share a role or JD.</h2>
+            <p class="post-job-subtitle">
+              For recruitment enquiries only. Share the role requirements or an
+              optional JD. Do not upload employee records, payroll data or other
+              confidential HR files.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <form
+        id="jobForm"
+        name="job"
+        method="POST"
+        action="#post-job"
+        class="website-form-split"
+        enctype="multipart/form-data"
+      >
+        <p hidden>
+          <label
+            >Leave empty <input
+              name="bot-field"
+              tabindex="-1"
+              autocomplete="off"
+            /></label
+          >
+        </p>
+        <div class="form-row-2">
+          <label
+            >Your name *<input
+              name="name"
+              required
+              maxlength="100"
+              autocomplete="name"
+            /></label
+          >
+          <label
+            >Business email *<input
+              name="email"
+              type="email"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+              maxlength="200"
+              autocomplete="email"
+            /></label
+          >
+        </div>
+        <div class="form-split-grid">
+          <div class="form-split-col">
+            <div class="form-col-kicker">01 / Mandate Particulars</div>
+            <div class="form-row-2">
+              <label
+                >Target Role Title *
+                <input
+                  name="role"
+                  required
+                  maxlength="120"
+                  placeholder="e.g. Head of Engineering"
+                />
+              </label>
+              <label
+                >Organisation / Brand *
+                <input
+                  name="company"
+                  autocomplete="organization"
+                  required
+                  maxlength="120"
+                  placeholder="Your company name"
+                />
+              </label>
+            </div>
+            <div class="form-row-2">
+              <label
+                >Primary Location *
+                <input
+                  name="city"
+                  autocomplete="address-level2"
+                  required
+                  maxlength="120"
+                  placeholder="Mumbai, Bengaluru, NCR, Remote, etc."
+                />
+              </label>
+              <label
+                >Practice Domain *
+                <select name="area" required>
+                  <option value="">Choose a specialism</option>
+                  <option value="Marketing and digital"
+                    >Marketing &amp; Digital</option
+                  >
+                  <option value="Creative">Creative &amp; Copywriting</option>
+                  <option value="Design and product">Design &amp; UX</option>
+                  <option value="Technology">Technology &amp; Data</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-row-2">
+              <label
+                >Work Arrangement
+                <select name="work_mode">
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="Remote">100% Remote</option>
+                  <option value="On-site">On-site</option>
+                </select>
+              </label>
+              <label
+                >Budget / CTC Range (₹)
+                <input
+                  name="salary"
+                  placeholder="Optional — annual budget or range"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div class="form-split-col">
+            <div class="form-col-kicker">
+              02 / Scope &amp; Job Description File
+            </div>
+            <div class="form-row-2">
+              <label
+                >Experience required *<input
+                  name="experience"
+                  required
+                  maxlength="100"
+                  placeholder="e.g. 5–8 years"
+                /></label
+              >
+              <label
+                >Applications close (optional)<input
+                  name="closes"
+                  type="date"
+                /></label
+              >
+            </div>
+            <label
+              >Mandate Description &amp; Deliverables *
+              <textarea
+                name="description"
+                required
+                minlength="30"
+                maxlength="6000"
+                rows="4"
+                placeholder="Core deliverables in first 90 days, required pedigree, or specific technologies..."
+              ></textarea>
+            </label>
+            <div class="cv-dropzone-wrapper">
+              <label for="jdFile" class="cv-dropzone">
+                <input
+                  type="file"
+                  id="jdFile"
+                  name="jd_file"
+                  aria-describedby="jdAvailability"
+                  accept=".pdf,.doc,.docx"
+                  class="file-input-accessible"
+                />
+                <div style="display:flex;align-items:center;gap:14px">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#2563eb"
+                    stroke-width="2"
+                    ><path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    ></path><polyline points="14 2 14 8 20 8"></polyline></svg
+                  >
+                  <div style="display:flex;flex-direction:column">
+                    <span style="font-weight:700;font-size:14px;color:#0F172A"
+                      >Upload JD Document (Optional)</span
+                    >
+                    <span
+                      id="jdAvailability"
+                      role="status"
+                      style="font-size:12.5px;color:#64748B"
+                      >PDF or Word JD, up to 5 MB.</span
+                    >
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <label class="consent">
+              <input name="consent" type="checkbox" value="yes" required />
+              <span
+                >I agree to be contacted regarding this mandate brief. <a
+                  href="/privacy.html"
+                  style="color:#2563eb;text-decoration:underline"
+                  >Privacy policy</a
+                ></span
+              >
+            </label>
+            <p
+              id="jobStatus"
+              class="submission-status"
+              role="status"
+              style="margin:0"
+            >
+            </p>
+            <button
+              type="submit"
+              id="postJobButton"
+              style="align-self:flex-start;background:#0F172A;color:#FFFFFF;border:0;border-radius:999px;padding:12px 26px;font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;margin-top:6px"
+              >Submit brief for review →</button
+            >
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="contact-faq page-section" aria-labelledby="faqHeading">
+      <p class="overline">Before we talk</p><h2 id="faqHeading">
+        A few useful answers.
+      </h2>
+      <details>
+        <summary
+          >Can you help with specialist roles as well as leadership?</summary
+        ><p>
+          Yes. We support marketing, creative, design and technology hiring,
+          from specialist contributors to team and functional leaders. Tell us
+          the responsibilities, location and budget so we can discuss the scope.
+        </p>
+      </details>
+      <details>
+        <summary>Can I send a job description?</summary><p>
+          Use the detailed brief above to attach a PDF or Word file up to 5 MB.
+          Include a short role summary so we understand what matters before
+          opening the attachment.
+        </p>
+      </details>
+      <details>
+        <summary>Will my contact details or attached JD be public?</summary><p>
+          Employer contact details and JD files stay private to our recruitment
+          team. Only approved job summaries appear in the public roles list. We
+          review briefs before publication.
+        </p>
+      </details>
+      <details>
+        <summary>I’m looking for a job. Where should I start?</summary><p>
+          <a href="/roles/">Explore approved roles</a>, or <a href="/submit-cv/"
+            >share your CV</a
+          > for future opportunities. Applying to a specific opening preserves its
+          reference with your application.
+        </p>
+      </details>
+    </section>
+  </main>
+</SiteLayout>

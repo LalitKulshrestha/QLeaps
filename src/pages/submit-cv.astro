@@ -1,0 +1,316 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import legacyPages from '../data/legacy-pages.json';
+import pageStyle from '../styles/pages/submit-cv.css?url';
+const page = legacyPages['submit-cv'];
+---
+
+<SiteLayout {...page} pageStyle={pageStyle} legacy={true} noindex={false}>
+  <main id="main">
+    <noscript
+      ><style is:global>
+        #msgForm,
+        #jobForm,
+        #cvForm,
+        #feedbackForm {
+          display: none !important;
+        }
+      </style><p class="no-script-note">
+        To send a brief or CV, enable JavaScript or email <a
+          href="mailto:contact@qleaps.in">contact@qleaps.in</a
+        >.
+      </p></noscript
+    >
+    <!-- CV Hero Header -->
+    <section class="cv-hero">
+      <div
+        style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px"
+      >
+        <div
+          style="display:flex;flex-direction:column;gap:12px;max-width:760px"
+        >
+          <span
+            style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+            >Your next opportunity</span
+          >
+          <h1
+            style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.5vw,54px);line-height:1.02;letter-spacing:-.035em;color:#0f172a"
+          >
+            Good work deserves to be seen.
+          </h1>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:#475569">
+            Tell us what you do well and what you want next. Share your CV for
+            specialist and leadership opportunities. If there is a relevant
+            opening, we will contact you before introducing your profile to an
+            employer.
+          </p>
+        </div>
+        <div
+          style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#047857;background:#ECFDF5;border:1px solid #A7F3D0;padding:8px 16px;border-radius:999px"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#059669"
+            stroke-width="2.5"
+            ><polyline points="20 6 9 17 4 12"></polyline></svg
+          >
+          Confidential applications · Personal review
+        </div>
+      </div>
+    </section>
+
+    <!-- Split Application Form -->
+    <section id="cv" class="page-section" style="padding-top:0">
+      <form
+        id="cvForm"
+        name="cv"
+        method="POST"
+        action="#cv"
+        enctype="multipart/form-data"
+        class="website-form-split"
+      >
+        <p id="applicationServiceStatus" class="availability" role="status">
+          Checking the private submission service…
+        </p>
+        <input type="hidden" name="job_id" id="applicationJobId" value="" />
+        <div id="applicationTarget" class="application-target" hidden></div>
+        <p hidden><label>Leave empty <input name="bot-field" /></label></p>
+
+        <div class="form-split-grid">
+          <!-- Left Column: Identity & Domain -->
+          <div class="form-split-col">
+            <div class="form-col-kicker">01 / Your details</div><p
+              class="form-help"
+            >
+              Only fields marked * are required. Add a CV up to 5 MB; the
+              remaining details help us understand your preferences.
+            </p>
+
+            <div class="form-row-2">
+              <label
+                >Full name *
+                <input
+                  name="name"
+                  required
+                  maxlength="100"
+                  autocomplete="name"
+                  placeholder="Your full name"
+                />
+                <span
+                  data-err="name"
+                  style="font-size:12px;font-weight:500;color:#B42318"></span>
+              </label>
+              <label
+                >Email *
+                <input
+                  type="email"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  name="email"
+                  required
+                  maxlength="200"
+                  autocomplete="email"
+                  placeholder="you@email.com"
+                />
+                <span
+                  data-err="email"
+                  style="font-size:12px;font-weight:500;color:#B42318"></span>
+              </label>
+            </div>
+
+            <div class="form-row-2">
+              <label
+                >Phone *
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  maxlength="30"
+                  autocomplete="tel"
+                  placeholder="+91 99999 99999"
+                />
+                <span
+                  data-err="phone"
+                  style="font-size:12px;font-weight:500;color:#B42318"></span>
+              </label>
+              <label
+                >Current Location / City *
+                <input
+                  name="city"
+                  autocomplete="address-level2"
+                  required
+                  placeholder="Mumbai, Bengaluru, NCR, Hyderabad, Pune, etc."
+                />
+              </label>
+            </div>
+
+            <div class="form-row-2">
+              <label
+                >Current Title &amp; Organisation
+                <input
+                  name="current_title"
+                  placeholder="e.g. Director of Engineering, Acme Tech"
+                />
+              </label>
+              <label
+                >LinkedIn Profile URL
+                <input
+                  type="url"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  name="linkedin"
+                  placeholder="https://linkedin.com/in/yourprofile"
+                />
+              </label>
+            </div>
+
+            <label
+              >Years of experience<input
+                name="exp"
+                maxlength="100"
+                placeholder="e.g. 6 years"
+              /></label
+            >
+            <label
+              >Portfolio or work samples (optional)<input
+                name="link"
+                type="url"
+                autocapitalize="none"
+                spellcheck="false"
+                maxlength="500"
+                placeholder="https://your-portfolio.com"
+              /></label
+            >
+            <label
+              >Target Role or Domain
+              <input
+                name="role"
+                placeholder="e.g. VP Marketing, Head of Design, Tech Lead"
+              />
+            </label>
+          </div>
+
+          <!-- Right Column: Career Parameters & Document -->
+          <div class="form-split-col">
+            <div class="form-col-kicker">02 / Preferences &amp; CV</div>
+
+            <div class="form-row-2">
+              <label
+                >Notice Period *
+                <select name="notice" required>
+                  <option value="">Select notice duration</option>
+                  <option value="Immediate / Serving Notice"
+                    >Immediate / Currently serving</option
+                  >
+                  <option value="15 to 30 Days">15 to 30 Days</option>
+                  <option value="60 Days">60 Days</option>
+                  <option value="90 Days">90 Days</option>
+                  <option value="To confirm">To confirm / negotiable</option>
+                </select>
+              </label>
+              <label
+                >Relocation Willingness
+                <select name="relocation">
+                  <option value="">Select a preference (optional)</option>
+                  <option value="Open to relocate across Tier-1 India"
+                    >Open to relocate across Tier-1 India</option
+                  >
+                  <option value="Preferred location only"
+                    >Current city only</option
+                  >
+                  <option value="Remote only">100% Remote only</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form-row-2">
+              <label
+                >Target Base / Fixed CTC (₹)
+                <input
+                  name="salary"
+                  placeholder="Optional — annual fixed pay or range"
+                />
+              </label>
+              <label
+                >Specialism Category
+                <select name="area" required>
+                  <option value="">Choose a specialism</option>
+                  <option value="Marketing and digital"
+                    >Marketing &amp; Digital</option
+                  >
+                  <option value="Creative">Creative &amp; Copywriting</option>
+                  <option value="Design and product">Design &amp; UX</option>
+                  <option value="Technology">Technology &amp; Data</option>
+                </select>
+              </label>
+            </div>
+
+            <!-- CV upload -->
+            <div class="cv-dropzone-wrapper">
+              <label for="cvFile" class="cv-dropzone" id="cvDropzone">
+                <input
+                  type="file"
+                  id="cvFile"
+                  name="cv"
+                  accept=".pdf,.doc,.docx"
+                  aria-label="Choose or replace your CV"
+                  required
+                  class="file-input-accessible"
+                  aria-describedby="cvFileHelp cvFileError"
+                />
+                <div style="display:flex;align-items:center;gap:18px">
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <span
+                      style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#0F172A"
+                      id="cvDropText">Drop your CV here or click to browse</span
+                    >
+                    <span id="cvFileHelp" style="font-size:13px;color:#64748B"
+                      >PDF or Word, up to 5 MB. Stored privately for our
+                      recruitment team.</span
+                    >
+                  </div>
+                </div>
+              </label>
+              <span
+                id="cvFileError"
+                role="status"
+                data-err="cv"
+                style="font-size:12px;font-weight:500;color:#B42318;margin-top:4px;display:block"
+              ></span>
+            </div>
+
+            <label class="consent" style="margin-top:6px">
+              <input name="consent" type="checkbox" value="yes" required />
+              <span
+                >I consent to Quantum Leaps storing my CV confidentially for
+                specialist and leadership recruitment. We never share your
+                profile without prior discussion. <a
+                  href="/privacy.html"
+                  style="color:#2563eb;text-decoration:underline"
+                  >Privacy policy</a
+                ></span
+              >
+            </label>
+
+            <p
+              id="cvStatus"
+              class="submission-status"
+              role="status"
+              style="margin:0"
+            >
+            </p>
+
+            <button
+              type="submit"
+              style="align-self:flex-start;background:#2563eb;color:#FFFFFF;border:0;border-radius:999px;padding:14px 32px;font-family:'Space Grotesk',sans-serif;font-size:15.5px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,0.25);transition:all .2s ease;margin-top:8px"
+              >Submit your CV confidentially →</button
+            >
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+</SiteLayout>

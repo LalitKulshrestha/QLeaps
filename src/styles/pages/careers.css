@@ -1,0 +1,48 @@
+main .careers-hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 64px) clamp(20px, 4vw, 48px) 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+main .careers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  gap: 28px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px) 60px;
+}
+main .career-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+main .career-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+main .nav-active-pill {
+  color: #2563eb !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+main .nav-active-pill::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #2563eb;
+  border-radius: 999px;
+}

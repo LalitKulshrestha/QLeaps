@@ -1,0 +1,147 @@
+---
+import Arrow from './Arrow.astro';
+const examples = [
+  {
+    title: 'Building an engineering team',
+    service: 'hiring-support',
+    label: 'Hiring support + recruitment',
+    challenge:
+      'A growing team needs senior engineers, but interviewers disagree on what good looks like.',
+    approach:
+      'Map role outcomes, agree assessment criteria and interview stages, then align budget and availability before candidate introductions.',
+    deliverable: 'A hiring plan, shared scorecards and an agreed search brief.',
+  },
+  {
+    title: 'Finding a marketing leader',
+    service: 'recruitment',
+    label: 'Specialist + leadership search',
+    challenge:
+      'A business needs someone who can connect brand thinking with performance and growth.',
+    approach:
+      'Clarify the mandate, discuss relevant work and leadership expectations, and give the team context for each introduction.',
+    deliverable:
+      'A considered shortlist with experience, expectations and open questions.',
+  },
+  {
+    title: 'Putting people foundations in place',
+    service: 'people-setup',
+    label: 'People setup',
+    challenge:
+      'The team has grown faster than its handbook, onboarding and day-to-day HR processes.',
+    approach:
+      'Start with a people health check, prioritise practical process gaps and agree any specialist workplace-policy review needed.',
+    deliverable:
+      'An agreed action plan, practical templates and a handover for the people using them.',
+  },
+];
+---
+
+<section
+  id="case-deconstructions"
+  class="wrap section-space examples"
+  aria-labelledby="deconstructionHeading"
+  data-reveal
+>
+  <div class="examples-header">
+    <p class="eyebrow">What working together can look like</p><h2
+      id="deconstructionHeading"
+      class="section-heading"
+    >
+      From a people challenge<br />to a practical plan.
+    </h2><p class="section-description">
+      Illustrative scenarios across hiring and HR setup. These explain our
+      approach; they are not client case studies or promised results.
+    </p>
+  </div>
+  <div class="examples-grid">
+    {
+      examples.map((example) => (
+        <article>
+          <>
+            <p class="example-label">Illustrative scenario · {example.label}</p>
+            <h3>{example.title}</h3>
+            <h4>The challenge</h4>
+            <p>{example.challenge}</p>
+            <h4>Our approach</h4>
+            <p>{example.approach}</p>
+            <div class="example-deliverable">
+              <>
+                <h4>What you can review</h4>
+                <p>{example.deliverable}</p>
+              </>
+            </div>
+            <a
+              class="text-link"
+              href={`/contact/?service=${example.service}#service-enquiry`}
+            >
+              Discuss a similar brief <Arrow diagonal />
+            </a>
+          </>
+        </article>
+      ))
+    }
+  </div>
+</section>
+<style>
+  .examples-header {
+    margin-bottom: 40px;
+    max-width: 850px;
+  }
+  .eyebrow {
+    color: var(--blue);
+  }
+  h2 {
+    margin: 20px 0;
+  }
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  article {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    background: var(--paper);
+  }
+  .example-label {
+    color: var(--blue);
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  h3 {
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 20px 0 8px;
+  }
+  h4 {
+    font-size: 12px;
+    margin: 20px 0 8px;
+  }
+  article p:not(.example-label) {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .example-deliverable {
+    padding: 0 0 24px;
+  }
+  .text-link {
+    margin-top: auto;
+    font-size: 12px;
+    color: var(--blue);
+    gap: 12px;
+  }
+  @media (max-width: 1000px) {
+    .examples-grid {
+      grid-template-columns: 1fr;
+    }
+    article {
+      padding: 24px;
+    }
+  }
+</style>

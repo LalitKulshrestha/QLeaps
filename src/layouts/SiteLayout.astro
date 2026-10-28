@@ -1,0 +1,50 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import '../styles/base.css';
+import legacyStyles from '../styles/legacy-pages.css?url';
+const {
+  legacy = false,
+  noindex = false,
+  pageStyle = null,
+  ...page
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-IN">
+  <head
+    ><meta charset="utf-8" /><meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    /><SEO {...page} noindex={noindex} /><link
+      rel="icon"
+      href="/assets/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/SpaceGrotesk-Bold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/InstrumentSans-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    {legacy && <link rel="stylesheet" href={legacyStyles} />}
+    {pageStyle && <link rel="stylesheet" href={pageStyle} />}
+  </head>
+  <body class:list={[legacy ? 'legacy-page' : 'umbrella-page']}>
+    <a class="skip-link" href="#main">Skip to content</a><Header /><slot
+    /><Footer />
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>

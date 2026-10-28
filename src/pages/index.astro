@@ -1,0 +1,30 @@
+---
+import MandateDeconstructions from '../components/MandateDeconstructions.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import FounderBrief from '../components/FounderBrief.astro';
+import HomeHero from '../components/HomeHero.astro';
+import Confidentiality from '../components/Confidentiality.astro';
+import HomeStories from '../components/HomeStories.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
+import { services } from '../data/services.js';
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Quantum Leaps services',
+    itemListElement: services.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: service.name,
+      url: `https://qleaps.in/${service.slug}/`,
+    })),
+  },
+];
+---
+
+<SiteLayout schemas={schemas} path="/"
+  ><main id="main">
+    <HomeHero /><FounderBrief /><MandateDeconstructions /><Confidentiality
+    /><HomeStories /><ClosingCTA />
+  </main></SiteLayout
+>

@@ -1,0 +1,94 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import legacyPages from '../data/legacy-pages.json';
+import pageStyle from '../styles/pages/roles.css?url';
+const page = legacyPages['roles'];
+---
+
+<SiteLayout {...page} pageStyle={pageStyle} legacy={true} noindex={false}>
+  <main id="main">
+    <!-- Roles Hero -->
+    <section class="roles-hero">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:800px">
+        <span
+          style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+          >Active Search Mandates</span
+        >
+        <h1
+          style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.5vw,54px);line-height:1.02;letter-spacing:-.035em;color:#0f172a"
+        >
+          Find your next career leap.
+        </h1>
+        <p style="margin:0;font-size:17px;line-height:1.6;color:#475569">
+          Explore approved specialist and leadership opportunities across India.
+          Apply to a specific role or share your CV for future conversations.
+        </p>
+      </div>
+    </section>
+
+    <!-- Dynamic & Filterable Mandates -->
+    <section class="page-section" id="roles" style="padding-top:0">
+      <div class="job-filters">
+        <label
+          >Search roles
+          <input
+            id="jobSearch"
+            type="search"
+            placeholder="Job title, company or city (e.g. Bengaluru, Mumbai, Tech)"
+          />
+        </label>
+        <label
+          >Specialism
+          <select id="jobCategory">
+            <option value="">All specialisms</option>
+            <option>Marketing and digital</option>
+            <option>Creative</option>
+            <option>Design and product</option>
+            <option>Technology</option>
+          </select>
+        </label>
+      </div>
+
+      <p id="jobsStatus" role="status">Loading opportunities…</p><button
+        id="retryJobs"
+        type="button"
+        class="motion-toggle">Refresh roles</button
+      >
+      <div id="rolesList" aria-busy="true"></div>
+      <noscript
+        ><p>
+          Enable JavaScript to load approved roles, or <a href="/contact/"
+            >contact our team</a
+          > for current opportunities.
+        </p></noscript
+      >
+
+      <!-- Confidential Submission Banner -->
+      <div
+        style="margin-top:48px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:24px;padding:clamp(24px,3.5vw,36px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px"
+      >
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:680px">
+          <span
+            style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2563eb"
+            >Discreet Leadership Network</span
+          >
+          <h3
+            style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,28px);letter-spacing:-.03em;color:#0f172a"
+          >
+            Don’t see the exact mandate you’re looking for?
+          </h3>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#475569">
+            New opportunities may not be listed yet. Share your CV and tell us
+            what you are looking for; we will contact you if there is a relevant
+            role.
+          </p>
+        </div>
+        <a
+          href="/submit-cv/"
+          style="background:#2563eb;color:#FFFFFF;padding:14px 28px;border-radius:999px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;text-decoration:none;box-shadow:0 4px 14px rgba(37,99,235,0.25)"
+          class="hv1 ql-action">Submit your CV confidentially →</a
+        >
+      </div>
+    </section>
+  </main>
+</SiteLayout>

@@ -6,7 +6,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import urlsplit, parse_qs
 import json, re
-ROOT=Path(__file__).resolve().parent.parent
+ROOT=Path(__file__).resolve().parent.parent/'dist'
 STATE=Path('/tmp/qleaps-fixture-state')
 CAPTURE=Path('/tmp/qleaps-fixture-requests.json')
 requests=[];receipts={}
@@ -25,8 +25,11 @@ class Handler(SimpleHTTPRequestHandler):
             else:data=receipts.get(params.get('request_id'),{'status':'pending','version':2})
             if params.get('callback'):return self.output(params['callback']+'('+json.dumps(data)+');',mime='application/javascript')
             return self.output(data)
-        if url.path=='/script.js':
-            code=(ROOT/'script.js').read_text();code=re.sub(r"var GOOGLE_SCRIPT_WEBAPP_URL = '[^']+';","var GOOGLE_SCRIPT_WEBAPP_URL = 'http://127.0.0.1:8081/__test/google';",code)
+        if url.path.startswith('/_astro/') and url.path.endswith('.js'):
+            bundle=(ROOT/url.path.lstrip('/')).resolve()
+            if not bundle.is_relative_to(ROOT.resolve()) or not bundle.is_file():return self.output({'status':'error'},404)
+            code=bundle.read_text()
+            code=re.sub(r'https://script\.google\.com/macros/s/[^\"\'\s]+/exec','http://127.0.0.1:8081/__test/google',code)
             return self.output(code,mime='application/javascript')
         return super().do_GET()
     def do_POST(self):

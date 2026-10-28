@@ -1,0 +1,655 @@
+---
+import Arrow from './Arrow.astro';
+---
+
+<section
+  id="diagnostic"
+  class="wrap section-space diagnostic-section"
+  aria-labelledby="diagnosticHeading"
+  data-reveal
+>
+  <div class="diagnostic-container">
+    <!-- Header -->
+    <div class="diagnostic-header">
+      <div class="diagnostic-kicker">
+        <span>Institutional Self-Assessment</span>
+      </div>
+      <h2 id="diagnosticHeading" class="diagnostic-title">
+        The 2-Minute HR Maturity &amp; Compliance Diagnostic
+      </h2>
+      <p class="diagnostic-desc">
+        Evaluate your organization’s statutory readiness, people infrastructure,
+        and hiring vulnerability. Receive an instant institutional score and
+        tailored tactical recommendations.
+      </p>
+    </div>
+
+    <!-- Diagnostic Engine Grid -->
+    <div class="diagnostic-grid" id="diagnosticEngine">
+      <!-- Interactive Inputs -->
+      <div class="diagnostic-questions">
+        <!-- Question 1 -->
+        <fieldset class="diag-group">
+          <legend class="diag-legend">
+            <span class="diag-step">01</span>
+            <div>
+              <strong>Current Team Scale</strong>
+              <small>Total active headcount across all India entities</small>
+            </div>
+          </legend>
+          <div class="diag-options">
+            <label class="diag-option">
+              <input type="radio" name="diag-team" value="10" checked />
+              <span class="diag-pill">
+                <strong>Seed / Early</strong>
+                <span>1 – 15 team members</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-team" value="15" />
+              <span class="diag-pill">
+                <strong>Growth Stage</strong>
+                <span>15 – 50 team members</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-team" value="20" />
+              <span class="diag-pill">
+                <strong>Expansion</strong>
+                <span>50 – 150 team members</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-team" value="25" />
+              <span class="diag-pill">
+                <strong>Established</strong>
+                <span>150+ team members</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Question 2 -->
+        <fieldset class="diag-group">
+          <legend class="diag-legend">
+            <span class="diag-step">02</span>
+            <div>
+              <strong>People &amp; HR Leadership Setup</strong>
+              <small
+                >Who currently designs policies and manages employee processes?</small
+              >
+            </div>
+          </legend>
+          <div class="diag-options">
+            <label class="diag-option">
+              <input type="radio" name="diag-hr" value="5" checked />
+              <span class="diag-pill">
+                <strong>Founder / Informal</strong>
+                <span>Founders or EA handle ad-hoc issues</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-hr" value="12" />
+              <span class="diag-pill">
+                <strong>External Payroll / Admin</strong>
+                <span>Bookkeeper or agency handles payroll only</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-hr" value="20" />
+              <span class="diag-pill">
+                <strong>Single HR Generalist</strong>
+                <span>One coordinator managing all hiring &amp; operations</span
+                >
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-hr" value="25" />
+              <span class="diag-pill">
+                <strong>Dedicated People Ops</strong>
+                <span
+                  >Specialist leads for talent, operations &amp; culture</span
+                >
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Question 3 -->
+        <fieldset class="diag-group">
+          <legend class="diag-legend">
+            <span class="diag-step">03</span>
+            <div>
+              <strong>POSH &amp; Statutory Governance</strong>
+              <small
+                >Mandatory Internal Committee (IC) &amp; Indian Labour Code
+                status</small
+              >
+            </div>
+          </legend>
+          <div class="diag-options">
+            <label class="diag-option">
+              <input type="radio" name="diag-posh" value="0" checked />
+              <span class="diag-pill">
+                <strong>No IC Formed</strong>
+                <span>No formal committee or policy in place</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-posh" value="12" />
+              <span class="diag-pill">
+                <strong>Internal Only</strong>
+                <span>IC formed internally, no external advocate</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-posh" value="25" />
+              <span class="diag-pill">
+                <strong>Fully Constituted IC</strong>
+                <span
+                  >External advocate, annual training &amp; reporting complete</span
+                >
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Question 4 -->
+        <fieldset class="diag-group">
+          <legend class="diag-legend">
+            <span class="diag-step">04</span>
+            <div>
+              <strong>Hiring Predictability &amp; Notice Vulnerability</strong>
+              <small
+                >How often do offers fall through or notice period dropouts
+                occur?</small
+              >
+            </div>
+          </legend>
+          <div class="diag-options">
+            <label class="diag-option">
+              <input type="radio" name="diag-hiring" value="5" checked />
+              <span class="diag-pill">
+                <strong>High Friction</strong>
+                <span
+                  >Frequent notice counter-offers and interview dropouts</span
+                >
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-hiring" value="15" />
+              <span class="diag-pill">
+                <strong>Moderate Variance</strong>
+                <span>Interviews happen but scorecards and pay bands vary</span>
+              </span>
+            </label>
+            <label class="diag-option">
+              <input type="radio" name="diag-hiring" value="25" />
+              <span class="diag-pill">
+                <strong>Standardized &amp; Calibrated</strong>
+                <span
+                  >Strict rubrics, verified notice defense, low dropout rate</span
+                >
+              </span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Live Score & Diagnostic Findings Display -->
+      <div class="diagnostic-readout">
+        <div class="readout-card">
+          <div class="score-badge-row">
+            <span class="score-kicker">ASSESSMENT RESULT</span>
+            <span id="diagStatusBadge" class="score-status-pill status-amber"
+              >Review In Progress</span
+            >
+          </div>
+
+          <div class="score-main">
+            <div class="score-number-wrap">
+              <span id="diagScoreVal" class="score-huge">20</span>
+              <span class="score-max">/100</span>
+            </div>
+            <div class="score-gauge-bar">
+              <div
+                id="diagGaugeFill"
+                class="score-gauge-fill"
+                style="width: 20%"
+              >
+              </div>
+            </div>
+          </div>
+
+          <div class="findings-block">
+            <h3 id="diagFindingsTitle" class="findings-headline">
+              High Statutory &amp; Notice Exposure
+            </h3>
+            <ul id="diagFindingsList" class="findings-list">
+              <li>
+                Immediate liability: Missing POSH Internal Committee with an
+                external advocate creates direct exposure under Act 2013.
+              </li>
+              <li>
+                Operational drag: Informal HR oversight increases
+                offer-to-joining dropouts during 60–90 day notice periods.
+              </li>
+              <li>
+                Absence of structured scorecards leads to mis-hire drag in
+                critical leadership and technical hires.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Direct Bridge to Action -->
+          <div class="diag-actions">
+            <a
+              id="diagActionBtn"
+              class="diag-btn-primary"
+              href="/contact/?service=people-setup"
+            >
+              <span>Convert Diagnostic to Action Plan</span>
+              <Arrow />
+            </a>
+            <p class="diag-disclaimer">
+              Confidential consultation. No employee records or proprietary data
+              required.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .diagnostic-section {
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .diagnostic-container {
+    background: #112522;
+    color: #f8fafc;
+    border-radius: 28px;
+    padding: clamp(32px, 5vw, 56px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 45px -10px rgba(17, 37, 34, 0.4);
+  }
+  .diagnostic-header {
+    max-width: 760px;
+    margin-bottom: 40px;
+  }
+  .diagnostic-kicker {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #a7c7be;
+    background: rgba(167, 199, 190, 0.12);
+    border: 1px solid rgba(167, 199, 190, 0.25);
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .diagnostic-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 3.5vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    color: #ffffff;
+    margin: 0 0 14px;
+  }
+  .diagnostic-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #b0c4bd;
+    margin: 0;
+  }
+  .diagnostic-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .diagnostic-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .diag-group {
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .diag-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+    padding: 0;
+  }
+  .diag-step {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #eff6ff;
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+  .diag-legend strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  .diag-legend small {
+    display: block;
+    font-size: 13px;
+    color: #8da49d;
+    margin-top: 2px;
+  }
+  .diag-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 10px;
+  }
+  .diag-option {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+  .diag-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .diag-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 14px;
+    background: #19332f;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+  .diag-pill strong {
+    font-size: 14px;
+    color: #e6eee9;
+  }
+  .diag-pill span {
+    font-size: 12px;
+    color: #9cb2aa;
+    line-height: 1.4;
+  }
+  .diag-option:hover .diag-pill {
+    border-color: rgba(167, 199, 190, 0.4);
+    background: #203f3a;
+  }
+  .diag-option input:checked + .diag-pill {
+    background: rgba(149, 190, 175, 0.18);
+    border-color: #95beaf;
+    box-shadow: 0 0 0 1px #95beaf;
+  }
+  .diag-option input:checked + .diag-pill strong {
+    color: #ffffff;
+  }
+
+  /* Readout Card */
+  .diagnostic-readout {
+    position: sticky;
+    top: 100px;
+  }
+  .readout-card {
+    background: #17322e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .score-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .score-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #8da49d;
+  }
+  .score-status-pill {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .status-red {
+    background: rgba(192, 96, 75, 0.18);
+    color: #e28874;
+    border: 1px solid rgba(192, 96, 75, 0.35);
+  }
+  .status-amber {
+    background: rgba(204, 160, 75, 0.18);
+    color: #e5bd71;
+    border: 1px solid rgba(204, 160, 75, 0.35);
+  }
+  .status-emerald {
+    background: rgba(103, 171, 146, 0.18);
+    color: #8fceb8;
+    border: 1px solid rgba(103, 171, 146, 0.35);
+  }
+  .score-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .score-number-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .score-huge {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+  }
+  .score-max {
+    font-size: 20px;
+    color: #8da49d;
+    font-weight: 500;
+  }
+  .score-gauge-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .score-gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c0604b 0%, #cca04b 50%, #67ab92 100%);
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .findings-block {
+    background: rgba(15, 33, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .findings-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+  .findings-list {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #c9d8d2;
+  }
+  .diag-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .diag-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #235249;
+    color: #ffffff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 22px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .diag-btn-primary:hover {
+    background: #2c6358;
+    transform: translateY(-1px);
+  }
+  .diag-disclaimer {
+    font-size: 12px;
+    color: #8da49d;
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (max-width: 980px) {
+    .diagnostic-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .diagnostic-readout {
+      position: static;
+    }
+  }
+</style>
+
+<script>
+  function setupDiagnostic() {
+    const engine = document.getElementById('diagnosticEngine');
+    if (!engine) return;
+
+    const scoreVal = document.getElementById('diagScoreVal');
+    const gaugeFill = document.getElementById('diagGaugeFill');
+    const statusBadge = document.getElementById('diagStatusBadge');
+    const findingsTitle = document.getElementById('diagFindingsTitle');
+    const findingsList = document.getElementById('diagFindingsList');
+    const actionBtn = document.getElementById('diagActionBtn');
+
+    function calculate() {
+      const team = Number(
+        engine.querySelector('input[name="diag-team"]:checked')?.value || 10,
+      );
+      const hr = Number(
+        engine.querySelector('input[name="diag-hr"]:checked')?.value || 5,
+      );
+      const posh = Number(
+        engine.querySelector('input[name="diag-posh"]:checked')?.value || 0,
+      );
+      const hiring = Number(
+        engine.querySelector('input[name="diag-hiring"]:checked')?.value || 5,
+      );
+
+      const total = Math.min(100, Math.max(10, team + hr + posh + hiring));
+
+      if (scoreVal) scoreVal.textContent = String(total);
+      if (gaugeFill) gaugeFill.style.width = `${total}%`;
+
+      let badgeClass = 'status-red';
+      let badgeText = 'Critical Exposure';
+      let title = 'Immediate Statutory & Operational Gaps';
+      let serviceTarget = 'people-setup';
+      let items = [];
+
+      if (total < 40) {
+        badgeClass = 'status-red';
+        badgeText = 'Critical Exposure';
+        title = 'High Statutory & Notice Attrition Exposure';
+        serviceTarget = 'people-setup';
+        items = [
+          'Immediate liability: Missing POSH Internal Committee with an external advocate creates direct exposure under Act 2013.',
+          'Operational drag: Ad-hoc policies without standardized employment agreements invite dispute and onboarding confusion.',
+          'Notice period vulnerability: Unstructured vetting results in high offer dropouts during 60–90 day waiting periods.',
+        ];
+      } else if (total < 75) {
+        badgeClass = 'status-amber';
+        badgeText = 'Developing Infrastructure';
+        title = 'Operational Gaps at Current Scale';
+        serviceTarget = 'people-setup';
+        items = [
+          'Headcount growth is outpacing handbook policies: Induction, appraisals, and leave systems require codification.',
+          'POSH governance needs regularized external training and mandated annual filings to maintain legal standing.',
+          'Hiring interviews lack standardized scorecards, leading to subjectivity in engineering and leadership selection.',
+        ];
+      } else {
+        badgeClass = 'status-emerald';
+        badgeText = 'Enterprise Scale Ready';
+        title = 'Institutional Readiness Established';
+        serviceTarget = 'recruitment';
+        items = [
+          'Foundational people governance is secure and aligned with statutory guidelines.',
+          'Primary growth bottleneck: Attracting top senior engineering, design, and marketing leadership.',
+          'Recommended focus: Calibrated search dossiers and executive founder thought positioning.',
+        ];
+      }
+
+      if (statusBadge) {
+        statusBadge.className = `score-status-pill ${badgeClass}`;
+        statusBadge.textContent = badgeText;
+      }
+      if (findingsTitle) {
+        findingsTitle.textContent = title;
+      }
+      if (findingsList) {
+        findingsList.innerHTML = items.map((i) => `<li>${i}</li>`).join('');
+      }
+      if (actionBtn) {
+        actionBtn.setAttribute(
+          'href',
+          `/contact/?service=${serviceTarget}&source=diagnostic&score=${total}`,
+        );
+      }
+    }
+
+    engine.querySelectorAll('input[type="radio"]').forEach((input) => {
+      input.addEventListener('change', calculate);
+    });
+
+    calculate();
+  }
+
+  setupDiagnostic();
+  document.addEventListener('astro:page-load', setupDiagnostic);
+</script>

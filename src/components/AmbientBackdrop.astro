@@ -1,0 +1,113 @@
+---
+const { variant = 'connections' } = Astro.props;
+const paths =
+  variant === 'reading'
+    ? ['M20 145 H1180', 'M200 295 H1060', 'M80 445 H1120']
+    : variant === 'steps'
+      ? [
+          'M60 510 H300 V390 H540 V270 H780 V150 H1160',
+          'M200 590 H440 V470 H680 V350 H920 V230 H1200',
+        ]
+      : [
+          'M0 420 C240 420 240 130 520 130 S800 420 1200 190',
+          'M0 170 C300 170 300 460 650 460 S900 170 1200 350',
+        ];
+---
+
+<div
+  class:list={['ambient-backdrop', variant]}
+  data-ambient-motion
+  aria-hidden="true"
+>
+  <svg
+    viewBox="0 0 1200 600"
+    preserveAspectRatio="xMidYMid slice"
+    focusable="false"
+    >{
+      paths.map((path, index) => (
+        <g>
+          <>
+            <path class="ambient-track" d={path} />
+            <path
+              class="ambient-pulse"
+              d={path}
+              style={`--delay:${index * -5}s`}
+            />
+          </>
+        </g>
+      ))
+    }</svg
+  >
+</div>
+<script>
+  import { motionPaused, reducedMotion } from '../scripts/motion.js';
+  document.querySelectorAll('[data-ambient-motion]').forEach((root) => {
+    let visible = false;
+    const sync = () => {
+      root.setAttribute(
+        'data-running',
+        String(visible && !document.hidden && !motionPaused && !reducedMotion),
+      );
+    };
+    if ('IntersectionObserver' in window)
+      new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        sync();
+      }).observe(root);
+    document.addEventListener('visibilitychange', sync);
+    document.addEventListener('ql-motion-change', sync);
+    sync();
+  });
+</script>
+<style>
+  .ambient-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.22;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+  }
+  path {
+    fill: none;
+    stroke: #2563eb;
+    vector-effect: non-scaling-stroke;
+  }
+  .ambient-track {
+    stroke-width: 1;
+    opacity: 0.35;
+  }
+  .ambient-pulse {
+    stroke-width: 1.5;
+    stroke-dasharray: 32 1400;
+    animation: trace-path 16s linear infinite;
+    animation-delay: var(--delay);
+    animation-play-state: paused;
+  }
+  .reading .ambient-pulse {
+    stroke-dasharray: 100 1300;
+    animation-duration: 22s;
+  }
+  .steps .ambient-pulse {
+    stroke-dasharray: 22 1400;
+    animation-duration: 18s;
+  }
+  [data-running='true'] .ambient-pulse {
+    animation-play-state: running;
+  }
+  @keyframes trace-path {
+    to {
+      stroke-dashoffset: -1432;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ambient-pulse {
+      animation: none !important;
+    }
+  }
+</style>

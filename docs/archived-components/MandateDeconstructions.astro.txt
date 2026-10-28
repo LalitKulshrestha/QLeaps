@@ -1,0 +1,322 @@
+---
+import Arrow from './Arrow.astro';
+---
+
+<section
+  id="case-deconstructions"
+  class="wrap section-space deconstructions-section"
+  aria-labelledby="deconstructionHeading"
+  data-reveal
+>
+  <div class="deconstructions-header">
+    <div class="deconstructions-kicker">
+      <span>Institutional Track Record</span>
+    </div>
+    <h2 id="deconstructionHeading" class="section-heading">
+      Mandate &amp; Setup Deconstructions
+    </h2>
+    <p class="section-description">
+      Anonymized operational breakdowns across specialist search, technical
+      hiring architecture, and statutory people infrastructure.
+    </p>
+  </div>
+
+  <div class="deconstructions-grid">
+    <!-- Case 1 -->
+    <article class="deconstruction-card">
+      <div class="card-meta">
+        <span class="card-track">TRK-01 / SEARCH &amp; EVALUATION</span>
+        <span class="card-metric-pill">0% Dropout Rate</span>
+      </div>
+      <h3 class="card-title">Series B FinTech Core Engineering Scale</h3>
+      <div class="card-context">
+        <strong>The Challenge:</strong>
+        <p>
+          A high-velocity payment platform faced repeated 90-day notice period
+          dropouts and aggressive counter-offers, creating a 4-month hiring
+          bottleneck for core backend engineering.
+        </p>
+      </div>
+      <div class="card-intervention">
+        <strong>The Strategic Intervention:</strong>
+        <p>
+          Deployed specialized technical SME panels to screen code architecture
+          upfront. Pre-aligned market compensation percentiles and structured
+          early notice defense protocols.
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="card-stat">
+          <span class="stat-num">6 Wks</span>
+          <span class="stat-label">To Fill 7 Senior Hires</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Notice Period Adherence</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 2 -->
+    <article class="deconstruction-card">
+      <div class="card-meta">
+        <span class="card-track">TRK-01 / EXECUTIVE RETAINED</span>
+        <span class="card-metric-pill">24-Day Closure</span>
+      </div>
+      <h3 class="card-title">High-Growth D2C Brand Chief Marketing Officer</h3>
+      <div class="card-context">
+        <strong>The Challenge:</strong>
+        <p>
+          A category-leading consumer brand required a CMO capable of balancing
+          creative storytelling with rigorous performance marketing and
+          unit-economic discipline.
+        </p>
+      </div>
+      <div class="card-intervention">
+        <strong>The Strategic Intervention:</strong>
+        <p>
+          Targeted executive mapping across high-growth consumer peers.
+          Conducted portfolio deconstruction and deep capability scoring before
+          candidate introductions.
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="card-stat">
+          <span class="stat-num">72h</span>
+          <span class="stat-label">To First Calibrated Dossier</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-num">24 Days</span>
+          <span class="stat-label">Brief to Offer Acceptance</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 3 -->
+    <article class="deconstruction-card">
+      <div class="card-meta">
+        <span class="card-track">TRK-02 / STATUTORY &amp; GOVERNANCE</span>
+        <span class="card-metric-pill">100% Statutory Defense</span>
+      </div>
+      <h3 class="card-title">50-Member B2B SaaS People Setup &amp; POSH</h3>
+      <div class="card-context">
+        <strong>The Challenge:</strong>
+        <p>
+          Rapid headcount growth across three Indian cities without a codified
+          employee handbook, absent POSH Internal Committee, and statutory
+          exposure under state Shops &amp; Est laws.
+        </p>
+      </div>
+      <div class="card-intervention">
+        <strong>The Strategic Intervention:</strong>
+        <p>
+          Conducted a 42-point statutory compliance audit, established the POSH
+          IC with an external advocate, and delivered a clear, plain-language
+          employee handbook.
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="card-stat">
+          <span class="stat-num">14 Days</span>
+          <span class="stat-label">Full Handover Sprint</span>
+        </div>
+        <div class="card-stat">
+          <span class="stat-num">Zero</span>
+          <span class="stat-label">Director Exposure</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="deconstructions-cta-bar">
+    <div class="cta-bar-text">
+      <strong>Discuss an institutional mandate or people setup</strong>
+      <p>
+        Confidential consultation with our practice partners. We align on scope
+        before search begins.
+      </p>
+    </div>
+    <a href="/contact/" class="cta-bar-btn">
+      <span>Initiate Consultation</span>
+      <Arrow />
+    </a>
+  </div>
+</section>
+
+<style>
+  .deconstructions-section {
+    position: relative;
+  }
+  .deconstructions-header {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .deconstructions-kicker {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4d655f;
+    background: #eff6ff;
+    border: 1px solid #d1dbd2;
+    padding: 4px 12px;
+    border-radius: 999px;
+    align-self: flex-start;
+  }
+  .deconstructions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 28px;
+  }
+  .deconstruction-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 4px 16px rgba(19, 35, 33, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: all 0.2s ease;
+  }
+  .deconstruction-card:hover {
+    border-color: #c4d0c6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(19, 35, 33, 0.08);
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-track {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #5d756f;
+  }
+  .card-metric-pill {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #d1dbd2;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    color: #132321;
+    margin: 0;
+  }
+  .card-context,
+  .card-intervention {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #4e615c;
+  }
+  .card-context strong,
+  .card-intervention strong {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #132321;
+  }
+  .card-context p,
+  .card-intervention p {
+    margin: 0;
+  }
+  .card-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid #e8ede7;
+    margin-top: auto;
+  }
+  .card-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2563eb;
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 11.5px;
+    color: #5d756f;
+  }
+
+  /* CTA Bar */
+  .deconstructions-cta-bar {
+    margin-top: 40px;
+    background: #2563eb;
+    border-radius: 20px;
+    padding: 28px 36px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    box-shadow: 0 8px 24px -6px rgba(37, 99, 235, 0.3);
+  }
+  .cta-bar-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cta-bar-text strong {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .cta-bar-text p {
+    font-size: 14px;
+    color: #a7c4bc;
+    margin: 0;
+  }
+  .cta-bar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: #2563eb;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    padding: 12px 22px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+  .cta-bar-btn:hover {
+    background: #eff6ff;
+  }
+
+  @media (max-width: 768px) {
+    .deconstructions-cta-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px;
+    }
+  }
+</style>

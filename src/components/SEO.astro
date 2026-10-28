@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site.js';
+const {
+  title = 'HR Services & Specialist Recruitment | Quantum Leaps',
+  description = site.description,
+  path = Astro.url.pathname,
+  schemas = [],
+  noindex = false,
+} = Astro.props;
+const canonical = new URL(path, site.url).href;
+const pageSchemas = schemas
+  .flatMap((schema) => schema['@graph'] || [schema])
+  .filter((schema) => !['Organization', 'WebSite'].includes(schema['@type']))
+  .map((schema) => ({ '@context': 'https://schema.org', ...schema }));
+const article = pageSchemas.some((schema) => schema['@type'] === 'BlogPosting');
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  publisher: { '@id': `${site.url}/#organization` },
+};
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/assets/logo/ql-logo-horizontal.svg`,
+  email: site.email,
+  telephone: site.phone,
+  description: site.description,
+  areaServed: 'IN',
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} /><meta
+  name="robots"
+  content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}
+/>
+{!noindex && <link rel="canonical" href={canonical} />}
+<meta name="theme-color" content="#0f172a" /><meta
+  property="og:type"
+  content={article ? 'article' : 'website'}
+/><meta property="og:title" content={title} /><meta
+  property="og:description"
+  content={description}
+/><meta property="og:url" content={canonical} /><meta
+  property="og:site_name"
+  content={site.name}
+/><meta property="og:locale" content="en_IN" />
+<meta property="og:image" content={new URL(site.image, site.url).href} /><meta
+  property="og:image:alt"
+  content="Quantum Leaps — people, work and the next leap"
+/><meta property="og:image:width" content="1200" /><meta
+  property="og:image:height"
+  content="630"
+/>
+<meta name="twitter:card" content="summary_large_image" /><meta
+  name="twitter:title"
+  content={title}
+/><meta name="twitter:description" content={description} /><meta
+  name="twitter:image"
+  content={new URL(site.image, site.url).href}
+/><meta
+  name="twitter:image:alt"
+  content="Quantum Leaps — people, work and the next leap"
+/>
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(organization).replace(/</g, '\\u003c')}
+/>
+{
+  [website, ...pageSchemas].map((schema) => (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+    />
+  ))
+}

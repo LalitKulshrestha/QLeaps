@@ -1,0 +1,313 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import legacyPages from '../data/legacy-pages.json';
+import pageStyle from '../styles/pages/careers.css?url';
+const page = legacyPages['careers'];
+---
+
+<SiteLayout {...page} pageStyle={pageStyle} legacy={true} noindex={false}>
+  <main id="main">
+    <!-- Careers Hero Header -->
+    <section class="careers-hero">
+      <span
+        style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+      >
+        MUMBAI · BENGALURU · NCR · HYDERABAD · PUNE · REMOTE
+      </span>
+
+      <h1
+        style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(36px,4.5vw,56px);line-height:1.02;letter-spacing:-.04em;color:#0f172a"
+      >
+        Good conversations.<br />Meaningful work.
+      </h1>
+
+      <p
+        style="margin:0;font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:#475569;max-width:820px"
+      >
+        We’re building a recruitment practice around thoughtful research, clear
+        communication and genuine conversations. Remote-first across India, with
+        role-specific arrangements and support for career returners.
+      </p>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:12px">
+        <a href="#returners-program" class="brand-button">Returning to work ↓</a
+        >
+        <a
+          href="#open-roles"
+          style="background:#F1F5F9;color:#0F172A;padding:12px 26px;border-radius:999px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;text-decoration:none;border:1px solid #CBD5E1"
+          class="hv3 ql-action">Ways to work with us ↓</a
+        >
+      </div>
+    </section>
+
+    <!-- An editorial feature within the shared brand palette. -->
+    <section
+      id="returners-program"
+      class="returners-section"
+      aria-labelledby="returnersHeading"
+    >
+      <div class="returners-feature">
+        <div class="returners-copy">
+          <p class="overline">Women returning to work</p>
+          <h2 id="returnersHeading">
+            Your experience.<br />Your <span>next chapter.</span>
+          </h2>
+          <p class="returners-intro">Time away doesn’t erase what you bring.</p>
+          <p>
+            Returning after a career break? Bring your perspective, curiosity
+            and communication skills. We’re open to conversations with women
+            interested in recruitment, research and building relationships.
+          </p>
+          <a
+            class="brand-button"
+            href="mailto:contact@qleaps.in?subject=Career%20return%20conversation%20-%20Quantum%20Leaps"
+            >Start a conversation <span aria-hidden="true">↗</span></a
+          >
+          <p class="returners-note">
+            Tell us about your interests and availability. We’ll discuss
+            potential opportunities, support and working arrangements together.
+          </p>
+        </div>
+        <figure class="returners-portrait">
+          <img
+            src="/assets/photos/remote-work.jpg"
+            alt="A woman working on a laptop at home"
+            width="800"
+            height="533"
+            loading="lazy"
+          />
+          <figcaption>
+            <span class="portrait-marker" aria-hidden="true"></span>A fresh
+            perspective belongs here.
+          </figcaption>
+        </figure>
+        <div class="returners-principles">
+          <div>
+            <span class="principle-number">01</span><h3>
+              Your story, respected
+            </h3><p>
+              Start with what you can bring and where you want to go. You choose
+              what to share about your break.
+            </p>
+          </div>
+          <div>
+            <span class="principle-number">02</span><h3>A workable return</h3><p
+            >
+              Discuss location, hours and availability openly. Working
+              arrangements depend on the opportunity.
+            </p>
+          </div>
+          <div>
+            <span class="principle-number">03</span><h3>Room to learn</h3><p>
+              Explore how your existing skills could translate into recruitment,
+              research or candidate conversations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Culture & Values -->
+    <section
+      style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(50px,6vw,80px)"
+    >
+      <div
+        style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px"
+      >
+        <span
+          style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+          >How We Operate</span
+        >
+        <h2
+          style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,3.8vw,44px);letter-spacing:-.035em;color:#0f172a"
+        >
+          Built on trust, not micromanagement.
+        </h2>
+      </div>
+
+      <div
+        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px"
+      >
+        <div
+          style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:20px;padding:28px"
+        >
+          <div
+            style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#0F172A;margin-bottom:8px"
+          >
+            Remote-first collaboration
+          </div>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We measure the caliber of conversations and client outcomes, not the
+            hours you sit at your desk.
+          </p>
+        </div>
+        <div
+          style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:20px;padding:28px"
+        >
+          <div
+            style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#0F172A;margin-bottom:8px"
+          >
+            No Resume Spamming
+          </div>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We never dump 30 unvetted profiles. We speak directly with every
+            candidate and deliver calibrated dossiers.
+          </p>
+        </div>
+        <div
+          style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:20px;padding:28px"
+        >
+          <div
+            style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#0F172A;margin-bottom:8px"
+          >
+            Clear expectations
+          </div>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We discuss responsibilities, working arrangements and compensation
+            clearly before either side makes a commitment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open Internal Roles -->
+    <section
+      id="open-roles"
+      style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(60px,8vw,90px)"
+    >
+      <div
+        style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px"
+      >
+        <span
+          style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+          >Work With Us</span
+        >
+        <h2
+          style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,3.8vw,44px);letter-spacing:-.035em;color:#0f172a"
+        >
+          Help shape what we’re building.
+        </h2>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#475569">
+          We welcome expressions of interest in the areas below. These are
+          team-building conversations, not a guarantee of an open or funded
+          vacancy. We will discuss availability, scope and terms directly.
+        </p>
+      </div>
+
+      <div class="careers-grid" style="padding:0">
+        <!-- Role 1 -->
+        <article class="career-card">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div
+              style="display:flex;justify-content:space-between;align-items:center;gap:12px"
+            >
+              <span
+                style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2563eb;background:#eff6ff;padding:4px 10px;border-radius:999px"
+                >Technology &amp; Product</span
+              >
+              <span style="font-size:13px;color:#64748B">Remote (India)</span>
+            </div>
+            <h3
+              style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#0f172a"
+            >
+              Search Consultant — Tech &amp; Engineering
+            </h3>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#475569">
+              Partner with high-growth technology brands across Bengaluru,
+              Hyderabad, and NCR to place Engineering Directors, Heads of
+              Product, and Tech Leads.
+            </p>
+          </div>
+          <div
+            style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #F1F5F9;padding-top:16px"
+          >
+            <span style="font-size:13.5px;color:#64748B"
+              >Full-time · Remote</span
+            >
+            <a
+              href="mailto:contact@qleaps.in?subject=Application%20-%20Search%20Consultant%20(Tech)"
+              style="background:#2563eb;color:#FFFFFF;padding:8px 18px;border-radius:999px;font-size:13.5px;font-weight:700;text-decoration:none"
+              class="hv1 ql-action">Express interest →</a
+            >
+          </div>
+        </article>
+
+        <!-- Role 2 -->
+        <article class="career-card">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div
+              style="display:flex;justify-content:space-between;align-items:center;gap:12px"
+            >
+              <span
+                style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2563eb;background:#f8fafc;padding:4px 10px;border-radius:999px"
+                >Brand &amp; Creative</span
+              >
+              <span style="font-size:13px;color:#64748B"
+                >Location by agreement</span
+              >
+            </div>
+            <h3
+              style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#0f172a"
+            >
+              Practice Lead — Marketing &amp; Creative
+            </h3>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#475569">
+              Lead executive hiring briefs for premier creative agencies, D2C
+              brands, and growth companies seeking CMOs, Creative Directors, and
+              Performance Leaders.
+            </p>
+          </div>
+          <div
+            style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #F1F5F9;padding-top:16px"
+          >
+            <span style="font-size:13.5px;color:#64748B"
+              >Full-time / Flexible</span
+            >
+            <a
+              href="mailto:contact@qleaps.in?subject=Application%20-%20Practice%20Lead%20(Creative)"
+              style="background:#2563eb;color:#FFFFFF;padding:8px 18px;border-radius:999px;font-size:13.5px;font-weight:700;text-decoration:none"
+              class="hv1 ql-action">Express interest →</a
+            >
+          </div>
+        </article>
+
+        <!-- Role 3 -->
+        <article class="career-card">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div
+              style="display:flex;justify-content:space-between;align-items:center;gap:12px"
+            >
+              <span
+                style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2563eb;background:#eff6ff;padding:4px 10px;border-radius:999px"
+                >Research &amp; Analytics</span
+              >
+              <span style="font-size:13px;color:#64748B">Remote (India)</span>
+            </div>
+            <h3
+              style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#0f172a"
+            >
+              Research Associate — Market Intelligence
+            </h3>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#475569">
+              Conduct talent market mapping, executive compensation
+              benchmarking, and leadership dossier analysis across Tier-1 Indian
+              tech ecosystems.
+            </p>
+          </div>
+          <div
+            style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #F1F5F9;padding-top:16px"
+          >
+            <span style="font-size:13.5px;color:#64748B"
+              >Flexible / Returners Welcome</span
+            >
+            <a
+              href="mailto:contact@qleaps.in?subject=Application%20-%20Research%20Associate"
+              style="background:#2563eb;color:#FFFFFF;padding:8px 18px;border-radius:999px;font-size:13.5px;font-weight:700;text-decoration:none"
+              class="hv1 ql-action">Express interest →</a
+            >
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

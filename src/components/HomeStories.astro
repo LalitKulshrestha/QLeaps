@@ -1,0 +1,314 @@
+---
+import Arrow from './Arrow.astro';
+import { articles } from '../data/site.js';
+import { serviceBySlug } from '../data/services.js';
+const careerPrep = serviceBySlug('career-prep');
+---
+
+<section
+  class="wrap section-space voice-story"
+  aria-labelledby="voiceHeading"
+  data-reveal
+>
+  <div>
+    <p class="eyebrow">Founder Voice by Quantum Leaps</p><h2 id="voiceHeading">
+      A founder’s point of view.<br /><span
+        >A company people<br />want to know.</span
+      >
+    </h2>
+  </div><div class="voice-body">
+    <p>
+      What you believe. What you’re building. Why the right people should care.
+    </p><p>
+      LinkedIn content, newsletters, employer stories and careers copy, shaped
+      around the founder’s voice.
+    </p><a class="text-link" href="/founder-voice/"
+      >Find your voice <Arrow diagonal /></a
+    >
+  </div><div class="voice-rule" aria-hidden="true"><span></span></div>
+</section>
+<section class="career-story" aria-labelledby="careerHeading">
+  <div class="wrap career-grid" data-reveal>
+    <div>
+      <p class="eyebrow">For the person planning what’s next</p><h2
+        id="careerHeading"
+      >
+        You have the experience.<br />Let’s sharpen the story.
+      </h2><p>
+        A written profile review. CV and LinkedIn rework. One mock interview
+        with detailed feedback. A clearer way into your next conversation.
+      </p><a class="button button-light" href="/career-prep/"
+        >Explore Career Prep <Arrow /></a
+      ><a class="candidate-hub-link" href="/for-candidates/"
+        >Looking for open roles? Explore your options →</a
+      >
+    </div><div class="career-price">
+      <span>Career Prep</span><strong>{careerPrep.price}</strong><span
+        >Previously <s>{careerPrep.originalPrice}</s></span
+      ><span>{careerPrep.priceLabel} · {careerPrep.offerLabel}</span><small
+        >Preparation, not a job guarantee.<br />Add-on mock interview pricing to
+        be confirmed.</small
+      >
+    </div>
+  </div>
+</section>
+<section
+  class="wrap section-space knowledge-preview"
+  aria-labelledby="knowledgeHeading"
+>
+  <div class="knowledge-heading" data-reveal>
+    <div>
+      <p class="eyebrow">A little clarity goes a long way</p><h2
+        class="section-heading"
+        id="knowledgeHeading"
+      >
+        Useful thinking.<br />For the decisions ahead.
+      </h2>
+    </div><a class="text-link" href="/knowledge/"
+      >Explore the knowledge hub <Arrow /></a
+    >
+  </div><div class="article-preview-grid" data-reveal>
+    {
+      [articles[1], articles[2], articles[4]].map((article) => (
+        <a class="article-preview" href={`/blogs/${article.slug}/`}>
+          <>
+            <span class="eyebrow">{article.category}</span>
+            <h3>{article.title}</h3>
+            <p>{article.description}</p>
+            <span class="read-label">
+              Read the guide <Arrow diagonal />
+            </span>
+          </>
+        </a>
+      ))
+    }
+  </div>
+</section>
+<style>
+  .voice-story {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+  }
+  .voice-story .eyebrow {
+    color: #1d4ed8;
+  }
+  .voice-story h2 {
+    font-size: clamp(34px, 4.4vw, 60px);
+    margin-top: 26px;
+  }
+  .voice-story h2 span {
+    color: #2563eb;
+  }
+  .voice-body > p:first-child {
+    font-size: 22px;
+    line-height: 1.45;
+    color: #334155;
+    margin-bottom: 22px;
+  }
+  .voice-body > p:nth-child(2) {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+  .voice-body > a {
+    margin-top: 28px;
+  }
+  .voice-rule {
+    height: 1px;
+    background: #e2e8f0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+  .voice-rule span {
+    position: absolute;
+    width: 20%;
+    height: 1px;
+    background: #2563eb;
+    animation: voice-line 10s ease-in-out infinite;
+  }
+  @keyframes voice-line {
+    0%,
+    100% {
+      transform: translateX(-100%);
+    }
+    70% {
+      transform: translateX(600%);
+    }
+  }
+  .career-story {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 72px 0;
+  }
+  .career-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 96px;
+    align-items: center;
+  }
+  .career-story .eyebrow {
+    color: #cbd5e1;
+  }
+  .career-story h2 {
+    font-size: clamp(34px, 4vw, 54px);
+    margin: 24px 0;
+  }
+  .career-story p:not(.eyebrow) {
+    color: #e2e8f0;
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  .candidate-hub-link {
+    display: block;
+    margin-top: 18px;
+    font-size: 12px;
+    color: #e2e8f0;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .career-price {
+    border-left: 1px solid #475569;
+    padding-left: 44px;
+    display: flex;
+    flex-direction: column;
+  }
+  .career-price > span {
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: #e2e8f0;
+  }
+  .career-price strong {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 60px;
+    line-height: 1.2;
+    letter-spacing: -0.045em;
+    margin: 14px 0 5px;
+  }
+  .career-price small {
+    margin-top: 24px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #cbd5e1;
+  }
+  .knowledge-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+  .knowledge-heading h2 {
+    margin-top: 22px;
+  }
+  .knowledge-heading .text-link {
+    font-size: 13px;
+  }
+  .article-preview-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 26px;
+  }
+  .article-preview {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    border-top: 1px solid #cbd5e1;
+    transition: border-color 0.2s;
+  }
+  .article-preview:hover {
+    border-color: #2563eb;
+  }
+  .article-preview > .eyebrow {
+    font-size: 9px;
+    color: #475569;
+  }
+  .article-preview h3 {
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 24px 0 16px;
+  }
+  .article-preview p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .read-label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: auto;
+    min-height: 44px;
+  }
+  @media (max-width: 860px) {
+    .voice-story {
+      gap: 32px;
+      grid-template-columns: 1fr;
+    }
+    .voice-body {
+      max-width: 600px;
+    }
+    .career-grid {
+      gap: 36px;
+      grid-template-columns: 1.3fr 0.7fr;
+    }
+    .career-price {
+      padding-left: 24px;
+    }
+    .career-price strong {
+      font-size: 46px;
+    }
+    .knowledge-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .article-preview-grid {
+      gap: 18px;
+    }
+    .article-preview h3 {
+      font-size: 23px;
+    }
+  }
+  @media (max-width: 640px) {
+    .career-story {
+      padding: 48px 0;
+    }
+    .career-grid {
+      grid-template-columns: 1fr;
+    }
+    .career-price {
+      padding: 24px 0 0;
+      border-left: 0;
+      border-top: 1px solid #475569;
+    }
+    .career-price strong {
+      font-size: 56px;
+    }
+    .article-preview-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .article-preview {
+      padding: 24px 0;
+    }
+    .article-preview h3 {
+      margin-top: 14px;
+    }
+    .voice-body > p:first-child {
+      font-size: 20px;
+    }
+    .voice-story h2 br:last-child {
+      display: none;
+    }
+  }
+</style>

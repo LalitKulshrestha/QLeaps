@@ -1,0 +1,55 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import legacyPages from '../../data/legacy-pages.json';
+const page = legacyPages['blogs-notice-period'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={false}>
+  <main id="main" class="article-content">
+    <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blogs/"
+        >Hiring &amp; career guides</a
+      >
+    </nav><p class="overline">Quantum Leaps · Practical guidance</p><h1>
+      Managing a Notice Period: A Clearer Path from Offer to Joining
+    </h1><p class="article-meta">
+      By Quantum Leaps · Published and reviewed 25 October 2026 · 2 min read
+    </p><p class="article-note">
+      Practical steps for staying aligned through a long notice period, without
+      promising that every dropout can be prevented.
+    </p><h2>Start with the actual constraint</h2><p>
+      Ask the candidate to confirm their contractual notice period and whether
+      they have resigned. Separate a hoped-for early release from a date the
+      current employer has agreed. Do not present an unconfirmed buyout as
+      guaranteed availability.
+    </p><h2>Agree a contact rhythm</h2><p>
+      Before an offer is accepted, agree who will stay in touch and how often. A
+      short, useful conversation about the role is more valuable than repeated
+      requests to confirm the joining date. Ask permission before introducing
+      future colleagues, and respect the candidate’s existing employment
+      obligations.
+    </p><h2>Make changes discussable</h2><p>
+      Counter-offers, family needs and changes to the role can affect a
+      decision. Invite candidates to raise these early. Discuss what originally
+      motivated the move and whether the new role still addresses it. The
+      purpose is clarity, not pressure.
+    </p><h2>A practical joining checklist</h2><ul>
+      <li>
+        Confirm the reporting line, role scope and agreed compensation in
+        writing.
+      </li><li>
+        Distinguish contractual notice, requested release and confirmed joining
+        date.
+      </li><li>Name a contact on each side and agree check-ins.</li><li>
+        Discuss location, equipment and the first week’s expectations.
+      </li><li>Record open questions and the next agreed action.</li>
+    </ul><p>
+      These steps support communication. They cannot guarantee a joining outcome
+      or remove every counter-offer risk.
+    </p><p>
+      <a href="/contact/">Discuss a hiring brief →</a> · <a href="/submit-cv/"
+        >Share your CV →</a
+      >
+    </p>
+  </main>
+</SiteLayout>

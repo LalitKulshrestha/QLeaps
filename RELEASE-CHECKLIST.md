@@ -1,73 +1,57 @@
-# Quantum Leaps — release handoff (25 October 2026)
+# Quantum Leaps — HR ecosystem release checklist
 
-The site is prepared for **specialist hiring across seniority levels**, including leadership search, for brands and agencies. It remains a static Netlify website. No new paid service, animation dependency or application server was added. This document records the release configuration and verification requirements.
+This is a **local rebuild pending review**, not a deployed release. It expands the homepage to five service lines and retains recruitment at `/recruitment/`. No new server, checkout or paid runtime has been introduced.
 
-## Google deployment and release operations
+## Decisions before publishing
 
-1. Back up the current Google Apps Script source. Replace **the existing Code.gs** with [google-apps-script/Code.gs](google-apps-script/Code.gs). Do not keep two copies of doGet/doPost.
-2. Save and run **setupQuantumLeaps** in the editor. Existing rows/columns are retained. Applications gets five append-only columns: **Q LinkedIn, R Current title / organisation, S Notice period, T Relocation, U Target CTC**. Experience stays in K. Do not delete/recreate the workbook or rearrange these columns.
-3. Update the **existing web-app deployment** to a new version, preserving its current `/exec` URL. Keep execution as the owning account and the existing public endpoint access. This does not require making the Sheet or CV folders public.
-4. Open the existing endpoint with `?action=jobs`. It should return `version: 2`, **`candidate_details: true`** and `jd_attachments: true`. The website deliberately prevents CV submission to an older handler that would discard the new fields.
-5. With authorised disposable data, confirm a hiring brief and JD save privately, a Pending job is not listed, an Approved job is listed, a CV links to the correct Job ID, all new fields appear in their columns, enquiries/feedback reach Submissions, and a Closed job rejects further applications. Local mocked tests do not establish Google's deployed permissions or quotas.
-6. In Netlify, use the repository's updated configuration: **build `node scripts/build.cjs`; publish `dist`**. Remove any dashboard override that still publishes `.`. The build excludes Apps Script, tests, internal notes and old exports. The existing static workflow needs no Netlify function.
-7. After the one reviewed release: verify a nonexistent path returns HTTP 404, inspect social previews and submit `https://qleaps.in/sitemap.xml` in Google Search Console. Verify ownership there yourself if it is not already set up.
+- Review the five service pages and confirm the scope can be delivered, including specialist assessments and POSH support. Confirm qualified delivery partners and engagement-specific legal review where necessary.
+- Confirm the ₹3,999 one-time Career Prep offer and what taxes, if any, need stating before collecting payment. Add-on mock interview pricing remains unconfirmed; no payment flow is offered.
+- Confirm the enquiry inbox/Sheet owner, job approval owner, candidate follow-up process and actual availability. The site makes no invented response-time promise.
+- Approve or replace the existing handshake footage used in the full-screen homepage hero. No new video was commissioned for this iteration.
+- Keep employee data in client-managed infrastructure. The initial HR enquiry must remain non-confidential and attachment-free; recruitment retains its separate, consent-based CV/JD workflow.
+- No AI capabilities, testimonials, client logos or placement statistics should be added until supported by actual operations and approved facts.
 
-## Recommended operating decisions
-
-- Confirm who monitors contact@qleaps.in, the listed phone number, job approvals and saved applications. Set an internal response target that you can sustain; the public copy no longer invents a 24-hour promise.
-- Keep the workbook, resume folder and JD folder Restricted, sharing with named colleagues only. The public Apps Script endpoint handles visitor submissions.
-- Decide and maintain a real retention/deletion routine. The website does not automatically expire uploaded CVs or historical submissions. Its policy now describes manual management rather than claiming an automated two-year deletion feature.
-- Internal team roles are presented as expressions of interest, not invented funded vacancies. Confirm actual openings before calling them live jobs.
-- AI matching is not marketed on the launch website. Add factual wording only when the implementation and operating process exist.
-- Partner biographies, client logos, testimonials and success metrics are intentionally absent until approved facts are available. Nothing needs to be invented to launch this venture credibly.
-- `Submissions` is the enquiry/editorial-feedback and legacy-record tab. `Jobs` holds employer briefs and approval status. `Applications` holds current CVs and their job references. Keep all three.
-
-## Completed locally
-
-- Employer form identity, required experience, JD, status binding and payload contract repaired.
-- Cross-page application by stable job ID; approved role prefilled; closed/unavailable role requires an explicit general-application choice.
-- Candidate metadata saved separately; append-only schema; cached older clients do not erase newer optional details.
-- Editorial feedback captures message, topic and role. Category and search filters apply together.
-- 5 MB limit aligned across UI, JS and Apps Script. Safer filename rendering; keyboard-accessible native file controls.
-- Mobile hiring CTA stays visible; accessible menu disclosure, Escape and focus behaviour.
-- Dossier labelled fictional on every profile view; modal focus containment/restoration and background inerting.
-- Honest positioning, broader buyer context, placeholder vacancies and unverified outcome figures removed.
-- Six standalone practical guide pages with canonicals and article metadata; full sitemap; real 404; branded share image.
-- Pausable/reduced-motion/offscreen-aware canvas and video; poster fallback and lighter video encode.
-- Allowlisted static publication directory and cache updates. No additional runtime service.
-
-## Reproducible checks
+## Local verification
 
 ```sh
-node --check script.js
-node --check < google-apps-script/Code.gs
-node tests/google-webhook.cjs
-node scripts/build.cjs
-python3 tests/site-contracts.py
+npm ci
+npm run format:check
+npm run build
+npm test
 git diff --check
+npm run preview
 ```
 
-`tests/preview-server.py` runs an isolated loopback fixture on port 8081. It substitutes the Google URL **only in the served test copy**, captures synthetic payloads in `/tmp`, and never writes to Google. Fixture state can be normal/empty/error/legacy via `/tmp/qleaps-fixture-state`. It is excluded from the publish directory.
+Open http://127.0.0.1:4321/. Check homepage service switching and reduced-motion behaviour; phone/tablet navigation; all five service pages; knowledge/blog search; recruitment shortlist and collision lightning; fictional sample modal and Escape/focus restoration; enquiry category preselection; CV/JD workflows.
 
-Browser checks exercised employer/CV/feedback confirmed receipts, correct role linking and metadata, closed/empty states, article filters, 320/375 px navigation, modal focus and representative small-screen layouts. Mock receipts confirm the frontend journey, not Google persistence. Real production storage remains gated by the Google steps above.
+Use `python3 tests/preview-server.py` on port 8081 for disposable local form submissions. It never writes to Google. Mock receipts validate frontend behaviour, not production storage or permissions.
 
+## Verified locally — 27 October 2026
 
-## Visual refinement — 25 October 2026
+- Static build, formatter check, Google backend regression suite and built-site contracts pass.
+- All 23 generated pages pass local resource/anchor, canonical, JSON-LD, form-contract and sitemap checks. Internal source and backend files remain outside the publish directory.
+- Browser checks found no horizontal page overflow on the reviewed content pages at 390 px. Representative homepage, recruitment, enquiry, service and article-index layouts also fit at 320 px and 820 px; desktop reviewed at 1280 px.
+- Service switching, enquiry-category preselection, blog search, recruitment mobile navigation, fictional dossier dismissal and focus restoration work in the browser.
+- Synthetic local enquiry and job-linked CV submissions received confirmed mock receipts. The captured CV retained its Job ID, attachment, experience, notice period, LinkedIn and current title. No Google records were created.
+- Earlier page-style leakage into recruitment was fixed by isolating page styles. Existing recruitment collision lightning is retained without a cooldown.
 
-Returners feature rebuilt in the shared navy/blue/neutral palette with an editorial image, readable supporting copy and one clear action. Primary link/button shapes and shadows aligned; homepage scope is explicit near the headline, and a closing conversation CTA explains the human value of the service. Ambient collisions use short branching lightning at contact. No matching engine or paid dependency was added. The public Google endpoint was checked read-only and now advertises both candidate_details and jd_attachments as true; a real storage round trip remains a separate release check.
+## Google and confidentiality
 
-## Final design and SEO pass
+This frontend rebuild requires **no Apps Script source/schema change**. New enquiries use the existing Contact Inquiry handler and include the service category in the message. Keep the workbook and upload folders Restricted, with named collaborators only. The publicly callable web-app endpoint does not require public Sheet/folder sharing.
 
-The updated Google deployment has already been reported complete and its capabilities verified read-only. No further Apps Script change was made in this final design pass. Retain the real storage round-trip check.
+Before a production release, verify the existing endpoint still advertises `version: 2`, `candidate_details: true` and `jd_attachments: true`. With authorised disposable data, verify a JD saves privately, Pending jobs stay hidden, Approved jobs publish, a CV links to its Job ID and all candidate fields reach their columns. Check enquiries and editorial feedback in Submissions. Keep Submissions, Jobs and Applications; none is an unnecessary template tab.
 
-Restored clear audience destinations and the photo-led agency story. Scout was subsequently removed at the owner’s request. Improved touch targets, mobile form typography, visible labels, category choices, text contrast, contact FAQs, share metadata and breadcrumbs. Removed AI marketing and Scout imagery. The final responsive sweep passed 48 combinations: eight main routes at 320, 390, 768, 820, 1024 and 1440 pixels, with no horizontal overflow. Production release is performed by pushing the audited commit to the linked GitHub repository.
+If the Google deployment needs repair, use [the existing setup instructions](google-apps-script/SETUP.md), preserving the deployment URL and append-only column layout. Do not recreate the workbook or delete existing records. Maintain a real retention/deletion process; the website does not automate historical data deletion.
 
-## Final pre-push audit
+## Future deployment
 
-- Latest GitHub main matched the local base before committing. Commit author/committer: LalitKulshrestha, using the configured GitHub noreply address.
-- Build, JavaScript/Apps Script syntax, backend regression suite, 16-page static contracts and whitespace checks pass.
-- Final browser sweep: eight main routes at 320, 390, 768, 820, 1024 and 1440px; all 48 checks pass without horizontal page overflow. One H1 per route, no dog images, music switch on the homepage only.
-- Mobile sample dossier opens and Escape restores focus to its trigger. Prior local fixture tests cover hiring brief, private upload receipts and linked CV journeys; final read-only production webhook check returns success/version 2 with candidate_details and jd_attachments true. No real applicant or employer submission was created for this release audit.
-- Audio is opt-in and homepage-only. Blogs, article schema, canonicals, social metadata and sitemap remain in the static build.
-- The Netlify badge requires the owner’s dashboard setting; this release does not change that account setting.
-- The existing Google deployment is already updated; do not redeploy it just for the frontend design release. Continue the normal private-storage and job-approval operating checks.
+1. Obtain approval for this local version. No deployment is authorised by the rebuild request.
+2. Confirm repository Git author and committer are LalitKulshrestha before a later authorised commit/push; Netlify deploys from that repository.
+3. Netlify: Node 22, build `node scripts/build.cjs`, publish `dist`; remove any dashboard publish-directory override pointing at `.`. No Netlify function is needed.
+4. Check the live homepage, `/recruitment/`, canonical redirects, a genuinely missing URL returning 404, security headers, forms and social previews.
+5. Submit the updated `https://qleaps.in/sitemap.xml` in Search Console. Metadata and structured data help discovery; rankings and enquiries are not guaranteed.
+6. If desired, switch off the Powered by Netlify badge in Project configuration → General. This dashboard setting does not require a rebuild.
+
+## Architecture safeguards
+
+Astro emits plain HTML/CSS/JS. Browser modules load by page capability; no frontend framework runtime is shipped. Content comes from one service catalogue; shared layout and isolated page styles prevent earlier migration conflicts. Fingerprinted bundles get immutable caching. The build excludes backend source, tests, notes, old exports and the heavyweight original video.

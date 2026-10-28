@@ -1,0 +1,105 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Arrow from '../components/Arrow.astro';
+import { workingExamples } from '../data/working-examples.mjs';
+---
+
+<SiteLayout
+  title="HR & Hiring Working Examples | Quantum Leaps"
+  description="Explore starter interview scorecards, onboarding checklists, people health check scopes and founder voice briefs. View and download practical examples."
+  path="/working-examples/"
+  schemas={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Quantum Leaps working examples',
+      url: 'https://qleaps.in/working-examples/',
+      hasPart: workingExamples.map((example) => ({
+        '@type': 'CreativeWork',
+        name: example.name,
+        url: `https://qleaps.in/working-examples/${example.slug}/`,
+      })),
+    },
+  ]}
+>
+  <main id="main">
+    <section class="wrap page-intro">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><a href="/knowledge/">Knowledge</a
+        ><span>/</span><span>Working examples</span>
+      </nav><p class="eyebrow">See the work before the conversation</p><h1>
+        A practical starting point.<br />Not another promise.
+      </h1><p class="section-description">
+        Explore how we turn a brief into something a team can use. These are
+        illustrative starter templates, not client work or evidence of completed
+        engagements.
+      </p>
+    </section>
+    <section class="wrap sample-list" aria-label="Working examples">
+      {
+        workingExamples.map((example, index) => (
+          <article>
+            <>
+              <span class="sample-index">0{index + 1}</span>
+              <div>
+                <>
+                  <p class="eyebrow">{example.category}</p>
+                  <h2>{example.name}</h2>
+                  <p>{example.description}</p>
+                </>
+              </div>
+              <a class="text-link" href={`/working-examples/${example.slug}/`}>
+                View the sample <Arrow diagonal />
+              </a>
+            </>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+</SiteLayout>
+<style>
+  .sample-list {
+    padding-bottom: 64px;
+  }
+  article {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    gap: 28px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    align-items: center;
+  }
+  .sample-index,
+  .eyebrow {
+    color: var(--blue);
+  }
+  .sample-index {
+    font-size: 12px;
+  }
+  h2 {
+    font-size: 30px;
+    margin: 12px 0;
+  }
+  article p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 54ch;
+  }
+  .text-link {
+    color: var(--blue);
+  }
+  @media (max-width: 700px) {
+    article {
+      grid-template-columns: 26px 1fr;
+      gap: 16px;
+    }
+    article a {
+      grid-column: 2;
+      justify-self: start;
+    }
+    h2 {
+      font-size: 26px;
+    }
+  }
+</style>

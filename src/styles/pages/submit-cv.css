@@ -1,0 +1,14 @@
+main .cv-hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 64px) clamp(20px, 4vw, 48px) 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+main .active-cta-btn {
+  border: 2px solid #2563eb !important;
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  font-weight: 700 !important;
+}

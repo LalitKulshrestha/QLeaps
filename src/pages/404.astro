@@ -1,0 +1,24 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import legacyPages from '../data/legacy-pages.json';
+const page = legacyPages['404.html'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={true}>
+  <main id="main" class="article-content">
+    <a href="/"
+      ><img
+        src="/assets/logo/ql-logo-horizontal.svg"
+        alt="Quantum Leaps"
+        width="701"
+        height="206"
+      /></a
+    ><p class="overline">404 · Page not found</p><h1>
+      Let’s find the right direction.
+    </h1><p>This page may have moved, or the link may be incorrect.</p><p>
+      <a href="/">Return home</a> · <a href="/roles/">Explore roles</a> · <a
+        href="/contact/">Talk hiring</a
+      >
+    </p>
+  </main>
+</SiteLayout>

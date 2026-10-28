@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import legacyPages from '../../data/legacy-pages.json';
+const page = legacyPages['blogs-search-economics'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={false}>
+  <main id="main" class="article-content">
+    <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blogs/"
+        >Hiring &amp; career guides</a
+      >
+    </nav><p class="overline">Quantum Leaps · Practical guidance</p><h1>
+      Why a Focused Shortlist Beats a Pile of CVs
+    </h1><p class="article-meta">
+      By Quantum Leaps · Published and reviewed 25 October 2026 · 2 min read
+    </p><p class="article-note">
+      A useful shortlist explains relevant evidence, tradeoffs and open
+      questions instead of asking the hiring manager to start screening again.
+    </p><h2>Define the decision before the search</h2><p>
+      A shortlist is only useful when the hiring team agrees what good work
+      looks like. Write down the problems the person will own, the capabilities
+      needed to solve them and the constraints that cannot change. Separate
+      genuine requirements from preferences.
+    </p><h2>Ask what each introduction adds</h2><p>
+      For each candidate, a recruiter should explain why their experience
+      matters, what has been discussed and what still needs checking. A job
+      title alone is not evidence of capability. A relevant project, portfolio
+      decision or example of ownership can support a more useful conversation.
+    </p><h2>Make tradeoffs visible</h2><p>
+      One candidate may know your market but need support with a larger team.
+      Another may have led at scale but be new to your sector. Describing these
+      tradeoffs helps the hiring team decide what to explore rather than
+      treating a score as an answer.
+    </p><h2>Use the shortlist to calibrate</h2><ul>
+      <li>Ask the hiring manager which evidence is compelling and why.</li><li>
+        Record consistent reasons for progressing or declining a profile.
+      </li><li>
+        Check whether budget, location or scope is restricting the search.
+      </li><li>
+        Agree whether the brief needs adjustment before expanding volume.
+      </li>
+    </ul><p>
+      Three profiles is a useful illustration of focus, not a universal quota.
+      The appropriate shortlist size and timeline depend on the role and the
+      available market.
+    </p><p>
+      <a href="/contact/">Discuss a hiring brief →</a> · <a href="/submit-cv/"
+        >Share your CV →</a
+      >
+    </p>
+  </main>
+</SiteLayout>

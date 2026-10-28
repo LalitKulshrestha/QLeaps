@@ -1,0 +1,414 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import legacyPages from '../data/legacy-pages.json';
+import pageStyle from '../styles/pages/specialisms.css?url';
+const page = legacyPages['specialisms'];
+---
+
+<SiteLayout {...page} pageStyle={pageStyle} legacy={true} noindex={false}>
+  <main id="main">
+    <!-- Specialisms Hero Header -->
+    <section class="spec-hero">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:800px">
+        <span
+          style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+          >Specialist Search Practices</span
+        >
+        <h1
+          style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,4.5vw,54px);line-height:1.02;letter-spacing:-.035em;color:#0f172a"
+        >
+          Four core specialisms.<br />One thoughtful hiring standard.
+        </h1>
+        <p style="margin:0;font-size:17px;line-height:1.6;color:#475569">
+          We evaluate what makes someone exceptional on the job — deep craft,
+          commercial instinct, technical architecture, and leadership presence.
+          No generic resume sift.
+        </p>
+      </div>
+    </section>
+
+    <!-- Specialisms 2x2 Grid -->
+    <section
+      style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px) 48px"
+    >
+      <div class="specialisms-grid">
+        <!-- 01: Marketing & Digital -->
+        <div class="spec-card spec-card-dark">
+          <div
+            style="display:flex;justify-content:space-between;align-items:center"
+          >
+            <span
+              style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;color:#60A5FA"
+              >01 / GROWTH</span
+            >
+            <span
+              style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)"
+              >PRACTICE 01</span
+            >
+          </div>
+          <div
+            style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:12px 0"
+          >
+            <div style="flex:1 1 200px">
+              <h2
+                style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.03em;color:#FFFFFF"
+              >
+                Marketing &amp; Digital
+              </h2>
+              <div class="spec-pills">
+                <span class="spec-pill-blue">Performance Marketing</span>
+                <span class="spec-pill-blue">Growth Strategy</span>
+                <span class="spec-pill-blue">SEO / SEM</span>
+                <span class="spec-pill-blue">Brand Marketing</span>
+                <span class="spec-pill-blue">Lifecycle &amp; CRM</span>
+              </div>
+            </div>
+            <div
+              style="width:110px;height:110px;border-radius:16px;overflow:hidden;flex-shrink:0"
+            >
+              <img
+                src="/assets/photos/marketing-colleagues.jpg"
+                alt="Marketing colleagues working together"
+                loading="lazy"
+                style="width:100%;height:100%;object-fit:cover;display:block"
+                width="800"
+                height="533"
+              />
+            </div>
+          </div>
+          <div
+            style="font-size:14.5px;line-height:1.5;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85)"
+          >
+            Connecting commercial unit economics to brand narrative. From
+            marketing specialists to growth and brand leaders.
+          </div>
+        </div>
+
+        <!-- 02: Creative & Copywriting -->
+        <div class="spec-card spec-card-light spec-card-creative">
+          <div
+            style="display:flex;justify-content:space-between;align-items:center"
+          >
+            <span
+              style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;color:#4F46E5"
+              >02 / CRAFT</span
+            >
+            <span
+              style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B"
+              >PRACTICE 02</span
+            >
+          </div>
+          <div
+            style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:12px 0"
+          >
+            <div style="flex:1 1 200px">
+              <h2
+                style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.03em;color:#0F172A"
+              >
+                Creative &amp; Copywriting
+              </h2>
+              <div class="spec-pills">
+                <span class="spec-pill-violet"
+                  >Executive Creative Direction</span
+                >
+                <span class="spec-pill-violet">Copy Chiefs</span>
+                <span class="spec-pill-violet">Content Strategy</span>
+                <span class="spec-pill-violet">Brand Storytelling</span>
+              </div>
+            </div>
+            <div class="practice-image">
+              <img
+                src="/assets/photos/professional-smiling.jpg"
+                alt="Professional in a creative workspace"
+                width="800"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div
+            style="font-size:14.5px;line-height:1.5;padding-top:14px;border-top:1px solid #E2E8F0;color:#475569"
+          >
+            Original ideas that move consumer markets. Writers and creative
+            leaders who build iconic campaigns and mentor high-output creative
+            agencies.
+          </div>
+        </div>
+
+        <!-- 03: Design & Experience -->
+        <div class="spec-card spec-card-light spec-card-design">
+          <div
+            style="display:flex;justify-content:space-between;align-items:center"
+          >
+            <span
+              style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;color:#B93D28"
+              >03 / PRODUCT</span
+            >
+            <span
+              style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B"
+              >PRACTICE 03</span
+            >
+          </div>
+          <div
+            style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:12px 0"
+          >
+            <div style="flex:1 1 200px">
+              <h2
+                style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.03em;color:#0F172A"
+              >
+                Design &amp; Experience
+              </h2>
+              <div class="spec-pills">
+                <span class="spec-pill-coral">Design Systems</span>
+                <span class="spec-pill-coral">UX Architecture</span>
+                <span class="spec-pill-coral">User Research</span>
+                <span class="spec-pill-coral">Heads of Design</span>
+              </div>
+            </div>
+            <div class="practice-image">
+              <img
+                src="/assets/photos/remote-work.jpg"
+                alt="Professional working with a laptop"
+                width="800"
+                height="533"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div
+            style="font-size:14.5px;line-height:1.5;padding-top:14px;border-top:1px solid #E2E8F0;color:#475569"
+          >
+            Systems-thinkers whose portfolios are proven in production. Leaders
+            who balance aesthetic craft with conversion velocity and product
+            retention.
+          </div>
+        </div>
+
+        <!-- 04: Technology & Data -->
+        <div class="spec-card spec-card-dark-alt">
+          <div
+            style="display:flex;justify-content:space-between;align-items:center"
+          >
+            <span
+              style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;color:#10B981"
+              >04 / PLATFORMS</span
+            >
+            <span
+              style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)"
+              >PRACTICE 04</span
+            >
+          </div>
+          <div
+            style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:12px 0"
+          >
+            <div style="flex:1 1 200px">
+              <h2
+                style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.03em;color:#FFFFFF"
+              >
+                Technology &amp; Data
+              </h2>
+              <div class="spec-pills">
+                <span class="spec-pill-emerald">VP of Engineering</span>
+                <span class="spec-pill-emerald">Principal Architects</span>
+                <span class="spec-pill-emerald">Tech Leads</span>
+                <span class="spec-pill-emerald">GCC Leadership</span>
+              </div>
+            </div>
+            <div
+              style="width:110px;height:110px;border-radius:16px;overflow:hidden;flex-shrink:0;background:#081426"
+            >
+              <img
+                src="/assets/photos/technology-ecosystem.jpg"
+                alt="Connected technology ecosystem"
+                loading="lazy"
+                style="width:100%;height:100%;object-fit:cover;display:block"
+                width="1200"
+                height="900"
+              />
+            </div>
+          </div>
+          <div
+            style="font-size:14.5px;line-height:1.5;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85)"
+          >
+            Architects who build scalable infrastructure and communicate with
+            business clarity. Deep experience across Indian tech hubs and Global
+            Capability Centers.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Dive Scope of Placements -->
+    <section
+      style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(60px,8vw,100px)"
+    >
+      <div
+        style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px"
+      >
+        <span
+          style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb"
+          >Mandate Depth &amp; Placements</span
+        >
+        <h2
+          style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;color:#0f172a"
+        >
+          How we assess talent in each domain.
+        </h2>
+      </div>
+
+      <!-- Practice 1 Details -->
+      <div class="domain-deep-dive">
+        <div>
+          <h3
+            style="margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#0F172A"
+          >
+            Growth &amp; Performance Marketing
+          </h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We look past vanity ROAS metrics to understand channel
+            diversification, attribution models, blended customer acquisition
+            cost (CAC), and LTV optimization across D2C, fintech, and enterprise
+            SaaS.
+          </p>
+        </div>
+        <div>
+          <h4
+            style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B"
+          >
+            Representative roles we can support
+          </h4>
+          <ul
+            style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.7;color:#334155"
+          >
+            <li>Chief Marketing Officer (CMO)</li>
+            <li>VP Growth &amp; Performance Marketing</li>
+            <li>Director of Performance &amp; Media</li>
+            <li>Head of Retention &amp; CRM</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Practice 2 Details -->
+      <div class="domain-deep-dive">
+        <div>
+          <h3
+            style="margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#0F172A"
+          >
+            Creative &amp; Brand Storytelling
+          </h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We review live work, discarded concepts, and business outcomes. Our
+            partners evaluate whether a creative leader can pitch to executive
+            boards while mentoring junior art directors and copywriters.
+          </p>
+        </div>
+        <div>
+          <h4
+            style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B"
+          >
+            Representative roles we can support
+          </h4>
+          <ul
+            style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.7;color:#334155"
+          >
+            <li>Executive Creative Director (ECD)</li>
+            <li>VP Brand Strategy</li>
+            <li>Creative Director (Copy &amp; Concept)</li>
+            <li>Head of Content &amp; Editorial</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Practice 3 Details -->
+      <div class="domain-deep-dive">
+        <div>
+          <h3
+            style="margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#0F172A"
+          >
+            Design, UX &amp; Product Architecture
+          </h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We probe the messy tradeoffs behind design choices: constraints
+            navigated, cross-functional friction resolved with engineering, and
+            behavioral metrics that proved the design worked in production.
+          </p>
+        </div>
+        <div>
+          <h4
+            style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B"
+          >
+            Representative roles we can support
+          </h4>
+          <ul
+            style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.7;color:#334155"
+          >
+            <li>Head of Product Design</li>
+            <li>Director of User Experience</li>
+            <li>Lead Design Systems Architect</li>
+            <li>Principal User Researcher</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Practice 4 Details -->
+      <div class="domain-deep-dive">
+        <div>
+          <h3
+            style="margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#0F172A"
+          >
+            Engineering, Data &amp; GCC Technology
+          </h3>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#475569">
+            We evaluate distributed systems experience, cloud cost architecture,
+            team throughput, and mentoring capacity. Candidates are vetted for
+            architectural vision without losing hands-on debugging instinct.
+          </p>
+        </div>
+        <div>
+          <h4
+            style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B"
+          >
+            Representative roles we can support
+          </h4>
+          <ul
+            style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.7;color:#334155"
+          >
+            <li>VP of Engineering</li>
+            <li>Director of Cloud &amp; DevOps</li>
+            <li>Principal Data Architect</li>
+            <li>Head of GCC Technology</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA Banner -->
+      <div
+        style="background:linear-gradient(135deg, #0F172A 0%, #1E293B 100%);border-radius:24px;padding:clamp(32px,5vw,56px);color:#FFFFFF;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px"
+      >
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:640px">
+          <h3
+            style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);letter-spacing:-.03em;color:#FFFFFF"
+          >
+            Looking to hire calibrated leadership talent?
+          </h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#CBD5E1">
+            Discuss your mandate directly with a search partner. Shortlist scope
+            and timings agreed after we understand your brief.
+          </p>
+        </div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a
+            href="/contact/"
+            style="background:#2563eb;color:#FFFFFF;padding:14px 28px;border-radius:999px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 14px rgba(37,99,235,0.25)"
+            class="hv1 ql-action">Let’s talk hiring →</a
+          >
+          <a
+            href="/how-we-work/"
+            style="background:rgba(255,255,255,0.1);color:#FFFFFF;border:1px solid rgba(255,255,255,0.25);padding:14px 28px;border-radius:999px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;text-decoration:none"
+            class="hv3 ql-action">How we work</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

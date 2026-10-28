@@ -1,0 +1,139 @@
+---
+import Arrow from './Arrow.astro';
+const { service } = Astro.props;
+const scopes = {
+  'people-setup': {
+    fit: 'For growing teams without a senior HR lead, or teams whose processes need a reset.',
+    start:
+      'Begin with a people health check. Agree what to review and any specialist involvement before accessing client-managed systems.',
+    outcome:
+      'A prioritised action plan, agreed templates and a practical handover for the team using them.',
+  },
+  'hiring-support': {
+    fit: 'For companies building a technology or design function, or improving the quality of hiring decisions.',
+    start:
+      'Agree role outcomes, the evaluation brief and the specialist perspective required.',
+    outcome:
+      'A hiring setup or assessment scope with clear criteria, evidence and open questions. Your team makes the final decision.',
+  },
+  'founder-voice': {
+    fit: 'For founders who have a point of view but need help turning it into consistent, recognisable content.',
+    start:
+      'Agree the audience and voice. Work from approved, non-confidential inputs and the founder’s own thinking.',
+    outcome:
+      'Content for the agreed channels, reviewed and approved before publication.',
+  },
+  'career-prep': {
+    fit: 'For professionals who want a clearer profile and better preparation for the interview conversation.',
+    start:
+      'Discuss your target roles and agree the preparation scope, next steps and delivery arrangements before you proceed.',
+    outcome:
+      'A written profile review, CV and LinkedIn rework, first-shortlist CV tailoring and one mock interview with feedback. Add-ons are agreed separately.',
+  },
+};
+const plan = scopes[service.slug];
+---
+
+{
+  plan && (
+    <section class="engagement-plan" aria-labelledby="engagementHeading">
+      <div class="wrap">
+        <>
+          <div class="engagement-heading">
+            <>
+              <p class="eyebrow">Know what the engagement is for</p>
+              <h2 id="engagementHeading">
+                A clear brief.
+                <br />A useful handover.
+              </h2>
+            </>
+          </div>
+          <div class="engagement-grid">
+            <>
+              <article>
+                <>
+                  <span>01 / Is this for you?</span>
+                  <p>{plan.fit}</p>
+                </>
+              </article>
+              <article>
+                <>
+                  <span>02 / Where we start</span>
+                  <p>{plan.start}</p>
+                </>
+              </article>
+              <article>
+                <>
+                  <span>03 / What you can review</span>
+                  <p>{plan.outcome}</p>
+                </>
+              </article>
+            </>
+          </div>
+          <a
+            class="text-link"
+            href={
+              service.slug === 'career-prep'
+                ? '/for-candidates/'
+                : '/working-examples/'
+            }
+          >
+            {service.slug === 'career-prep'
+              ? 'Explore your candidate options'
+              : 'Explore working examples'}{' '}
+            <Arrow diagonal />
+          </a>
+        </>
+      </div>
+    </section>
+  )
+}
+<style>
+  .engagement-plan {
+    background: #f8fafc;
+    border-block: 1px solid var(--line);
+    padding: 56px 0;
+    margin-bottom: 64px;
+  }
+  .eyebrow {
+    color: var(--blue);
+  }
+  h2 {
+    font-size: 36px;
+    line-height: 1.15;
+    margin-top: 18px;
+  }
+  .engagement-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin-top: 36px;
+  }
+  article {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 20px;
+  }
+  article span {
+    color: var(--blue);
+    font-size: 11px;
+  }
+  article p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #475569;
+    margin-top: 14px;
+  }
+  .text-link {
+    color: var(--blue);
+    margin-top: 28px;
+  }
+  @media (max-width: 700px) {
+    .engagement-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    h2 {
+      font-size: 32px;
+    }
+  }
+</style>

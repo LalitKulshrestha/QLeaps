@@ -1,0 +1,985 @@
+{
+  "recruitment": {
+    "title": "Specialist Recruitment in India | Quantum Leaps",
+    "description": "Recruitment for marketing, creative, design and technology teams. Supporting brands and agencies across India, from specialist hires to leadership search.",
+    "path": "/recruitment/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across India."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "Service",
+            "name": "Specialist recruitment for brands and agencies",
+            "serviceType": "Marketing, creative, design and technology recruitment",
+            "provider": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "India"
+            },
+            "url": "https://qleaps.in/recruitment/",
+            "description": "Recruitment for marketing, creative, design and technology teams. Supporting brands and agencies across India, from specialist hires to leadership search."
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Recruitment",
+            "item": "https://qleaps.in/recruitment/"
+          }
+        ]
+      }
+    ]
+  },
+  "privacy.html": {
+    "title": "Privacy Policy \u00b7 Quantum Leaps",
+    "description": "How Quantum Leaps collects, uses and protects your personal data.",
+    "path": "/privacy.html",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Privacy policy",
+            "item": "https://qleaps.in/privacy.html"
+          }
+        ]
+      }
+    ]
+  },
+  "404.html": {
+    "title": "Page Not Found | Quantum Leaps",
+    "description": "Find your next step with Quantum Leaps.",
+    "path": "/404.html",
+    "schemas": []
+  },
+  "blogs": {
+    "title": "Hiring & Career Guides | Quantum Leaps",
+    "description": "Practical guidance on hiring briefs, shortlists, notice periods, compensation conversations and portfolios from Quantum Leaps.",
+    "path": "/blogs/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across India."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "Blog",
+            "@id": "https://qleaps.in/blogs/#blog",
+            "name": "Quantum Leaps Hiring & Career Guides",
+            "description": "Practical hiring and career guidance from Quantum Leaps.",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "url": "https://qleaps.in/blogs/",
+            "blogPost": [
+              {
+                "@type": "BlogPosting",
+                "headline": "Managing a Notice Period: A Clearer Path from Offer to Joining",
+                "url": "https://qleaps.in/blogs/notice-period/",
+                "datePublished": "2026-10-25",
+                "dateModified": "2026-10-25",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Quantum Leaps"
+                }
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "Why a Focused Shortlist Beats a Pile of CVs",
+                "url": "https://qleaps.in/blogs/search-economics/",
+                "datePublished": "2026-10-25",
+                "dateModified": "2026-10-25",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Quantum Leaps"
+                }
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "Compensation Conversations: Look Beyond Headline CTC",
+                "url": "https://qleaps.in/blogs/compensation-benchmarks/",
+                "datePublished": "2026-10-25",
+                "dateModified": "2026-10-25",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Quantum Leaps"
+                }
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "Four Questions Before Accepting a Role",
+                "url": "https://qleaps.in/blogs/offer-questions/",
+                "datePublished": "2026-10-25",
+                "dateModified": "2026-10-25",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Quantum Leaps"
+                }
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "Show How You Think: A Better Portfolio Conversation",
+                "url": "https://qleaps.in/blogs/portfolio-thinking/",
+                "datePublished": "2026-10-25",
+                "dateModified": "2026-10-25",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Quantum Leaps"
+                }
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "Serving Notice: Finish Well and Prepare for What\u2019s Next",
+                "url": "https://qleaps.in/blogs/serving-notice/",
+                "datePublished": "2026-10-25",
+                "dateModified": "2026-10-25",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Quantum Leaps"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          }
+        ]
+      }
+    ]
+  },
+  "blogs-compensation-benchmarks": {
+    "title": "Understanding a Compensation Package | Quantum Leaps",
+    "description": "A practical checklist for comparing fixed pay, variable pay and equity. This is guidance, not a salary survey or market benchmark.",
+    "path": "/blogs/compensation-benchmarks/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Compensation Conversations: Look Beyond Headline CTC",
+        "description": "A practical checklist for comparing fixed pay, variable pay and equity. This is guidance, not a salary survey or market benchmark.",
+        "url": "https://qleaps.in/blogs/compensation-benchmarks/",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "url": "https://qleaps.in/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg"
+          }
+        },
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://qleaps.in/blogs/compensation-benchmarks/",
+        "image": ["https://qleaps.in/assets/photos/qleaps-social-20261025.png"],
+        "isPartOf": {
+          "@type": "Blog",
+          "@id": "https://qleaps.in/blogs/#blog"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Understanding a Compensation Package",
+            "item": "https://qleaps.in/blogs/compensation-benchmarks/"
+          }
+        ]
+      }
+    ]
+  },
+  "blogs-search-economics": {
+    "title": "A Better Recruitment Shortlist | Quantum Leaps",
+    "description": "A useful shortlist explains relevant evidence, tradeoffs and open questions instead of asking the hiring manager to start screening again.",
+    "path": "/blogs/search-economics/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Why a Focused Shortlist Beats a Pile of CVs",
+        "description": "A useful shortlist explains relevant evidence, tradeoffs and open questions instead of asking the hiring manager to start screening again.",
+        "url": "https://qleaps.in/blogs/search-economics/",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "url": "https://qleaps.in/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg"
+          }
+        },
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://qleaps.in/blogs/search-economics/",
+        "image": ["https://qleaps.in/assets/photos/qleaps-social-20261025.png"],
+        "isPartOf": {
+          "@type": "Blog",
+          "@id": "https://qleaps.in/blogs/#blog"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "A Better Recruitment Shortlist",
+            "item": "https://qleaps.in/blogs/search-economics/"
+          }
+        ]
+      }
+    ]
+  },
+  "blogs-serving-notice": {
+    "title": "Serving Notice & Preparing to Join | Quantum Leaps",
+    "description": "A practical handover and joining checklist that respects both your current and future teams.",
+    "path": "/blogs/serving-notice/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Serving Notice: Finish Well and Prepare for What\u2019s Next",
+        "description": "A practical handover and joining checklist that respects both your current and future teams.",
+        "url": "https://qleaps.in/blogs/serving-notice/",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "url": "https://qleaps.in/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg"
+          }
+        },
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://qleaps.in/blogs/serving-notice/",
+        "image": ["https://qleaps.in/assets/photos/qleaps-social-20261025.png"],
+        "isPartOf": {
+          "@type": "Blog",
+          "@id": "https://qleaps.in/blogs/#blog"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Serving Notice & Preparing to Join",
+            "item": "https://qleaps.in/blogs/serving-notice/"
+          }
+        ]
+      }
+    ]
+  },
+  "blogs-portfolio-thinking": {
+    "title": "How to Present Your Portfolio | Quantum Leaps",
+    "description": "Make your contribution, constraints and decisions easy for a hiring team to understand.",
+    "path": "/blogs/portfolio-thinking/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Show How You Think: A Better Portfolio Conversation",
+        "description": "Make your contribution, constraints and decisions easy for a hiring team to understand.",
+        "url": "https://qleaps.in/blogs/portfolio-thinking/",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "url": "https://qleaps.in/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg"
+          }
+        },
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://qleaps.in/blogs/portfolio-thinking/",
+        "image": ["https://qleaps.in/assets/photos/qleaps-social-20261025.png"],
+        "isPartOf": {
+          "@type": "Blog",
+          "@id": "https://qleaps.in/blogs/#blog"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "How to Present Your Portfolio",
+            "item": "https://qleaps.in/blogs/portfolio-thinking/"
+          }
+        ]
+      }
+    ]
+  },
+  "blogs-offer-questions": {
+    "title": "Questions Before Accepting a Role | Quantum Leaps",
+    "description": "Clarify ownership, expectations and support before making your next move.",
+    "path": "/blogs/offer-questions/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Four Questions Before Accepting a Role",
+        "description": "Clarify ownership, expectations and support before making your next move.",
+        "url": "https://qleaps.in/blogs/offer-questions/",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "url": "https://qleaps.in/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg"
+          }
+        },
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://qleaps.in/blogs/offer-questions/",
+        "image": ["https://qleaps.in/assets/photos/qleaps-social-20261025.png"],
+        "isPartOf": {
+          "@type": "Blog",
+          "@id": "https://qleaps.in/blogs/#blog"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Questions Before Accepting a Role",
+            "item": "https://qleaps.in/blogs/offer-questions/"
+          }
+        ]
+      }
+    ]
+  },
+  "blogs-notice-period": {
+    "title": "Managing a Notice Period | Quantum Leaps",
+    "description": "Practical steps for staying aligned through a long notice period, without promising that every dropout can be prevented.",
+    "path": "/blogs/notice-period/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Managing a Notice Period: A Clearer Path from Offer to Joining",
+        "description": "Practical steps for staying aligned through a long notice period, without promising that every dropout can be prevented.",
+        "url": "https://qleaps.in/blogs/notice-period/",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "url": "https://qleaps.in/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Quantum Leaps",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg"
+          }
+        },
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://qleaps.in/blogs/notice-period/",
+        "image": ["https://qleaps.in/assets/photos/qleaps-social-20261025.png"],
+        "isPartOf": {
+          "@type": "Blog",
+          "@id": "https://qleaps.in/blogs/#blog"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hiring & career guides",
+            "item": "https://qleaps.in/blogs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Managing a Notice Period",
+            "item": "https://qleaps.in/blogs/notice-period/"
+          }
+        ]
+      }
+    ]
+  },
+  "careers": {
+    "title": "Join Our Recruitment Team | Quantum Leaps",
+    "description": "Explore working with Quantum Leaps, including remote-first recruitment and research opportunities and support for career returners.",
+    "path": "/careers/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across Mumbai, Bengaluru, NCR, Hyderabad, and Pune."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://qleaps.in/careers/#webpage",
+            "url": "https://qleaps.in/careers/",
+            "name": "Careers & Women Returners \u00b7 Quantum Leaps",
+            "description": "Explore working with Quantum Leaps, including remote-first recruitment and research opportunities and support for career returners.",
+            "inLanguage": "en-IN"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Join our team",
+            "item": "https://qleaps.in/careers/"
+          }
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Quantum Leaps | HR Services & Recruitment",
+    "description": "Discuss recruitment, people setup, hiring support, Founder Voice or Career Prep. Start with a non-confidential enquiry.",
+    "path": "/contact/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across Mumbai, Bengaluru, NCR, Hyderabad, and Pune."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "ContactPage",
+            "@id": "https://qleaps.in/contact/#webpage",
+            "url": "https://qleaps.in/contact/",
+            "name": "Contact & Hiring Consultation \u00b7 Quantum Leaps",
+            "description": "Discuss recruitment, people setup, hiring support, Founder Voice or Career Prep. Start with a non-confidential enquiry.",
+            "inLanguage": "en-IN"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Talk hiring",
+            "item": "https://qleaps.in/contact/"
+          }
+        ]
+      }
+    ]
+  },
+  "how-we-work": {
+    "title": "Our Hiring & Shortlisting Process | Quantum Leaps",
+    "description": "A clear brief, focused research, personal conversations and considered introductions. See how Quantum Leaps approaches specialist and leadership hiring.",
+    "path": "/how-we-work/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across Mumbai, Bengaluru, NCR, Hyderabad, and Pune."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://qleaps.in/how-we-work/#webpage",
+            "url": "https://qleaps.in/how-we-work/",
+            "name": "How We Work \u00b7 Quantum Leaps",
+            "description": "A clear brief, focused research, personal conversations and considered introductions. See how Quantum Leaps approaches specialist and leadership hiring.",
+            "inLanguage": "en-IN"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "How we work",
+            "item": "https://qleaps.in/how-we-work/"
+          }
+        ]
+      }
+    ]
+  },
+  "roles": {
+    "title": "Open Roles in India | Quantum Leaps",
+    "description": "Explore approved marketing, creative, design and technology opportunities. Apply to a specific opening or submit a general CV to Quantum Leaps.",
+    "path": "/roles/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across Mumbai, Bengaluru, NCR, Hyderabad, and Pune."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://qleaps.in/roles/#webpage",
+            "url": "https://qleaps.in/roles/",
+            "name": "Open Roles \u00b7 Quantum Leaps",
+            "description": "Explore approved marketing, creative, design and technology opportunities. Apply to a specific opening or submit a general CV to Quantum Leaps.",
+            "inLanguage": "en-IN"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Open roles",
+            "item": "https://qleaps.in/roles/"
+          }
+        ]
+      }
+    ]
+  },
+  "specialisms": {
+    "title": "Marketing, Creative, Design & Tech Hiring | Quantum Leaps",
+    "description": "Specialist and leadership recruitment for brands and agencies in India. Explore our approach to marketing, creative, design and technology hiring.",
+    "path": "/specialisms/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across Mumbai, Bengaluru, NCR, Hyderabad, and Pune."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "Service",
+            "name": "Specialist Executive Recruitment Practices",
+            "serviceType": "Marketing, Creative, Design, and Technology Recruitment",
+            "provider": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "India"
+            },
+            "url": "https://qleaps.in/specialisms/",
+            "description": "Specialist and leadership recruitment for brands and agencies in India. Explore our approach to marketing, creative, design and technology hiring."
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Specialisms",
+            "item": "https://qleaps.in/specialisms/"
+          }
+        ]
+      }
+    ]
+  },
+  "submit-cv": {
+    "title": "Submit Your CV | Quantum Leaps Recruitment",
+    "description": "Share your CV confidentially for marketing, creative, design and technology opportunities across India. Apply to an open role or introduce yourself.",
+    "path": "/submit-cv/",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qleaps.in/#organization",
+            "name": "Quantum Leaps",
+            "url": "https://qleaps.in/",
+            "logo": "https://qleaps.in/assets/logo/ql-logo-horizontal.svg",
+            "email": "contact@qleaps.in",
+            "telephone": "+91-99308-22894",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            },
+            "description": "Specialist recruitment for marketing, creative, design and technology teams across Mumbai, Bengaluru, NCR, Hyderabad, and Pune."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://qleaps.in/#website",
+            "url": "https://qleaps.in/",
+            "name": "Quantum Leaps",
+            "publisher": {
+              "@id": "https://qleaps.in/#organization"
+            },
+            "inLanguage": "en-IN"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://qleaps.in/submit-cv/#webpage",
+            "url": "https://qleaps.in/submit-cv/",
+            "name": "Submit Your CV \u00b7 Quantum Leaps",
+            "description": "Share your CV confidentially for marketing, creative, design and technology opportunities across India. Apply to an open role or introduce yourself.",
+            "inLanguage": "en-IN"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://qleaps.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Submit your CV",
+            "item": "https://qleaps.in/submit-cv/"
+          }
+        ]
+      }
+    ]
+  }
+}

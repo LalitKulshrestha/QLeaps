@@ -1,0 +1,117 @@
+main *,
+main *::before,
+main *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+main {
+  --bg: #ffffff;
+  --navy: #0f172a;
+  --indigo: #2563eb;
+  --gray: #475569;
+  --font: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+main {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--navy);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+main a {
+  color: var(--indigo);
+}
+main .nav {
+  background: var(--bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1rem 2rem;
+}
+main .nav-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--navy);
+  text-decoration: none;
+}
+main .back {
+  font-size: 0.875rem;
+  color: var(--indigo);
+  font-weight: 500;
+}
+main.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+main .overline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  margin-bottom: 0.75rem;
+}
+main h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+main .meta {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 3rem;
+}
+main h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+}
+main p,
+main li {
+  font-size: 0.95rem;
+  color: var(--gray);
+  margin-bottom: 0.75rem;
+}
+main ul {
+  padding-left: 1.4rem;
+}
+main li {
+  margin-bottom: 0.4rem;
+}
+main .highlight {
+  background: #eff6ff;
+  border-left: 3px solid var(--indigo);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
+main .highlight p {
+  margin-bottom: 0;
+  color: var(--navy);
+  font-weight: 500;
+}
+main strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+main footer {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+}
+main footer a {
+  color: rgba(255, 255, 255, 0.8);
+}

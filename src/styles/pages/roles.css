@@ -1,0 +1,40 @@
+main .roles-hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 64px) clamp(20px, 4vw, 48px) 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+main .nav-active-pill {
+  color: #2563eb !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+main .nav-active-pill::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #2563eb;
+  border-radius: 999px;
+}
+main .featured-mandate-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+main .featured-mandate-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+}

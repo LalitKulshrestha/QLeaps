@@ -1,0 +1,46 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import legacyPages from '../../data/legacy-pages.json';
+const page = legacyPages['blogs-offer-questions'];
+---
+
+<SiteLayout {...page} legacy={true} noindex={false}>
+  <main id="main" class="article-content">
+    <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blogs/"
+        >Hiring &amp; career guides</a
+      >
+    </nav><p class="overline">Quantum Leaps · Practical guidance</p><h1>
+      Four Questions Before Accepting a Role
+    </h1><p class="article-meta">
+      By Quantum Leaps · Published and reviewed 25 October 2026 · 2 min read
+    </p><p class="article-note">
+      Clarify ownership, expectations and support before making your next move.
+    </p><h2>1. What does success look like?</h2><p>
+      Ask what the team needs in the first three months and what can
+      realistically wait. Look for agreement between the hiring manager and
+      other interviewers. A title can hide very different expectations.
+    </p><h2>2. What will I own?</h2><p>
+      Clarify the reporting line, decision rights, team resources and budget.
+      Ask which decisions you can make independently and where approvals are
+      needed. Discuss the boundaries between your role and neighbouring
+      functions.
+    </p><h2>3. Why is the role open?</h2><p>
+      A new role, a replacement and a team reorganisation each bring different
+      questions. Ask what has changed and what the organisation has learned. You
+      do not need another employee’s private details to understand the operating
+      context.
+    </p><h2>4. What support will be available?</h2><p>
+      Discuss manager access, onboarding, feedback and access to tools or
+      people. Confirm location and working arrangements in the written offer
+      rather than relying on a general careers statement.
+    </p><p>
+      Use the answers to decide which tradeoffs suit your goals. Ask for
+      clarification where a written offer differs from the conversations.
+    </p><p>
+      <a href="/contact/">Discuss a hiring brief →</a> · <a href="/submit-cv/"
+        >Share your CV →</a
+      >
+    </p>
+  </main>
+</SiteLayout>

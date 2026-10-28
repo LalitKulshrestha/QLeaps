@@ -1,0 +1,116 @@
+---
+import AmbientBackdrop from './AmbientBackdrop.astro';
+const { label, title, description } = Astro.props;
+---
+
+<section class="hub-opening">
+  <AmbientBackdrop
+    variant={label === 'Knowledge'
+      ? 'reading'
+      : label === 'For candidates'
+        ? 'steps'
+        : 'connections'}
+  />
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><span>{label}</span>
+    </nav>
+    <div class="opening-grid">
+      <div class="opening-copy">
+        <p class="eyebrow">{label}</p><h1>{title}</h1><p
+          class="opening-description"
+        >
+          {description}
+        </p>{
+          Astro.slots.has('actions') && (
+            <div class="opening-actions">
+              <slot name="actions" />
+            </div>
+          )
+        }
+      </div>
+      <div class="opening-utility"><slot /></div>
+    </div>
+  </div>
+</section>
+<style>
+  .hub-opening {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 28px 0 40px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+    background: linear-gradient(180deg, #f8fafc, #ffffff);
+  }
+  .breadcrumbs {
+    margin-bottom: 24px;
+    font-size: 11px;
+  }
+  .opening-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 64px;
+    align-items: center;
+  }
+  .eyebrow {
+    color: var(--blue);
+    font-size: 10px;
+  }
+  h1 {
+    white-space: pre-line;
+    font-size: clamp(36px, 3.7vw, 52px);
+    line-height: 1.12;
+    max-width: 22ch;
+    margin: 18px 0;
+    letter-spacing: -0.035em;
+  }
+  .opening-description {
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 58ch;
+  }
+  .opening-actions {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+  .opening-utility {
+    min-width: 0;
+  }
+  @media (max-width: 860px) {
+    .opening-grid {
+      gap: 28px;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+    h1 {
+      font-size: 38px;
+    }
+  }
+  @media (max-width: 640px) {
+    .hub-opening {
+      padding-top: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 28px;
+    }
+    .breadcrumbs {
+      margin-bottom: 18px;
+    }
+    .opening-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    h1 {
+      font-size: 34px;
+      margin-block: 14px;
+    }
+    .opening-description {
+      font-size: 15px;
+    }
+    .opening-actions {
+      margin-top: 16px;
+    }
+  }
+</style>

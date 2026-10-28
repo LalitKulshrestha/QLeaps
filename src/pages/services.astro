@@ -1,0 +1,77 @@
+---
+import HRDiagnostic from '../components/HRDiagnostic.astro';
+import MandateDeconstructions from '../components/MandateDeconstructions.astro';
+import HubOpening from '../components/HubOpening.astro';
+import Arrow from '../components/Arrow.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ServiceExplorer from '../components/ServiceExplorer.astro';
+import Confidentiality from '../components/Confidentiality.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
+---
+
+<SiteLayout
+  title="HR Services for Companies & Career Prep | Quantum Leaps"
+  description="Explore recruitment, people setup, hiring support, Founder Voice and Career Prep. Five focused services from Quantum Leaps."
+  path="/services/"
+>
+  <main id="main">
+    <HubOpening
+      label="Services"
+      title={'The right support.\nFor the decision ahead.'}
+      description="Recruitment, people setup, hiring support and founder communications for companies. A separate Career Prep service for candidates."
+    >
+      <aside class="starting-point">
+        <p class="eyebrow">Not sure where to begin?</p><h2>
+          Start with your HR setup.
+        </h2><p>
+          Team size, HR owner, POSH status and joining dropouts. A practical
+          roadmap in four inputs.
+        </p><a class="text-link" href="#diagnostic"
+          >Try the HR maturity diagnostic <Arrow diagonal /></a
+        >
+      </aside>
+      <a slot="actions" class="opening-sample-link" href="/working-examples/"
+        >See sample deliverables <Arrow diagonal /></a
+      >
+    </HubOpening><ServiceExplorer showIntro={false} /><HRDiagnostic
+    /><MandateDeconstructions /><Confidentiality /><ClosingCTA />
+  </main>
+</SiteLayout>
+
+<style>
+  .starting-point {
+    padding: 24px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-top: 3px solid var(--blue);
+    border-radius: 4px;
+  }
+  .starting-point .eyebrow {
+    color: var(--blue);
+    font-size: 10px;
+  }
+  .starting-point h2 {
+    font-size: 23px;
+    margin: 14px 0;
+    line-height: 1.2;
+  }
+  .starting-point p:not(.eyebrow) {
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .starting-point a {
+    color: var(--blue);
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  .opening-sample-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 44px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 600;
+  }
+</style>

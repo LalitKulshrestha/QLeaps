@@ -1,0 +1,139 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Arrow from '../../components/Arrow.astro';
+import { workingExamples } from '../../data/working-examples.mjs';
+export function getStaticPaths() {
+  return workingExamples.map((example) => ({
+    params: { sample: example.slug },
+    props: { example },
+  }));
+}
+const { example } = Astro.props;
+---
+
+<SiteLayout
+  title={`${example.name}: Starter Template | Quantum Leaps`}
+  description={example.description}
+  path={`/working-examples/${example.slug}/`}
+  schemas={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: example.name,
+      description: example.description,
+      url: `https://qleaps.in/working-examples/${example.slug}/`,
+      author: { '@id': 'https://qleaps.in/#organization' },
+      isAccessibleForFree: true,
+    },
+  ]}
+>
+  <main id="main">
+    <section class="wrap page-intro">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><a href="/working-examples/"
+          >Working examples</a
+        ><span>/</span><span>{example.name}</span>
+      </nav><p class="eyebrow">
+        Illustrative working sample · {example.category}
+      </p><h1>{example.name}</h1><p class="section-description">
+        {example.intro}
+      </p><div class="button-row sample-actions">
+        <a
+          class="button"
+          href={`/working-examples/${example.slug}.txt`}
+          download>Download starter template <Arrow /></a
+        ><a
+          class="text-link"
+          href={`/contact/?service=${example.service}#service-enquiry`}
+          >Discuss your version <Arrow diagonal /></a
+        >
+      </div>
+    </section>
+    <section class="wrap sample-document" aria-label="Template content">
+      <div class="document-title">
+        <span>Quantum Leaps / Working example</span><span
+          >Adapt to your context</span
+        >
+      </div>{
+        example.sections.map((section) => (
+          <article>
+            <>
+              <h2>{section.title}</h2>
+              <ul>
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </>
+          </article>
+        ))
+      }<p class="sample-note">
+        Illustrative starter material. No client or candidate information is
+        included. Keep completed documents in your own approved systems.
+      </p>
+    </section>
+  </main>
+</SiteLayout>
+<style>
+  .sample-actions {
+    margin-top: 28px;
+  }
+  .sample-document {
+    max-width: 900px;
+    border: 1px solid var(--line);
+    padding: 40px;
+    background: var(--surface-cream);
+    margin-bottom: 64px;
+  }
+  .document-title {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  article {
+    padding-top: 30px;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  ul {
+    padding-left: 20px;
+    color: #475569;
+  }
+  li {
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .sample-note {
+    margin-top: 30px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  @media (max-width: 540px) {
+    .sample-document {
+      padding: 24px 20px;
+    }
+  }
+  @media print {
+    :global(header),
+    :global(footer),
+    .sample-actions {
+      display: none !important;
+    }
+    .sample-document {
+      border: 0;
+    }
+  }
+</style>
